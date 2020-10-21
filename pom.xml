@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.mall.cloud</groupId>
+        <artifactId>mall-cloud-dependencies</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>./mall-cloud-dependencies</relativePath>
+    </parent>
+    <groupId>com.mall.cloud</groupId>
+    <artifactId>mall-cloud-platform</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>${project.artifactId}</name>
+    <description>Pivotal项目分布式框架父级聚合模块Parent工程</description>
+    <url>https://github.com/mazhilin/mall-cloud-platform</url>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Pivotal</name>
+            <email>info@pivotal.io</email>
+            <organization>Pivotal Software, Inc.</organization>
+            <organizationUrl>https://www.spring.io</organizationUrl>
+        </developer>
+        <developer>
+            <id>marklin</id>
+            <name>marklin</name>
+            <email>marklin1992@outlook.com</email>
+            <url>https://github.com/mazhilin</url>
+            <organization>PivotalCloud</organization>
+        </developer>
+    </developers>
+    <scm>
+        <url>https://github.com/mazhilin/mall-cloud-platform</url>
+    </scm>
+    <issueManagement>
+        <system>Github Issues</system>
+        <url>https://github.com/mazhilin/mall-cloud-platform/issues</url>
+    </issueManagement>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+    <modules>
+        <module>mall-cloud-api</module>
+        <module>mall-cloud-common</module>
+        <module>mall-cloud-data</module>
+        <module>mall-cloud-dependencies</module>
+        <module>mall-cloud-service</module>
+        <module>mall-cloud-web</module>
+    </modules>
+
+</project>
