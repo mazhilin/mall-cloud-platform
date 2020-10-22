@@ -15,10 +15,30 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Pivotal项目分布式框架依赖版本模块Dependencies工程</description>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>[1.8,)</java.version>
+        <spring-boot-parent.version>2.3.4.RELEASE</spring-boot-parent.version>
+        <spring-framework-parent.version>5.2.9.RELEASE</spring-framework-parent.version>
+        <spring-checkstyle.version>0.0.22</spring-checkstyle.version>
+        <main.basedir>${basedir}/../..</main.basedir>
+        <resource.delimiter>@</resource.delimiter>
+        <start-class>org.rainbow.spring.boot.Application</start-class>
+        <zookeeper.version>3.5.6</zookeeper.version>
+        <aliyun-oss.version>3.10.2</aliyun-oss.version>
+        <aliyun-sms.verison>4.5.1</aliyun-sms.verison>
+        <transmittable-thread-local.version>2.11.0</transmittable-thread-local.version>
+        <netty.version>4.1.38.Final</netty.version>
+        <curator.version>4.2.0</curator.version>
+        <guava.version>28.0-jre</guava.version>
+        <dubbo.version>2.7.3</dubbo.version>
+        <pagehelper.version>5.1.11</pagehelper.version>
+        <fastjson.version>1.2.68</fastjson.version>
+        <fastdfs.versain>1.26.7</fastdfs.versain>
+        <lombok.version>1.18.10</lombok.version>
+        <mysql.version>8.0.19</mysql.version>
+        <hutool.verion>5.4.5</hutool.verion>
     </properties>
 
     <dependencies>
@@ -40,13 +60,141 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot-parent.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring-framework-parent.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-dependencies-bom</artifactId>
+                <version>${dubbo.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.verion}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>transmittable-thread-local</artifactId>
+                <version>${transmittable-thread-local.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <target>${maven.compiler.target}</target>
+                        <source>${maven.compiler.source}</source>
+                        <encoding>UTF-8</encoding>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+                <!--代码格式插件，默认使用spring 规则-->
+                <plugin>
+                    <groupId>io.spring.javaformat</groupId>
+                    <artifactId>spring-javaformat-maven-plugin</artifactId>
+                    <version>${spring-checkstyle.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot-parent.version}</version>
+                    <configuration>
+                        <jvmArguments>-Xmx64m</jvmArguments>
+                        <fork>true</fork>
+                        <mainClass>${start-class}</mainClass>
+                        <layout>ZIP</layout>
+                        <classifier>${profiles.active}</classifier>
+                        <executable>false</executable>
+                        <excludeDevtools>false</excludeDevtools>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
+    <profiles>
+        <profile>
+            <id>develop</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profiles.active>develop</profiles.active>
+            </properties>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <profiles.active>test</profiles.active>
+            </properties>
+        </profile>
+        <profile>
+            <id>preview</id>
+            <properties>
+                <profiles.active>preview</profiles.active>
+            </properties>
+        </profile>
+        <profile>
+            <id>product</id>
+            <properties>
+                <profiles.active>product</profiles.active>
+            </properties>
+        </profile>
+        <profile>
+            <id>jdk-1.8</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <jdk>[1.8,)</jdk>
+            </activation>
+            <properties>
+                <maven.compiler.target>${java.version}</maven.compiler.target>
+                <maven.compiler.version>${java.version}</maven.compiler.version>
+                <maven.compiler.source>${java.version}</maven.compiler.source>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>

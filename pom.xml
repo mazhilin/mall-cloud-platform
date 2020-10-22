@@ -51,7 +51,7 @@
     <modules>
         <module>mall-cloud-api</module>
         <module>mall-cloud-common</module>
-        <module>mall-cloud-data</module>
+        <module>mall-cloud-model</module>
         <module>mall-cloud-dependencies</module>
         <module>mall-cloud-service</module>
         <module>mall-cloud-web</module>
