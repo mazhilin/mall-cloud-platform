@@ -33,6 +33,7 @@
         <curator.version>4.2.0</curator.version>
         <guava.version>28.0-jre</guava.version>
         <dubbo.version>2.7.3</dubbo.version>
+        <spring-boot-dubbo.version>2.7.3</spring-boot-dubbo.version>
         <pagehelper.version>5.1.11</pagehelper.version>
         <fastjson.version>1.2.68</fastjson.version>
         <mybatis-plus.version>3.4.0</mybatis-plus.version>
@@ -276,6 +277,66 @@
                 <version>${mybatis-plus.version}</version>
             </dependency>
             <!--spring-boot mybatis setting end-->
+            <!--spring-boot dubbo setting  begin-->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>spring</artifactId>
+                        <groupId>org.springframework</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>servlet-api</artifactId>
+                        <groupId>javax.servlet</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>log4j</artifactId>
+                        <groupId>log4j</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>netty-all</artifactId>
+                        <groupId>io.netty</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-spring-boot-starter</artifactId>
+                <version>${spring-boot-dubbo.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>dubbo</artifactId>
+                        <groupId>org.apache.dubbo</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-spring-boot-actuator</artifactId>
+                <version>${spring-boot-dubbo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-metadata-report-zookeeper</artifactId>
+                <version>${dubbo.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>dubbo-common</artifactId>
+                        <groupId>org.apache.dubbo</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>dubbo-remoting-zookeeper</artifactId>
+                        <groupId>org.apache.dubbo</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>dubbo-remoting-api</artifactId>
+                        <groupId>org.apache.dubbo</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!--spring-boot dubbo setting  end-->
             <!--spring-boot project setting  begin-->
             <dependency>
                 <groupId>com.mall.cloud</groupId>
@@ -335,7 +396,7 @@
                         <fork>true</fork>
                         <mainClass>${start-class}</mainClass>
                         <layout>ZIP</layout>
-                        <classifier>${profiles.active}</classifier>
+                       <classifier>${project.version}</classifier>
                         <executable>false</executable>
                         <excludeDevtools>false</excludeDevtools>
                     </configuration>

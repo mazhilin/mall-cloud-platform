@@ -45,7 +45,7 @@
                     <fork>true</fork>
                     <mainClass>${start-class}</mainClass>
                     <layout>ZIP</layout>
-                    <classifier>${profiles.active}</classifier>
+                   <classifier>${project.version}</classifier>
                     <executable>false</executable>
                 </configuration>
             </plugin>

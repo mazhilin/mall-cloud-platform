@@ -14,8 +14,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class PassportWebApplication {
 	public static void main(String[] args) {
-		ConfigurableApplicationContext applicationContext = SpringApplication.run(PassportWebApplication.class, args);
-		applicationContext.registerShutdownHook();
-		applicationContext.start();
+		SpringApplication.run(PassportWebApplication.class, args);
 	}
 }

@@ -25,11 +25,26 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <filtering>true</filtering>
+                <directory>${basedir}/src/main/resources</directory>
+                <includes>
+                    <include>application.properties</include>
+                    <include>application-${profiles.active}.properties</include>
+                    <include>spy.properties</include>
+                    <include>logback-spring.xml</include>
+                    <include>logback-spring-boot.xml</include>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
         <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot-parent.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -41,7 +56,7 @@
                     <fork>true</fork>
                     <mainClass>${start-class}</mainClass>
                     <layout>ZIP</layout>
-                    <classifier>${profiles.active}</classifier>
+                   <classifier>${project.version}</classifier>
                     <executable>false</executable>
                 </configuration>
             </plugin>
@@ -88,6 +103,8 @@
             </properties>
         </profile>
     </profiles>
+
+
 
     <modules>
         <module>mall-mobile-service</module>

@@ -14,8 +14,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class MobileWebApplication {
 	public static void main(String[] args) {
-		ConfigurableApplicationContext applicationContext = SpringApplication.run(MobileWebApplication.class, args);
-		applicationContext.registerShutdownHook();
-		applicationContext.start();
+		SpringApplication.run(MobileWebApplication.class, args);
 	}
 }
