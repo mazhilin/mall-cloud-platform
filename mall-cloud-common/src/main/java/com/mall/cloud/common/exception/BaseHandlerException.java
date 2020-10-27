@@ -8,17 +8,4 @@ package com.mall.cloud.common.exception;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p> 
  */
 public interface BaseHandlerException {
-	/**
-	 * code 编码
-	 *
-	 * @return 返回编码
-	 */
-	Integer code();
-	
-	/**
-	 * message 信息
-	 *
-	 * @return 返回信息
-	 */
-	String message();
 }

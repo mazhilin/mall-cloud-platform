@@ -1,5 +1,6 @@
 package com.mall.cloud.common.persistence.service;
 
+
 /**
  * <p>封装Qicloud项目Service类.<br></p> 
  * <p>//TODO...<br></p> 

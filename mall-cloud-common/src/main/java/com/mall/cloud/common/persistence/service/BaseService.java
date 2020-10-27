@@ -1,7 +1,4 @@
 package com.mall.cloud.common.persistence.service;
-
-import com.mall.cloud.common.persistence.service.Service;
-
 /**
  * <p>封装Qicloud项目BaseService类.<br></p> 
  * <p>//TODO...<br></p> 

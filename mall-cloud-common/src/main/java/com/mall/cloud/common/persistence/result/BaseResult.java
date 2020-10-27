@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BaseResult implements Result {
+public abstract class BaseResult implements Result {
 	private static final long serialVersionUID = 3620313223908856814L;
 	/**
 	 * 创建人-createBy

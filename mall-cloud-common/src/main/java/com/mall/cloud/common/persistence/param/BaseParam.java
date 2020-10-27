@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BaseParam implements Param {
+public abstract class BaseParam implements Param {
 	
 	private static final long serialVersionUID = -5795979579450401276L;
 	/**

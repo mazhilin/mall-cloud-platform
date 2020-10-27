@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BaseDocument implements Document {
+public abstract class BaseDocument implements Document {
 	private static final long serialVersionUID = 8282365920137665834L;
 	/**
 	 * 创建人-createBy

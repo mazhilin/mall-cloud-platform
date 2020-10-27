@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BaseEntity  implements Entity {
+public abstract class BaseEntity  implements Entity {
 	private static final long serialVersionUID = -847020715802664453L;
 	/**
 	 * 创建人-createBy

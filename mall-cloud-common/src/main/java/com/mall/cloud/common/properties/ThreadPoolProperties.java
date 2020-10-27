@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * <p>封装Qicloud项目ThreadPoolProperties类.<br></p> 
- * <p>//TODO...<br></p> 
+ * <p>线程池属性配置类<br></p>
  * @author marklin
  * @author Powered by marklin 2020-10-23 22:32
  * @version 1.0.0
