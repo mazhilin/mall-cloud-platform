@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.mall.cloud.common.persistence.entity.BaseEntity;
 import lombok.*;
 
+import javax.validation.constraints.*;
+
 /**
  * <p>封装Qicloud项目CustomerUser类.<br></p>
  * <p>//TODO...<br></p>
@@ -28,18 +30,39 @@ public class CustomerUser extends BaseEntity {
     /**
      * 客户账户
      */
+    @NotBlank(message = "用户账户不能为空!")
+    @NotNull(message = "用户账户不能为空!")
+    @NotEmpty(message = "用户账户不能为空!")
     private String account;
     /**
      * 客户密码
      */
+    @NotBlank(message = "用户账户不能为空!")
+    @NotNull(message = "用户账户不能为空!")
+    @NotEmpty(message = "用户账户不能为空!")
     private String password;
 
     /**
      * 客户姓名
      */
+    @NotBlank(message = "用户账户不能为空!")
+    @NotNull(message = "用户账户不能为空!")
+    @NotEmpty(message = "用户账户不能为空!")
     private String name;
     /**
      * 客户昵称
      */
+    @NotBlank(message = "用户账户不能为空!")
+    @NotNull(message = "用户账户不能为空!")
+    @NotEmpty(message = "用户账户不能为空!")
     private String nickname;
+    /**
+     * 客户手机号
+     */
+    @NotNull(message = "手机号不能为空")
+    @NotBlank(message = "手机号不能为空")
+    @Pattern(regexp ="^[1][3,4,5,6,7,8,9][0-9]{9}$", message = "手机号格式有误")
+    @Max(value = 11,message = "手机号只能为{max}位")
+    @Min(value = 11,message = "手机号只能为{min}位")
+    private String phone;
 }
