@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.mall.cloud.common.configuration.EnableAutoContainerConfiguration
+    com.mall.cloud.common.configuration.EnableAutoContainerConfiguration,\
+    com.mall.cloud.common.configuration.SwaggerConfiguration

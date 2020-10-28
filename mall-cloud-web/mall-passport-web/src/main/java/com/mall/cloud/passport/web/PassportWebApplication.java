@@ -1,8 +1,7 @@
 package com.mall.cloud.passport.web;
 
+import com.mall.cloud.common.container.annotation.ApplicationClientBootstrap;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * <p>封装Qicloud项目PassportWebApplication类.<br></p> 
@@ -11,7 +10,7 @@ import org.springframework.context.ConfigurableApplicationContext;
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p> 
  */
-@SpringBootApplication
+@ApplicationClientBootstrap
 public class PassportWebApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PassportWebApplication.class, args);

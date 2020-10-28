@@ -47,6 +47,8 @@
         <swagger-core.version>2.1.1</swagger-core.version>
         <swagger-bootstrap.version>1.9.6</swagger-bootstrap.version>
         <jetcache.version>2.6.0</jetcache.version>
+        <!--报表poi工具-->
+        <easypoi.verison>3.3.0</easypoi.verison>
     </properties>
 
 
@@ -364,6 +366,21 @@
                 <version>${project.version}</version>
             </dependency>
             <!--spring-boot project setting  end-->
+            <dependency>
+                <groupId>cn.afterturn</groupId>
+                <artifactId>easypoi-base</artifactId>
+                <version>${easypoi.verison}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.afterturn</groupId>
+                <artifactId>easypoi-web</artifactId>
+                <version>${easypoi.verison}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.afterturn</groupId>
+                <artifactId>easypoi-annotation</artifactId>
+                <version>${easypoi.verison}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

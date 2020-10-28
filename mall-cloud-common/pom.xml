@@ -169,6 +169,23 @@
             <version>${mybatis-plus.version}</version>
         </dependency>
         <!--spring-boot mybatis setting end-->
+        <!--spring-boot easypoi setting begin-->
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-base</artifactId>
+            <version>${easypoi.verison}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-web</artifactId>
+            <version>${easypoi.verison}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-annotation</artifactId>
+            <version>${easypoi.verison}</version>
+        </dependency>
+        <!--spring-boot easypoi setting end-->
     </dependencies>
 
     <build>

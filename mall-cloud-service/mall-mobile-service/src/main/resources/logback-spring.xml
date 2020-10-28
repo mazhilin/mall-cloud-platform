@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false">
     <!-- 日志根目录-->
-    <springProperty scope="context" name="LOG_HOME" source="logging.path" defaultValue="logs/"/>
+    <springProperty scope="context" name="LOG_HOME" source="logging.path" defaultValue="app/logs/"/>
     <!-- 日志级别 -->
     <springProperty scope="context" name="LOG_ROOT_LEVEL" source="logging.level.root" defaultValue="DEBUG"/>
     <!--  标识这个"STDOUT" 将会添加到这个logger -->
     <springProperty scope="context" name="STDOUT" source="log.stdout" defaultValue="STDOUT"/>
 
     <!-- 日志文件名称-->
-    <property name="LOG_PREFIX" value="mall-passport-web"/>
+    <property name="LOG_PREFIX" value="mall-mobile-service"/>
     <!-- 日志文件编码-->
     <property name="LOG_CHARSET" value="UTF-8"/>
     <!-- 日志文件路径+日期-->
