@@ -43,7 +43,7 @@ public class CompanyInfo extends BaseEntity {
     /**
      * 公司视频
      */
-    private String infoVedios;
+    private String infoVideos;
     /**
      * 经度
      */
