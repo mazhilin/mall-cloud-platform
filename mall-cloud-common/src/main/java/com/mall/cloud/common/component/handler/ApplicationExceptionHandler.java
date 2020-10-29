@@ -42,41 +42,47 @@ public class ApplicationExceptionHandler {
 
     /**
      * 忽略参数异常处理器
+     *
      * @param e 忽略参数异常
      * @return ResultObject
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MissingServletRequestParameterException.class)
-    public ResultObject<String> parameterMissingExceptionHandler(MissingServletRequestParameterException e,
-                                                                 HttpServletRequest request) {
+    public ResponseResult parameterMissingExceptionHandler(MissingServletRequestParameterException e,
+                                                           HttpServletRequest request) {
+        ResponseResult response =new ResponseResult();
         printLog(e, request);
-        return ResultObject.createByErrorMessage("请求参数 " + e.getParameterName() + " 不能为空");
+        return response.setError("请求参数 " + e.getParameterName() + " 不能为空");
     }
 
     /**
      * 媒体类型不支持异常处理器
+     *
      * @param e 类型不匹配异常
      * @return resultObject
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-    public ResultObject<String> HttpMediaTypeNotSupportedExceptionHandler(HttpMediaTypeNotSupportedException e,
-                                                                          HttpServletRequest request) {
+    public ResponseResult HttpMediaTypeNotSupportedExceptionHandler(HttpMediaTypeNotSupportedException e,
+                                                                    HttpServletRequest request) {
+        ResponseResult response =new ResponseResult();
         printLog(e, request);
-        return ResultObject.createByErrorMessage("请求类型错误，请检查conten-type是否正确");
+        return response.setError("请求类型错误，请检查conten-type是否正确");
     }
 
     /**
      * 缺少请求体异常处理器
+     *
      * @param e 缺少请求体异常
      * @return ResultObject
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResultObject<String> parameterBodyMissingExceptionHandler(HttpMessageNotReadableException e,
-                                                                     HttpServletRequest request) {
+    public ResponseResult parameterBodyMissingExceptionHandler(HttpMessageNotReadableException e,
+                                                               HttpServletRequest request) {
+        ResponseResult response =new ResponseResult();
         printLog(e, request);
-        return ResultObject.createByErrorMessage("参数体校验错误");
+        return response.setError("参数体校验错误");
     }
 
     /**
@@ -88,6 +94,7 @@ public class ApplicationExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseResult parameterExceptionHandler(MethodArgumentNotValidException e,
                                                                 HttpServletRequest request) {
+        ResponseResult response =new ResponseResult();
         printLog(e, request);
         // 获取异常信息
         BindingResult exceptions = e.getBindingResult();
@@ -98,11 +105,11 @@ public class ApplicationExceptionHandler {
             List<ObjectError> errors = exceptions.getAllErrors();
             if (!errors.isEmpty()) {
                 errors.forEach(msg -> fieldErrorMsg.add(msg.getDefaultMessage()));
-                return new ResponseResult().setError("请求参数校验错误", fieldErrorMsg);
+                return response.setError("请求参数校验错误", fieldErrorMsg);
             }
         }
         fieldErrorMsg.add("未知异常");
-        return ResponseResult.setError("请求参数校验错误", fieldErrorMsg);
+        return response.setError("请求参数校验错误", fieldErrorMsg);
     }
 
     /**
@@ -114,12 +121,13 @@ public class ApplicationExceptionHandler {
     @ExceptionHandler(ValidationException.class)
     public ResponseResult validationExceptionHandler(ValidationException e,
                                                            HttpServletRequest request) {
+        ResponseResult response =new ResponseResult();
         printLog(e, request);
         String message = e.getCause().getMessage();
         if(message != null) {
-            return ResponseResult.createByErrorMessage(message);
+            return response.setError(message);
         }
-        return ResponseResult.createByErrorMessage("请求参数校验错误");
+        return response.setError("请求参数校验错误");
     }
 
     // --------- 业务逻辑异常 ----------
@@ -148,12 +156,13 @@ public class ApplicationExceptionHandler {
      */
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(value = Throwable.class)
-    public ResultObject<String> exceptionHandler(Throwable e,
+    public ResponseResult exceptionHandler(Throwable e,
                                                  HttpServletRequest request,
                                                  HttpServletResponse response) {
+        ResponseResult responseResult =new ResponseResult();
         printLog(e, request);
         response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
-        return ResultObject.createByErrorMessage("服务器异常");
+        return responseResult.setError("服务器异常");
     }
 
     /**

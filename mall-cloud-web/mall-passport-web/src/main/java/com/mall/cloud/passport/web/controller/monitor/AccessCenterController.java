@@ -14,4 +14,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/access")
 public class AccessCenterController extends BaseController {
+
 }

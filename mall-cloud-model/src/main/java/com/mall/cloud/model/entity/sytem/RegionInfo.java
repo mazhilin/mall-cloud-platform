@@ -1,5 +1,7 @@
 package com.mall.cloud.model.entity.sytem;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.mall.cloud.common.persistence.entity.BaseEntity;
 import lombok.*;
@@ -19,9 +21,11 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 @TableName(value = "mall_region_info")
 public class RegionInfo  extends BaseEntity {
+    private static final long serialVersionUID = 4897187522001545156L;
     /**
      * 区域id
      */
+    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
     /**
      * 父级区域id
