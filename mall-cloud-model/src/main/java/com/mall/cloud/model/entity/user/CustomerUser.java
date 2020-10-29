@@ -41,7 +41,15 @@ public class CustomerUser extends BaseEntity {
     @NotNull(message = "用户账户不能为空!")
     @NotEmpty(message = "用户账户不能为空!")
     private String password;
-
+    /**
+     * 客户手机号
+     */
+    @NotNull(message = "手机号不能为空")
+    @NotBlank(message = "手机号不能为空")
+    @Pattern(regexp = "^[1][3,4,5,6,7,8,9][0-9]{9}$", message = "手机号格式有误")
+    @Max(value = 11, message = "手机号只能为{max}位")
+    @Min(value = 11, message = "手机号只能为{min}位")
+    private String phone;
     /**
      * 客户姓名
      */
@@ -57,12 +65,35 @@ public class CustomerUser extends BaseEntity {
     @NotEmpty(message = "用户账户不能为空!")
     private String nickname;
     /**
-     * 客户手机号
+     * 客户头像
      */
-    @NotNull(message = "手机号不能为空")
-    @NotBlank(message = "手机号不能为空")
-    @Pattern(regexp ="^[1][3,4,5,6,7,8,9][0-9]{9}$", message = "手机号格式有误")
-    @Max(value = 11,message = "手机号只能为{max}位")
-    @Min(value = 11,message = "手机号只能为{min}位")
-    private String phone;
+    private String profilePicture;
+    /**
+     * 客户性别[0-保密 1-男 2-女]
+     */
+    private Integer gender;
+    /**
+     * 客户等级[0-普通会员 1-初级会员 2-中级会员 3-高级会员]
+     */
+    private Integer level;
+    /**
+     * 客户会员编号
+     */
+    private String memberNumber;
+    /**
+     * 客户分享邀请码
+     */
+    private String inviteCode;
+    /**
+     * 客户顾问id
+     */
+    private String employeeId;
+    /**
+     * 客户代表id
+     */
+    private String registrantId;
+    /**
+     * 客户来源类型[default-APP注册,manager-系统后台,invite-邀请注册,employee-员工录入]
+     */
+    private String sourceType;
 }

@@ -1,5 +1,7 @@
 package com.mall.cloud.model.entity.sytem;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.mall.cloud.common.persistence.entity.BaseEntity;
 import lombok.*;
@@ -23,6 +25,7 @@ public class CompanyInfo extends BaseEntity {
     /**
      * 公司id
      */
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
     /**
      * 公司编码

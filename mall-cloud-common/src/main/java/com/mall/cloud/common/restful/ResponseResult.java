@@ -138,7 +138,7 @@ public class ResponseResult implements Result {
 		this.message = message;
 		this.timestamp = Instant.now().toEpochMilli();
 		this.instanceId = SequenceServerUtil.getInstance().produceId();
-		return null;
+		return this;
 	}
 
 	/**
@@ -169,7 +169,7 @@ public class ResponseResult implements Result {
 		this.timestamp = Instant.now().toEpochMilli();
 		this.instanceId = SequenceServerUtil.getInstance().produceId();
 		this.otherList = list;
-		return null;
+		return this;
 	}
 
   public static void main(String[] args) {
