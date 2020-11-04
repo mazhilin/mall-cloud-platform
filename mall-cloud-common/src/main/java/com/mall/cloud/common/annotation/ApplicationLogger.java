@@ -21,6 +21,10 @@ import java.lang.annotation.*;
 @Inherited
 public @interface ApplicationLogger {
     /**
+     * 模块
+     */
+    String title() default StringUtils.EMPTY;
+    /**
      * 平台模块-platform
      */
     PlatformType platform() default PlatformType.WEB;

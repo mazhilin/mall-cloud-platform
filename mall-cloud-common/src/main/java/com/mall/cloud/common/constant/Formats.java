@@ -7,7 +7,7 @@ package com.mall.cloud.common.constant;
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p> 
  */
-public class Formats {
+public final class Formats {
 	/**
 	 * 年-月-日 时:分:秒 ,显示格式-[使用大写HH标识使用24小时显示格式 ]
 	 */

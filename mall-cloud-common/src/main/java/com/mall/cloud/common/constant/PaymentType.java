@@ -27,9 +27,9 @@ public enum PaymentType implements BaseHandler {
 	 */
 	JD(3, "京东支付"),
 	/**
-	 * 线下支付-3
+	 * 线下支付-4
 	 */
-	OFFLINE(3, "线下支付"),
+	OFFLINE(4, "线下支付"),
 	;
 	
 	/**
