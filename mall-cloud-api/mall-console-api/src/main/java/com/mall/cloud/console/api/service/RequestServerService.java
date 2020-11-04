@@ -1,4 +1,4 @@
-package com.mall.cloud.monitor.api.service;
+package com.mall.cloud.console.api.service;
 
 import com.mall.cloud.common.persistence.service.BaseService;
 

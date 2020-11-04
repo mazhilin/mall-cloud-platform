@@ -1,6 +1,5 @@
 package com.mall.cloud.common.container.annotation;
 
-import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
 import org.springframework.boot.autoconfigure.AutoConfigurationExcludeFilter;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
@@ -27,8 +26,7 @@ import java.lang.annotation.*;
 @Inherited
 @Configuration
 @SpringBootApplication(
-        exclude = {DataSourceAutoConfiguration.class, XADataSourceAutoConfiguration.class,
-                DruidDataSourceAutoConfigure.class, RedisAutoConfiguration.class
+        exclude = {DataSourceAutoConfiguration.class, XADataSourceAutoConfiguration.class, RedisAutoConfiguration.class
         })
 @ComponentScan(excludeFilters = {@ComponentScan.Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),
         @ComponentScan.Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class)})

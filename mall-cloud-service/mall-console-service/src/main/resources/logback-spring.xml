@@ -90,16 +90,15 @@
     <logger name="org.apache.zookeeper" level="error" additivity="true"/>
     <logger name="org.apache.dubbo.monitor" level="error" additivity="true"/>
     <logger name="org.apache.dubbo.remoting" level="error" additivity="true"/>
-    <logger name="com.alibaba.nacos" level="INFO" additivity="false"/>
-    <logger name="com.alibaba.druid" level="INFO" additivity="true"/>
+    <logger name="org.apache.dubbo" level="INFO" additivity="true"/>
+    <logger name="com.zaxxer" level="debug" additivity="true"/>
     <logger name="org.quartz" level="WARN" additivity="false"/>
     <logger name="ch.qos.logback" level="INFO" additivity="true"/>
     <logger name="org.mybatis.caches" level="INFO" additivity="true"/>
     <logger name="org.apache.curator" level="INFO" additivity="true"/>
-    <logger name="org.springframework" level="INFO" additivity="true"/>
-    <logger name="org.springframework.data" level="INFO" additivity="true"/>
-    <logger name="com.pivotal" level="error" additivity="true"/>
-    <logger name="com.pivotal.authority.server.mapper" level="debug" additivity="true"/>
+    <logger name="org.springframework.boot.jdbc" level="INFO" additivity="true"/>
+    <logger name="com.mall.cloud" level="info" additivity="true"/>
+    <logger name="com.mall.cloud.model.mapper" level="debug" additivity="true"/>
     <!-- ${LOG_ROOT_LEVEL} 日志级别 -->
     <root level="INFO">
         <!-- 标识这个"${STDOUT}"将会添加到这个logger -->

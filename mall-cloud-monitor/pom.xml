@@ -21,7 +21,17 @@
     <dependencies>
         <dependency>
             <groupId>com.mall.cloud</groupId>
-            <artifactId>mall-cloud-model</artifactId>
+            <artifactId>mall-console-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mall.cloud</groupId>
+            <artifactId>mall-passport-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mall.cloud</groupId>
+            <artifactId>mall-mobile-api</artifactId>
             <version>${project.version}</version>
         </dependency>
         <!--pivotal-cloud dubbo setting begin-->

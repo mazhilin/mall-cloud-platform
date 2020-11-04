@@ -25,7 +25,7 @@
         <main.basedir>${basedir}/../..</main.basedir>
         <resource.delimiter>@</resource.delimiter>
         <start-class>org.rainbow.spring.boot.Application</start-class>
-        <zookeeper.version>3.5.6</zookeeper.version>
+        <zookeeper.version>3.6.2</zookeeper.version>
         <aliyun-oss.version>3.10.2</aliyun-oss.version>
         <aliyun-sms.verison>4.5.1</aliyun-sms.verison>
         <transmittable-thread-local.version>2.11.0</transmittable-thread-local.version>
@@ -40,13 +40,13 @@
         <lombok.version>1.18.10</lombok.version>
         <mysql.version>8.0.19</mysql.version>
         <hikaricp.version>3.4.5</hikaricp.version>
-        <druid.version>1.1.22</druid.version>
         <hutool.verion>5.4.5</hutool.verion>
         <swagger.version>2.9.2</swagger.version>
         <knife4j.version>2.0.2</knife4j.version>
         <swagger-core.version>2.1.1</swagger-core.version>
         <swagger-bootstrap.version>1.9.6</swagger-bootstrap.version>
         <jetcache.version>2.6.0</jetcache.version>
+        <metrics.version>3.2.4</metrics.version>
         <!--报表poi工具-->
         <easypoi.verison>3.3.0</easypoi.verison>
         <jjwt.version>0.9.1</jjwt.version>
@@ -260,22 +260,31 @@
                         <artifactId>HikariCP</artifactId>
                         <groupId>com.zaxxer</groupId>
                     </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.tomcat</groupId>
+                        <artifactId>tomcat-jdbc</artifactId>
+                    </exclusion>
                 </exclusions>
             </dependency>
             <dependency>
                 <groupId>com.zaxxer</groupId>
                 <artifactId>HikariCP</artifactId>
                 <version>${hikaricp.version}</version>
+                <scope>compile</scope>
             </dependency>
             <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid</artifactId>
-                <version>${druid.version}</version>
+                <groupId>io.dropwizard.metrics</groupId>
+                <artifactId>metrics-core</artifactId>
+                <version>${metrics.version}</version>
+                <scope>provided</scope>
+                <optional>true</optional>
             </dependency>
             <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid-spring-boot-starter</artifactId>
-                <version>${druid.version}</version>
+                <groupId>io.dropwizard.metrics</groupId>
+                <artifactId>metrics-healthchecks</artifactId>
+                <version>${metrics.version}</version>
+                <scope>provided</scope>
+                <optional>true</optional>
             </dependency>
             <dependency>
                 <groupId>com.alicp.jetcache</groupId>

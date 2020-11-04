@@ -1,7 +1,7 @@
 package com.mall.cloud.monitor.component.aspect;
 
 import com.mall.cloud.common.component.BaseApplicationAspect;
-import com.mall.cloud.monitor.api.param.ApplicationLoggerParam;
+import com.mall.cloud.console.api.param.ApplicationLoggerParam;
 import com.mall.cloud.monitor.component.event.ApplicationLoggerEvent;
 import com.mall.cloud.monitor.uitls.ApplicationLoggerUtil;
 import lombok.AllArgsConstructor;
