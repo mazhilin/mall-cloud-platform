@@ -1,6 +1,7 @@
 package com.mall.cloud.passport.api.service;
 
 import com.mall.cloud.common.persistence.service.BaseService;
+import com.mall.cloud.model.entity.user.CustomerUser;
 
 /**
  * <p>封装Qicloud项目CustomerUserService类.<br></p> 
@@ -9,5 +10,5 @@ import com.mall.cloud.common.persistence.service.BaseService;
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p> 
  */
-public interface CustomerServerService extends BaseService {
+public interface CustomerServerService extends BaseService{
 }

@@ -11,6 +11,6 @@ import org.slf4j.LoggerFactory;
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
-public abstract class BaseServerService {
+public abstract class BaseServerService implements Service {
     protected static final transient Logger logger = LoggerFactory.getLogger(BaseService.class);
 }

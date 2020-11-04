@@ -49,6 +49,7 @@
         <jetcache.version>2.6.0</jetcache.version>
         <!--报表poi工具-->
         <easypoi.verison>3.3.0</easypoi.verison>
+        <jjwt.version>0.9.1</jjwt.version>
     </properties>
 
 
@@ -354,6 +355,11 @@
                 </exclusions>
             </dependency>
             <!--spring-boot dubbo setting  end-->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
             <!--spring-boot project setting  begin-->
             <dependency>
                 <groupId>com.mall.cloud</groupId>
@@ -363,6 +369,11 @@
             <dependency>
                 <groupId>com.mall.cloud</groupId>
                 <artifactId>mall-cloud-model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mall.cloud</groupId>
+                <artifactId>mall-cloud-monitor</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

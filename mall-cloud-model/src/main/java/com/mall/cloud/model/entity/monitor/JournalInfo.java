@@ -25,35 +25,32 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 @TableName(value = "mall_journal_info")
 public class JournalInfo extends BaseEntity {
+    private static final long serialVersionUID = 3258355806982380917L;
     /**
-     * 请求id
+     * 日志id
      */
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
     /**
-     * 请求用户id
+     * 平台类型[web-Web客户端 app-APP smr-小程序]
      */
-    private String requestUserId;
+    private String platformType;
     /**
-     * 请求用户类型
+     * 请求方法名称
      */
-    private String requestUserType;
+    private String methodName;
     /**
-     * 请求服务id
+     * 业务操作类型
      */
-    private String serviceId;
+    private String businessType;
     /**
-     * 请求Token
+     * 来源类型[0-公共平台 1-后端平台]
      */
-    private String token;
+    private String sourceType;
     /**
-     * 请求IP
+     * 请求方法类型
      */
-    private String ipAddress;
-    /**
-     * 请求客户端类型[web-Web客户端 app-APP smr-小程序]
-     */
-    private String clientType;
+    private String requestType;
     /**
      * 请求设备类型
      */
@@ -71,27 +68,35 @@ public class JournalInfo extends BaseEntity {
      */
     private String systemVersion;
     /**
+     * 请求IP地址
+     */
+    private String ipAddress;
+    /**
      * 请求API服务URL
      */
     private String apiAddress;
     /**
-     * 请求错误信息
+     * 应用服务id
      */
-    private String errorMessage;
+    private String serviceId;
     /**
      * 请求参数
      */
     private String inputParam;
     /**
-     * 请求响应结果
+     * 响应结果
      */
     private String returnInfo;
     /**
-     * 请求响应结果
+     * 请求时间
+     */
+    private LocalDateTime requestTime;
+    /**
+     * 响应时间
      */
     private LocalDateTime responseTime;
     /**
-     * 请求响应结果
+     * 日志类型[0-成功记录 1-错误异常]
      */
-    private LocalDateTime requestTime;
+    private Integer messageType;
 }
