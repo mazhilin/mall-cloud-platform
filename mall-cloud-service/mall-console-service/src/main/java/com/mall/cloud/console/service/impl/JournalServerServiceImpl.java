@@ -1,11 +1,13 @@
-package com.mall.cloud.monitor.api.service.impl;
+package com.mall.cloud.console.service.impl;
 
+import com.mall.cloud.console.api.param.ApplicationLoggerParam;
+import com.mall.cloud.console.api.service.JournalServerService;
 import com.mall.cloud.model.mapper.monitor.JournalInfoMapper;
 import com.mall.cloud.model.mapper.monitor.JournalItemMapper;
-import com.mall.cloud.monitor.api.param.ApplicationLoggerParam;
-import com.mall.cloud.monitor.api.service.JournalServerService;
+
 import org.apache.dubbo.config.annotation.Service;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 
 import javax.annotation.Resource;
 
@@ -18,6 +20,7 @@ import javax.annotation.Resource;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
 @Service
+@Component
 public class JournalServerServiceImpl implements JournalServerService {
     @Resource
     private JournalInfoMapper journalInfoMapper;

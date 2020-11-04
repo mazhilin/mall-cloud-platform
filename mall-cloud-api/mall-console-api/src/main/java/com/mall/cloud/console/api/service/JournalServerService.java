@@ -1,7 +1,7 @@
-package com.mall.cloud.monitor.api.service;
+package com.mall.cloud.console.api.service;
 
 import com.mall.cloud.common.persistence.service.BaseService;
-import com.mall.cloud.monitor.api.param.ApplicationLoggerParam;
+import com.mall.cloud.console.api.param.ApplicationLoggerParam;
 
 /**
  * <p>封装Qicloud项目JournalServerService类.<br></p>

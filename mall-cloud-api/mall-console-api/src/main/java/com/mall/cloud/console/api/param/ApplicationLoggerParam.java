@@ -1,4 +1,4 @@
-package com.mall.cloud.monitor.api.param;
+package com.mall.cloud.console.api.param;
 
 import com.mall.cloud.common.persistence.param.BaseParam;
 import lombok.*;

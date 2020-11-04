@@ -3,7 +3,7 @@ package com.mall.cloud.monitor.uitls;
 import cn.hutool.core.util.URLUtil;
 import cn.hutool.extra.servlet.ServletUtil;
 import cn.hutool.http.HttpUtil;
-import com.mall.cloud.monitor.api.param.ApplicationLoggerParam;
+import com.mall.cloud.console.api.param.ApplicationLoggerParam;
 import lombok.experimental.UtilityClass;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;

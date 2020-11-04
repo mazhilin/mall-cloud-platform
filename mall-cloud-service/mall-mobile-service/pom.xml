@@ -23,7 +23,7 @@
     <dependencies>
         <dependency>
             <groupId>com.mall.cloud</groupId>
-            <artifactId>mall-mobile-api</artifactId>
+            <artifactId>mall-cloud-monitor</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

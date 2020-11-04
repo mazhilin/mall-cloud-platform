@@ -1,6 +1,7 @@
-package com.mall.cloud.monitor.api.service.impl;
+package com.mall.cloud.console.service.impl;
 
-import com.mall.cloud.monitor.api.service.RequestServerService;
+
+import com.mall.cloud.console.api.service.RequestServerService;
 
 /**
  * <p>封装Qicloud项目RequestServerServiceImpl类.<br></p>

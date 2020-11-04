@@ -1,15 +1,15 @@
 package com.mall.cloud.monitor.configuration;
 
-import com.mall.cloud.monitor.api.service.JournalServerService;
+import com.mall.cloud.console.api.service.JournalServerService;
 import com.mall.cloud.monitor.component.aspect.ApplicationLoggerAspect;
 import com.mall.cloud.monitor.component.listener.ApplicationLoggerListener;
-import lombok.AllArgsConstructor;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.stereotype.Component;
 
 /**
  * <p>封装Qicloud项目EnableApplicationLoggerConfiguration类.<br></p>
@@ -21,11 +21,11 @@ import org.springframework.scheduling.annotation.EnableAsync;
  */
 @EnableAsync
 @Configuration
-@AllArgsConstructor
 @ConditionalOnWebApplication
+@Component
 public class EnableApplicationLoggerConfiguration {
     @Reference
-    private final JournalServerService journalServerService;
+    private JournalServerService journalServerService;
 
     @Bean
     public ApplicationLoggerListener applicationLoggerListener() {
