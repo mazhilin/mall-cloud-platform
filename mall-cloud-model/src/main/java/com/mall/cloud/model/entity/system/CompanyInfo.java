@@ -1,4 +1,4 @@
-package com.mall.cloud.model.entity.sytem;
+package com.mall.cloud.model.entity.system;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

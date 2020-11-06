@@ -26,7 +26,7 @@ import org.springframework.stereotype.Component;
 public class ApplicationLoggerListener {
 
     @Reference(version = "1.0.0")
-    private JournalServerService journalServerService;
+    private final JournalServerService journalServerService;
 
 
 
@@ -34,7 +34,7 @@ public class ApplicationLoggerListener {
     @Async
     @Order
     @EventListener(ApplicationLoggerEvent.class)
-    public void saveSysLog(ApplicationLoggerEvent event) {
+    public void saveApplicationLogger(ApplicationLoggerEvent event) {
         ApplicationLoggerParam applicationLogger = event.getApplicationLogger();
         journalServerService.save(applicationLogger);
     }

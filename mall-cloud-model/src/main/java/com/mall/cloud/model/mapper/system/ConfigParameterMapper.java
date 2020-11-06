@@ -1,7 +1,7 @@
-package com.mall.cloud.model.mapper.sytem;
+package com.mall.cloud.model.mapper.system;
 
 import com.mall.cloud.common.persistence.mapper.BaseMybatisMapper;
-import com.mall.cloud.model.entity.sytem.ConfigParameter;
+import com.mall.cloud.model.entity.system.ConfigParameter;
 
 /**
  * <p>封装Qicloud项目ConfigParameterMapper类.<br></p>

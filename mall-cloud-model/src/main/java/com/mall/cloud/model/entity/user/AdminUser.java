@@ -58,19 +58,34 @@ public class AdminUser extends BaseEntity {
     @NotNull(message = "用户昵称不能为空!")
     @NotEmpty(message = "用户昵称不能为空!")
     private String nickname;
-
-    /**
-     * 账户类型[0-系统管理员 1-公司管理员]
-     */
-    private Integer type;
     /**
      * 用户手机号
      */
     @NotNull(message = "手机号不能为空")
     @NotBlank(message = "手机号不能为空")
-    @Pattern(regexp ="^[1][3,4,5,6,7,8,9][0-9]{9}$", message = "手机号格式有误")
-    @Max(value = 11,message = "手机号只能为{max}位")
-    @Min(value = 11,message = "手机号只能为{min}位")
-    private String phone;
+    @Pattern(regexp = "^[1][3,4,5,6,7,8,9][0-9]{9}$", message = "手机号格式有误")
+    @Max(value = 11, message = "手机号只能为{max}位")
+    @Min(value = 11, message = "手机号只能为{min}位")
+    private String mobile;
+
+    /**
+     * 用户性别类型[0-保密 1-男 2-女]
+     */
+    private String email;
+    /**
+     * 用户性别类型[0-保密 1-男 2-女]
+     */
+    private Integer gender;
+
+    /**
+     * 用户性别类型[0-保密 1-男 2-女]
+     */
+    private Integer profilePicture;
+
+    /**
+     * 账户类型[0-系统管理员 1-公司管理员]
+     */
+    private Integer type;
+
 
 }

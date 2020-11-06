@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.mall.cloud.common.persistence.entity.BaseEntity;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 /**
  * <p>封装Qicloud项目AdminInfo类.<br></p>
  * <p>//TODO...<br></p>
@@ -27,14 +29,60 @@ public class AdminInfo extends BaseEntity {
      */
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
-
     /**
      * 用户id
      */
-    private String adminUserId;
-
+    private String userId;
     /**
-     * 角色id
+     * 用户生日
      */
-    private String roleId;
+    private LocalDateTime birthday;
+    /**
+     * 公司id
+     */
+    private String companyId;
+    /**
+     * 公司id
+     */
+    private String identityCard;
+    /**
+     * 省/直辖市-编码
+     */
+    private String provinceCode;
+    /**
+     * 省/直辖市-名称
+     */
+    private String provinceName;
+    /**
+     * 市/区-编码
+     */
+    private String cityCode;
+    /**
+     * 市-名称
+     */
+    private String cityName;
+    /**
+     * 区/县-编码
+     */
+    private String countyCode;
+    /**
+     * 区/县-名称
+     */
+    private String countyName;
+    /**
+     * 具体地址
+     */
+    private String location;
+    /**
+     * 完整地址
+     */
+    private String address;
+    /**
+     * 经度
+     */
+    private String longitude;
+    /**
+     * 纬度
+     */
+    private String latitude;
 }
