@@ -1,13 +1,14 @@
 package com.mall.cloud.console.service.impl;
 
+import com.mall.cloud.common.persistence.service.BaseServerService;
 import com.mall.cloud.console.api.param.ApplicationLoggerParam;
 import com.mall.cloud.console.api.service.JournalServerService;
+import com.mall.cloud.model.entity.monitor.JournalInfo;
+import com.mall.cloud.model.entity.monitor.JournalItem;
 import com.mall.cloud.model.mapper.monitor.JournalInfoMapper;
 import com.mall.cloud.model.mapper.monitor.JournalItemMapper;
-
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.stereotype.Component;
-
 
 import javax.annotation.Resource;
 
@@ -21,12 +22,13 @@ import javax.annotation.Resource;
  */
 @Service
 @Component
-public class JournalServerServiceImpl implements JournalServerService {
+public class JournalServerServiceImpl extends BaseServerService implements JournalServerService {
     @Resource
     private JournalInfoMapper journalInfoMapper;
 
     @Resource
     private JournalItemMapper journalItemMapper;
+
     /**
      * 创建系统操作日志
      *
@@ -34,6 +36,12 @@ public class JournalServerServiceImpl implements JournalServerService {
      */
     @Override
     public void save(ApplicationLoggerParam param) {
-
+        JournalInfo info = new JournalInfo();
+        journalInfoMapper.insert(info);
+        JournalItem item = new JournalItem();
+        item.setJournalId(info.getId());
+        item.setUpdateBy(param.getUpdateBy());
+        item.setCreateBy(param.getCreateBy());
+        journalItemMapper.insert(item);
     }
 }

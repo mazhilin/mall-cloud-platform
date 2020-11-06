@@ -1,7 +1,7 @@
-package com.mall.cloud.model.mapper.sytem;
+package com.mall.cloud.model.mapper.system;
 
 import com.mall.cloud.common.persistence.mapper.BaseMybatisMapper;
-import com.mall.cloud.model.entity.sytem.CategoryInfo;
+import com.mall.cloud.model.entity.system.CategoryInfo;
 
 /**
  * <p>封装Qicloud项目CategoryInfoMapper类.<br></p>

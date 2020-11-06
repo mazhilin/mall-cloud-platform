@@ -1,6 +1,7 @@
 package com.mall.cloud.console.api.service;
 
 import com.mall.cloud.common.persistence.service.BaseService;
+import com.mall.cloud.console.api.param.RequestLoggerParam;
 
 /**
  * <p>封装Qicloud项目RequestServerService类.<br></p>
@@ -11,4 +12,11 @@ import com.mall.cloud.common.persistence.service.BaseService;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
 public interface RequestServerService extends BaseService {
+
+    /**
+     * 创建系统操作日志
+     *
+     * @param param 操作日志对象
+     */
+    void save(RequestLoggerParam param);
 }
