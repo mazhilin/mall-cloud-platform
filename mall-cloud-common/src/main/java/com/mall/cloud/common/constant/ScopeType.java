@@ -12,37 +12,17 @@ import com.mall.cloud.common.BaseHandler;
  */
 public enum ScopeType implements BaseHandler {
 	/**
-	 * 公共平台-0
+	 * 后端平台-0
 	 */
-	COMMON(0, "公共平台"),
+	CONSOLE(0, "后端平台"),
 	/**
-	 * 后端平台-1
+	 * 移动端-1
 	 */
-	CONSOLE(1, "后端平台"),
+	MOBILE(1, "移动APP端"),
 	/**
-	 * 前端平台-2
+	 * 微信端-2
 	 */
-	FRONT(2, "前端平台"),
-	/**
-	 * 官网平台-3
-	 */
-	PORTAL(3, "官网平台"),
-	/**
-	 * 移动端-4
-	 */
-	MOBILE(4, "移动APP端"),
-	/**
-	 * 微信端-5
-	 */
-	WECHAT(5, "微信SMR端"),
-	/**
-	 * 公司管理员-6
-	 */
-	COMPANY(6, "公司管理员"),
-	/**
-	 * 公司自定义-7
-	 */
-	CUSTOMIZE(7, "公司自定义");
+	WECHAT(2, "微信SMR端");
 	/**
 	 * 编码-code
 	 */

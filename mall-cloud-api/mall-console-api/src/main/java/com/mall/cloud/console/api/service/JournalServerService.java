@@ -1,5 +1,6 @@
 package com.mall.cloud.console.api.service;
 
+
 import com.mall.cloud.common.persistence.service.BaseService;
 import com.mall.cloud.console.api.param.ApplicationLoggerParam;
 

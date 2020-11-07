@@ -1,5 +1,6 @@
 package com.mall.cloud.console.service.impl;
 
+
 import com.mall.cloud.common.persistence.service.BaseServerService;
 import com.mall.cloud.console.api.param.ApplicationLoggerParam;
 import com.mall.cloud.console.api.service.JournalServerService;
@@ -37,6 +38,7 @@ public class JournalServerServiceImpl extends BaseServerService implements Journ
     @Override
     public void save(ApplicationLoggerParam param) {
         JournalInfo info = new JournalInfo();
+        info.setCreateBy(param.getCreateBy());
         journalInfoMapper.insert(info);
         JournalItem item = new JournalItem();
         item.setJournalId(info.getId());
