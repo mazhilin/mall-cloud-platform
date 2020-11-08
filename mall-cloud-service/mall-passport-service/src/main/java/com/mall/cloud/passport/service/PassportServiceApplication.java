@@ -1,5 +1,7 @@
 package com.mall.cloud.passport.service;
 
+import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
+import com.alicp.jetcache.anno.config.EnableMethodCache;
 import com.mall.cloud.common.container.annotation.ApplicationServerBootstrap;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.mybatis.spring.annotation.MapperScan;
@@ -14,7 +16,9 @@ import org.springframework.boot.SpringApplication;
  */
 @ApplicationServerBootstrap
 @EnableDubbo(scanBasePackages = {"com.mall.cloud.passport.service.impl"})
-@MapperScan(basePackages = {"com.mall.cloud.model.mapper"})
+@MapperScan(basePackages = {"com.mall.cloud.model.mapper.*"})
+@EnableMethodCache(basePackages = "com.mall.cloud")
+@EnableCreateCacheAnnotation
 public class PassportServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PassportServiceApplication.class, args);
