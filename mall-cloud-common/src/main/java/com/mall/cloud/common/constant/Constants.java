@@ -118,4 +118,15 @@ public final class Constants {
      * 微信登录token
      */
     public static final String SMR_LOGIN_TOKEN = "smr_login_token";
+
+    /**
+     * dubbo 服务通用版本号
+     */
+    public static final String DUBBO_SERVICE_VERSION = "1.0.0";
+
+    public static final int DUBBO_TIMEOUT = 360000;
+
+    public static final boolean DUBBO_CHECK = false;
+
+    public static final int DUBBO_RETRIES = 1;
 }

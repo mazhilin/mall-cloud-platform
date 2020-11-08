@@ -51,6 +51,7 @@
         <redisson.version>3.12.5</redisson.version>
         <lettuce.version>5.2.2.RELEASE</lettuce.version>
         <metrics.version>3.2.4</metrics.version>
+        <druid.version>1.1.22</druid.version>
         <!--报表poi工具-->
         <easypoi.verison>3.3.0</easypoi.verison>
         <jjwt.version>0.9.1</jjwt.version>
@@ -284,20 +285,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-jdbc</artifactId>
                 <version>${spring-boot-parent.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.dropwizard.metrics</groupId>
-                <artifactId>metrics-core</artifactId>
-                <version>${metrics.version}</version>
-                <scope>provided</scope>
-                <optional>true</optional>
-            </dependency>
-            <dependency>
-                <groupId>io.dropwizard.metrics</groupId>
-                <artifactId>metrics-healthchecks</artifactId>
-                <version>${metrics.version}</version>
-                <scope>provided</scope>
-                <optional>true</optional>
             </dependency>
             <dependency>
                 <groupId>com.alicp.jetcache</groupId>

@@ -1,5 +1,6 @@
 package com.mall.cloud.passport.service.impl;
 
+import com.mall.cloud.common.constant.Constants;
 import com.mall.cloud.common.persistence.service.BaseServerService;
 import com.mall.cloud.common.utils.SequenceServerUtil;
 import com.mall.cloud.model.result.sytem.SequenceIdResult;
@@ -16,7 +17,7 @@ import org.apache.dubbo.config.annotation.Service;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
 @Slf4j
-@Service
+@Service(version = Constants.DUBBO_SERVICE_VERSION, timeout = Constants.DUBBO_TIMEOUT)
 public class SequenceServerServiceImpl extends BaseServerService implements SequenceServerService {
 
     private SequenceServerUtil sequenceServer;

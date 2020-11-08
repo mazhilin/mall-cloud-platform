@@ -1,5 +1,6 @@
 package com.mall.cloud.passport.service.impl;
 
+import com.mall.cloud.common.constant.Constants;
 import com.mall.cloud.passport.api.service.SetOperationsService;
 import com.mall.cloud.passport.api.service.ValueOperationsService;
 import org.apache.dubbo.config.annotation.Service;
@@ -23,7 +24,7 @@ import java.util.Set;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
 @Component(value = "setOperationsServiceImpl")
-@Service(interfaceClass = SetOperationsService.class)
+@Service(version = Constants.DUBBO_SERVICE_VERSION, timeout = Constants.DUBBO_TIMEOUT)
 public class SetOperationsServiceImpl<K, V> implements SetOperationsService<K, V> {
     @Resource(name = "stringRedisTemplate")
     private ValueOperations<K, V> valueOperations;

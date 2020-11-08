@@ -1,6 +1,7 @@
 package com.mall.cloud.passport.web.controller.common;
 
 import com.mall.cloud.common.annotation.ApplicationAuthorize;
+import com.mall.cloud.common.constant.Constants;
 import com.mall.cloud.common.constant.PlatformType;
 import com.mall.cloud.common.constant.ScopeType;
 import com.mall.cloud.common.persistence.controller.BaseController;
@@ -24,7 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/mobile/center")
 public class MobileCenterController extends BaseController {
 
-    @Reference
+    @Reference(version = Constants.DUBBO_SERVICE_VERSION, timeout = Constants.DUBBO_TIMEOUT, check = Constants.DUBBO_CHECK, retries = Constants.DUBBO_RETRIES)
+
     private LoginServerService loginServerService;
 
     /**

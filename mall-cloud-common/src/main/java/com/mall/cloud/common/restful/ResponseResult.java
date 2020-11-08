@@ -122,12 +122,6 @@ public class ResponseResult implements Result {
 	 * @return
 	 */
 	public synchronized String parseToJson(ResponseResult response) {
-		if (Objects.isNull(response.getResult())) {
-			response = new ResponseResult();
-			response.setCode(ResponseType.FAILURE.code());
-			response.setError("请求系统接口异常!");
-			return JsonServerUtil.getInstance().parseToJson(response);
-		}
 		return JsonServerUtil.getInstance().parseToJson(response);
 	}
 

@@ -1,12 +1,18 @@
 package com.mall.cloud.passport.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
+import com.mall.cloud.common.constant.Constants;
 import com.mall.cloud.common.persistence.service.BaseServerService;
 import com.mall.cloud.model.entity.user.AdminUser;
 import com.mall.cloud.model.entity.user.CustomerUser;
 import com.mall.cloud.model.entity.user.EmployeeUser;
+import com.mall.cloud.model.mapper.user.AdminUserMapper;
 import com.mall.cloud.passport.api.service.LoginServerService;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 /**
  * <p>封装Qicloud项目LoginServerServiceImpl类.<br></p>
@@ -16,9 +22,12 @@ import org.springframework.stereotype.Component;
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
-@Service
+@Service(version = Constants.DUBBO_SERVICE_VERSION, timeout = Constants.DUBBO_TIMEOUT)
 @Component
 public class LoginServerServiceImpl extends BaseServerService implements LoginServerService {
+    @Resource
+    private AdminUserMapper adminUserMapper;
+
     /**
      * 系统用户登录-根据用户帐号和密码查找用户
      *
@@ -28,7 +37,7 @@ public class LoginServerServiceImpl extends BaseServerService implements LoginSe
      */
     @Override
     public AdminUser queryAdminUser(String account, String password) {
-    return null;
+        return adminUserMapper.selectOne(new QueryWrapper<AdminUser>().eq("account",account).eq("password",password));
     }
 
     /**

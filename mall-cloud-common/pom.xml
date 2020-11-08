@@ -173,20 +173,6 @@
             <version>${hikaricp.version}</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>io.dropwizard.metrics</groupId>
-            <artifactId>metrics-core</artifactId>
-            <version>${metrics.version}</version>
-            <scope>provided</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>io.dropwizard.metrics</groupId>
-            <artifactId>metrics-healthchecks</artifactId>
-            <version>${metrics.version}</version>
-            <scope>provided</scope>
-            <optional>true</optional>
-        </dependency>
         <!--mysql setting end-->
         <!--spring-boot mybatis setting begin-->
         <dependency>

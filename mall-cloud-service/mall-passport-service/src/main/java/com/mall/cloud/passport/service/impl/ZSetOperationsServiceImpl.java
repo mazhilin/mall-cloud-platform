@@ -1,5 +1,6 @@
 package com.mall.cloud.passport.service.impl;
 
+import com.mall.cloud.common.constant.Constants;
 import com.mall.cloud.passport.api.service.ZSetOperationsService;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.data.redis.connection.RedisZSetCommands;
@@ -22,7 +23,7 @@ import java.util.Set;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
 @Component(value = "ZSetOperationsServiceImpl")
-@Service(interfaceClass = ZSetOperationsService.class)
+@Service(version = Constants.DUBBO_SERVICE_VERSION, timeout = Constants.DUBBO_TIMEOUT)
 public class ZSetOperationsServiceImpl <K, V> implements ZSetOperationsService<K, V> {
     @Resource(name = "stringRedisTemplate")
     private ValueOperations<K, V> valueOperations;

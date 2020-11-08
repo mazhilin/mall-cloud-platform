@@ -1,7 +1,6 @@
 package com.mall.cloud.passport.web.controller.common;
 
-import com.mall.cloud.common.annotation.ApplicationAuthorize;
-import com.mall.cloud.common.constant.ScopeType;
+import com.mall.cloud.common.constant.Constants;
 import com.mall.cloud.common.constant.UserType;
 import com.mall.cloud.common.exception.ApplicationServerException;
 import com.mall.cloud.common.persistence.controller.BaseController;
@@ -31,7 +30,7 @@ import java.util.Objects;
 @RequestMapping(value = "/api/console/center",produces = "application/json;charset=UTF-8",method = RequestMethod.POST)
 public class ConsoleCenterController extends BaseController {
 
-    @Reference
+    @Reference(version = Constants.DUBBO_SERVICE_VERSION, timeout = Constants.DUBBO_TIMEOUT, check = Constants.DUBBO_CHECK, retries = Constants.DUBBO_RETRIES)
     private LoginServerService loginServerService;
 
     /**
