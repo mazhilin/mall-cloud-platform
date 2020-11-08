@@ -33,7 +33,7 @@ public interface BaseApplicationAspect {
      * @param joinPoint 切入点
      */
     default Object handlerAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        return null;
+        return joinPoint.proceed();
     }
 
     /**

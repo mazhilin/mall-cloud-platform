@@ -31,7 +31,7 @@ public class SmallCenterController extends BaseController {
      * @return 返回结果
      */
     @PostMapping(value = "/login")
-    @ApplicationAuthorize(platform = PlatformType.SMR, scope = ScopeType.WECHAT)
+    @ApplicationAuthorize( scope = ScopeType.SMR)
     public ResponseResult login(
             @RequestParam(value = "account") String account,
             @RequestParam(value = "password") String password,

@@ -13,7 +13,7 @@ import org.springframework.boot.SpringApplication;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p> 
  */
 @ApplicationServerBootstrap
-@EnableDubbo(scanBasePackages = {"com.mall.cloud.passport.service.impl","com.mall.cloud.passport.holder"})
+@EnableDubbo(scanBasePackages = {"com.mall.cloud.passport.service.impl"})
 @MapperScan(basePackages = {"com.mall.cloud.model.mapper"})
 public class PassportServiceApplication {
 	public static void main(String[] args) {

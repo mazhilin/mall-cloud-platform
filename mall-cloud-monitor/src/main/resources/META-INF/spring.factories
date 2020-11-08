@@ -1,4 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-    com.mall.cloud.monitor.configuration.EnableApplicationLoggerConfiguration
-org.springframework.context.ApplicationContextInitializer=\
-    com.mall.cloud.monitor.initializer.ApplicationLoggerInitializer

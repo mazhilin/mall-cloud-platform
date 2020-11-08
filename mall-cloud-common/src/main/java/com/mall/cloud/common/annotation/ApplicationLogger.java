@@ -25,11 +25,6 @@ public @interface ApplicationLogger {
      */
     String title() default StringUtils.EMPTY;
     /**
-     * 平台模块-platform
-     */
-    PlatformType platform() default PlatformType.WEB;
-
-    /**
      * 操作值-value
      */
     String method() default StringUtils.EMPTY;
@@ -47,10 +42,5 @@ public @interface ApplicationLogger {
     /**
      * 作用域-scope
      */
-    ScopeType scope() default ScopeType.CONSOLE;
-
-    /**
-     * 是否持久化请求参数-persistence
-     */
-    boolean persistence() default true;
+    ScopeType scope() default ScopeType.WEB;
 }

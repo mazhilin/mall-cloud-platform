@@ -14,15 +14,15 @@ public enum ScopeType implements BaseHandler {
 	/**
 	 * 后端平台-0
 	 */
-	CONSOLE(0, "后端平台"),
+	WEB(0, "后端平台"),
 	/**
 	 * 移动端-1
 	 */
-	MOBILE(1, "移动APP端"),
+	APP(1, "移动APP端"),
 	/**
 	 * 微信端-2
 	 */
-	WECHAT(2, "微信SMR端");
+	SMR(2, "微信SMR端");
 	/**
 	 * 编码-code
 	 */

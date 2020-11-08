@@ -106,4 +106,16 @@ public final class Constants {
      * 接口请求和调用服务TraceId-[RequestId]
      */
     public static final String REQUEST_ID = "RequestId";
+    /**
+     * 后台管理登录token
+     */
+    public static final String WEB_LOGIN_TOKEN = "web_login_token";
+    /**
+     * 移动APP登录token
+     */
+    public static final String APP_LOGIN_TOKEN = "app_login_token";
+    /**
+     * 微信登录token
+     */
+    public static final String SMR_LOGIN_TOKEN = "smr_login_token";
 }
