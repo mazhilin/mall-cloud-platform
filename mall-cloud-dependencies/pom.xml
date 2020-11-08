@@ -46,13 +46,20 @@
         <swagger-core.version>2.1.1</swagger-core.version>
         <swagger-bootstrap.version>1.9.6</swagger-bootstrap.version>
         <jetcache.version>2.6.0</jetcache.version>
+        <caffeine.version>2.8.5</caffeine.version>
         <jedis.version>3.1.0</jedis.version>
         <redisson.version>3.12.5</redisson.version>
         <lettuce.version>5.2.2.RELEASE</lettuce.version>
         <metrics.version>3.2.4</metrics.version>
+        <druid.version>1.1.22</druid.version>
         <!--报表poi工具-->
         <easypoi.verison>3.3.0</easypoi.verison>
         <jjwt.version>0.9.1</jjwt.version>
+        <commons-fileupload.version>1.4</commons-fileupload.version>
+        <commons-lang3.version>3.9</commons-lang3.version>
+        <commons-codec.version>1.11</commons-codec.version>
+        <commons-beanutils.verison>[1.9.4,)</commons-beanutils.verison>
+        <commons-io.version>2.6</commons-io.version>
     </properties>
 
 
@@ -87,18 +94,6 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
-                <version>${spring-boot-parent.version}</version>
-                <!-- 排除Tomcat依赖 -->
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.springframework.boot</groupId>
-                        <artifactId>spring-boot-starter-tomcat</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-undertow</artifactId>
                 <version>${spring-boot-parent.version}</version>
             </dependency>
             <dependency>
@@ -190,6 +185,38 @@
                 <version>${knife4j.version}</version>
             </dependency>
             <!--spring-boot swagger setting end-->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons-codec.version}</version>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>${commons-pool2.version}</version>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${commons-beanutils.verison}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${commons-fileupload.version}</version>
+            </dependency>
             <!--spring-boot zookeeper setting  begin-->
             <dependency>
                 <groupId>org.apache.zookeeper</groupId>
@@ -258,36 +285,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-jdbc</artifactId>
                 <version>${spring-boot-parent.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>HikariCP</artifactId>
-                        <groupId>com.zaxxer</groupId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.apache.tomcat</groupId>
-                        <artifactId>tomcat-jdbc</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>com.zaxxer</groupId>
-                <artifactId>HikariCP</artifactId>
-                <version>${hikaricp.version}</version>
-                <scope>compile</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.dropwizard.metrics</groupId>
-                <artifactId>metrics-core</artifactId>
-                <version>${metrics.version}</version>
-                <scope>provided</scope>
-                <optional>true</optional>
-            </dependency>
-            <dependency>
-                <groupId>io.dropwizard.metrics</groupId>
-                <artifactId>metrics-healthchecks</artifactId>
-                <version>${metrics.version}</version>
-                <scope>provided</scope>
-                <optional>true</optional>
             </dependency>
             <dependency>
                 <groupId>com.alicp.jetcache</groupId>

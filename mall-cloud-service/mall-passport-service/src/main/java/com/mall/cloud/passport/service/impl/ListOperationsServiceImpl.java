@@ -1,5 +1,6 @@
 package com.mall.cloud.passport.service.impl;
 
+import com.mall.cloud.common.constant.Constants;
 import com.mall.cloud.passport.api.service.ListOperationsService;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.data.redis.core.RedisOperations;
@@ -19,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
-@Service
+@Service(version = Constants.DUBBO_SERVICE_VERSION, timeout = Constants.DUBBO_TIMEOUT)
 @Component
 public class ListOperationsServiceImpl <K, V> implements ListOperationsService<K, V> {
     @Resource(name = "stringRedisTemplate")

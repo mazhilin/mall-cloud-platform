@@ -35,15 +35,7 @@ public @interface ApplicationAuthorize {
      */
     boolean authorizeResources() default true;
     /**
-     * 平台模块-platform[web-Web应用平台 app-APP平台 smr-小程序平台]
-     */
-    PlatformType platform() default PlatformType.WEB;
-    /**
      * 作用域-scope鉴权范围，指定端范围，默认为为后台。指定端后，登录用户只鉴权改端的登录用户，资源只鉴权该端的资源。
      */
-    ScopeType scope() default ScopeType.CONSOLE;
-    /**
-     * 是否持久化请求参数-persistence
-     */
-    boolean persistence() default true;
+    ScopeType scope() default ScopeType.WEB;
 }

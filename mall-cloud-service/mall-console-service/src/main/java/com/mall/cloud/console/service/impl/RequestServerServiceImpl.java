@@ -1,6 +1,7 @@
 package com.mall.cloud.console.service.impl;
 
 
+import com.mall.cloud.common.constant.Constants;
 import com.mall.cloud.common.persistence.service.BaseServerService;
 import com.mall.cloud.console.api.param.RequestLoggerParam;
 import com.mall.cloud.console.api.service.RequestServerService;
@@ -19,7 +20,7 @@ import javax.annotation.Resource;
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
-@Service
+@Service(version = Constants.DUBBO_SERVICE_VERSION, timeout = Constants.DUBBO_TIMEOUT)
 @Component
 public class RequestServerServiceImpl extends BaseServerService implements RequestServerService {
 

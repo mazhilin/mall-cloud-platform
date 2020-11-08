@@ -106,4 +106,27 @@ public final class Constants {
      * 接口请求和调用服务TraceId-[RequestId]
      */
     public static final String REQUEST_ID = "RequestId";
+    /**
+     * 后台管理登录token
+     */
+    public static final String WEB_LOGIN_TOKEN = "web_login_token";
+    /**
+     * 移动APP登录token
+     */
+    public static final String APP_LOGIN_TOKEN = "app_login_token";
+    /**
+     * 微信登录token
+     */
+    public static final String SMR_LOGIN_TOKEN = "smr_login_token";
+
+    /**
+     * dubbo 服务通用版本号
+     */
+    public static final String DUBBO_SERVICE_VERSION = "1.0.0";
+
+    public static final int DUBBO_TIMEOUT = 360000;
+
+    public static final boolean DUBBO_CHECK = false;
+
+    public static final int DUBBO_RETRIES = 1;
 }

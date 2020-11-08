@@ -1,10 +1,7 @@
 package com.mall.cloud.common.configuration;
 
-import com.mall.cloud.common.container.LazyInitProcessorServer;
-import com.mall.cloud.common.container.UndertowContainerServer;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -20,25 +17,4 @@ import org.springframework.context.annotation.Import;
 @AutoConfigurationPackage
 @Import(value = {GlobalContainerConfiguration.class})
 public class EnableAutoContainerConfiguration {
-	/**
-	 * 初始化容器配置UndertowContainerServer
-	 *
-	 * @return 返回结果
-	 */
-	@Bean
-	public static UndertowContainerServer undertowContainerServer() {
-		return new UndertowContainerServer();
-	}
-	
-
-	
-	/**
-	 * 初始化LazyInitProcessorServer
-	 *
-	 * @return 返回结果
-	 */
-	@Bean
-	public static LazyInitProcessorServer lazyInitProcessorServer() {
-		return new LazyInitProcessorServer();
-	}
 }

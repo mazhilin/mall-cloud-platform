@@ -5,7 +5,8 @@ import com.mall.cloud.common.constant.ResponseType;
 import com.mall.cloud.common.persistence.result.Result;
 import com.mall.cloud.common.utils.JsonServerUtil;
 import com.mall.cloud.common.utils.SequenceServerUtil;
-import lombok.Data;
+import lombok.*;
+import lombok.experimental.Accessors;
 
 import java.time.Instant;
 import java.util.List;
@@ -20,6 +21,10 @@ import java.util.Objects;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p> 
  */
 @Data
+@Builder
+@ToString
+@AllArgsConstructor
+@Accessors(chain = true)
 public class ResponseResult implements Result {
 	private static final long serialVersionUID = -3252379463288262335L;
 	/**
@@ -117,12 +122,6 @@ public class ResponseResult implements Result {
 	 * @return
 	 */
 	public synchronized String parseToJson(ResponseResult response) {
-		if (Objects.isNull(response.getResult())) {
-			response = new ResponseResult();
-			response.setCode(ResponseType.FAILURE.code());
-			response.setError("请求系统接口异常!");
-			return JsonServerUtil.getInstance().parseToJson(response);
-		}
 		return JsonServerUtil.getInstance().parseToJson(response);
 	}
 

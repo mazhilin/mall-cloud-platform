@@ -91,7 +91,7 @@
     <logger name="org.apache.dubbo.monitor" level="error" additivity="true"/>
     <logger name="org.apache.dubbo.remoting" level="error" additivity="true"/>
     <logger name="org.apache.dubbo" level="INFO" additivity="true"/>
-    <logger name="com.zaxxer" level="debug" additivity="true"/>
+    <logger name="com.zaxxer" level="INFO" additivity="true"/>
     <logger name="org.quartz" level="WARN" additivity="false"/>
     <logger name="ch.qos.logback" level="INFO" additivity="true"/>
     <logger name="org.mybatis.caches" level="INFO" additivity="true"/>

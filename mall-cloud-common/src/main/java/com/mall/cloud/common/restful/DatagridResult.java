@@ -1,13 +1,15 @@
 package com.mall.cloud.common.restful;
 
-import java.util.List;
-import java.util.Map;
-
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Lists;
 import com.mall.cloud.common.persistence.result.Result;
-
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.ToString;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>封装Qicloud项目DatagridResult类.<br></p> 
@@ -17,6 +19,9 @@ import lombok.Data;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p> 
  */
 @Data
+@Builder
+@ToString
+@AllArgsConstructor
 public class DatagridResult implements Result {
 	private static final long serialVersionUID = -954766243250722604L;
 	/**

@@ -47,4 +47,16 @@ public final class Tokens {
      * 移动端ToPC端Token
      */
     public static final String APP_TOKEN = "app" + TOKEN_SUFFIX;
+    /**
+     * 后台管理登录token
+     */
+    public static final String WEB_LOGIN_TOKEN = "web_login_token";
+    /**
+     * 移动APP登录token
+     */
+    public static final String APP_LOGIN_TOKEN = "app_login_token";
+    /**
+     * 微信登录token
+     */
+    public static final String SMR_LOGIN_TOKEN = "smr_login_token";
 }

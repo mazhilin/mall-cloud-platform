@@ -1,5 +1,7 @@
 package com.mall.cloud.console.service.impl;
 
+
+import com.mall.cloud.common.constant.Constants;
 import com.mall.cloud.common.persistence.service.BaseServerService;
 import com.mall.cloud.console.api.param.ApplicationLoggerParam;
 import com.mall.cloud.console.api.service.JournalServerService;
@@ -20,7 +22,7 @@ import javax.annotation.Resource;
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
-@Service
+@Service(version = Constants.DUBBO_SERVICE_VERSION, timeout = Constants.DUBBO_TIMEOUT)
 @Component
 public class JournalServerServiceImpl extends BaseServerService implements JournalServerService {
     @Resource
@@ -37,6 +39,7 @@ public class JournalServerServiceImpl extends BaseServerService implements Journ
     @Override
     public void save(ApplicationLoggerParam param) {
         JournalInfo info = new JournalInfo();
+        info.setCreateBy(param.getCreateBy());
         journalInfoMapper.insert(info);
         JournalItem item = new JournalItem();
         item.setJournalId(info.getId());

@@ -45,7 +45,6 @@ public class Achievement extends BaseEntity {
      * 成交量
      */
     private Integer success;
-
     /**
      * 客户ID
      */
