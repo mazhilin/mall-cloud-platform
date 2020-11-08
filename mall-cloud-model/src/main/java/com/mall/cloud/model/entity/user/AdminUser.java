@@ -21,7 +21,7 @@ import javax.validation.constraints.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@TableName(value = "mall_admin_user")
+@TableName(value = "mall_admin_user",autoResultMap = true,resultMap = "BaseResultMap",keepGlobalPrefix = false)
 public class AdminUser extends BaseEntity {
     private static final long serialVersionUID = 3854519652448554552L;
     /**
@@ -80,7 +80,7 @@ public class AdminUser extends BaseEntity {
     /**
      * 用户性别类型[0-保密 1-男 2-女]
      */
-    private Integer profilePicture;
+    private String profilePicture;
 
     /**
      * 账户类型[0-系统管理员 1-公司管理员]

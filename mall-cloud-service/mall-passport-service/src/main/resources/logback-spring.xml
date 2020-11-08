@@ -84,6 +84,7 @@
         </layout>
     </appender>
 
+
     <!-- additivity 设为false,则logger内容不附加至root ，配置以配置包下的所有类的日志的打印，级别是 ERROR-->
     <!-- additivity 设为false,则logger内容不附加至root ，配置以配置包下的所有类的日志的打印，级别是 ERROR-->
     <logger name="org.slf4j" level="INFO" additivity="true"/>

@@ -2,6 +2,7 @@ package com.mall.cloud.model.mapper.user;
 
 import com.mall.cloud.common.persistence.mapper.BaseMybatisMapper;
 import com.mall.cloud.model.entity.user.EmployeeUser;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>封装Qicloud项目EmployeeUserMapper类.<br></p>
@@ -11,5 +12,6 @@ import com.mall.cloud.model.entity.user.EmployeeUser;
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
+@Mapper
 public interface EmployeeUserMapper extends BaseMybatisMapper<EmployeeUser> {
 }

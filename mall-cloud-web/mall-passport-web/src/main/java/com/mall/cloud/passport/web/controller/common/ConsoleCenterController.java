@@ -7,10 +7,13 @@ import com.mall.cloud.common.persistence.controller.BaseController;
 import com.mall.cloud.common.restful.ResponseResult;
 import com.mall.cloud.common.utils.ApplicationServerUtil;
 import com.mall.cloud.common.utils.CheckEmptyUtil;
+import com.mall.cloud.common.utils.JsonServerUtil;
 import com.mall.cloud.common.utils.MD5Util;
 import com.mall.cloud.model.entity.user.AdminUser;
 import com.mall.cloud.model.entity.user.EmployeeUser;
 import com.mall.cloud.passport.api.service.LoginServerService;
+import com.mall.cloud.passport.api.service.RedisOperationsService;
+import com.mall.cloud.passport.api.service.ValueOperationsService;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,11 +30,15 @@ import java.util.Objects;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
 @RestController
-@RequestMapping(value = "/api/console/center",produces = "application/json;charset=UTF-8",method = RequestMethod.POST)
+@RequestMapping(value = "/api/console/center", produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
 public class ConsoleCenterController extends BaseController {
 
     @Reference(version = Constants.DUBBO_SERVICE_VERSION, timeout = Constants.DUBBO_TIMEOUT, check = Constants.DUBBO_CHECK, retries = Constants.DUBBO_RETRIES)
     private LoginServerService loginServerService;
+    @Reference(version = Constants.DUBBO_SERVICE_VERSION, timeout = Constants.DUBBO_TIMEOUT, check = Constants.DUBBO_CHECK, retries = Constants.DUBBO_RETRIES)
+    private RedisOperationsService<String, Object> redisOperationsService;
+    @Reference(version = Constants.DUBBO_SERVICE_VERSION, timeout = Constants.DUBBO_TIMEOUT, check = Constants.DUBBO_CHECK, retries = Constants.DUBBO_RETRIES)
+    private ValueOperationsService<String, Object> valueOperationsService;
 
     /**
      * 系统后台登录方法-login
@@ -48,7 +55,7 @@ public class ConsoleCenterController extends BaseController {
     public String login(
             @RequestParam(value = "account") String account,
             @RequestParam(value = "password") String password,
-            @RequestParam(value = "auto", required = false) Integer auto,
+            @RequestParam(value = "auto", required = false, defaultValue = "0") Integer auto,
             @RequestParam(value = "clientType", required = false, defaultValue = "web") String clientType,
             @RequestParam(value = "userType", required = false, defaultValue = "0") Integer userType)
             throws ApplicationServerException {
@@ -75,11 +82,12 @@ public class ConsoleCenterController extends BaseController {
                             result.setError("请填写密码！");
                             return result.parseToJson(result);
                         }
-                        adminUser =loginServerService.queryAdminUser(account,password);
-                        if (CheckEmptyUtil.isEmpty(adminUser)){
+                        adminUser = loginServerService.queryAdminUser(account, password);
+                        if (CheckEmptyUtil.isEmpty(adminUser)) {
                             result.setError("账号或密码错误！");
                             return result.parseToJson(result);
                         }
+                        valueOperationsService.set("mall:cloud:adminUser" + adminUser.getId(), JsonServerUtil.getInstance().parseToJson(adminUser));
                         session.setAttribute("adminUser", adminUser);
                         session.setMaxInactiveInterval(1800);
                         if (auto.equals("1")) {
