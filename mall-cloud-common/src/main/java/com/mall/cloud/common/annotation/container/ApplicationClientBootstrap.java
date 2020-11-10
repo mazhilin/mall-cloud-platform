@@ -1,4 +1,4 @@
-package com.mall.cloud.common.container.annotation;
+package com.mall.cloud.common.annotation.container;
 
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigurationExcludeFilter;

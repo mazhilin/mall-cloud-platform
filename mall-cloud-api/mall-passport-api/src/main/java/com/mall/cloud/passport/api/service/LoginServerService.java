@@ -3,7 +3,6 @@ package com.mall.cloud.passport.api.service;
 import com.mall.cloud.common.persistence.service.BaseService;
 import com.mall.cloud.model.entity.user.AdminUser;
 import com.mall.cloud.model.entity.user.CustomerUser;
-import com.mall.cloud.model.entity.user.EmployeeUser;
 
 /**
  * <p>封装Qicloud项目LoginServerService类.<br></p>
@@ -32,13 +31,4 @@ public interface LoginServerService extends BaseService {
      * @return 返回结果
      */
     CustomerUser queryCustomerUser(String account, String password);
-
-    /**
-     * 客户用户登录-根据用户帐号和密码查找用户
-     *
-     * @param account  客户用户账户
-     * @param password 客户用户密码
-     * @return 返回结果
-     */
-    EmployeeUser queryEmployeeUser(String account, String password);
 }

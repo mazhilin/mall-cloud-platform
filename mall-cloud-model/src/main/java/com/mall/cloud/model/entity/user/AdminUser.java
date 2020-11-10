@@ -83,7 +83,7 @@ public class AdminUser extends BaseEntity {
     private String profilePicture;
 
     /**
-     * 账户类型[0-系统管理员 1-公司管理员]
+     * 账户类型[0-系统管理账户 1-公司管理账户 2-公司员工账户]
      */
     private Integer type;
 

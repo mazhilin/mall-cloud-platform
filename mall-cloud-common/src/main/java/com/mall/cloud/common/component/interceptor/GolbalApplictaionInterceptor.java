@@ -1,36 +1,20 @@
-package com.mall.cloud.console.web.interceptor;
+package com.mall.cloud.common.component.interceptor;
 
-import com.mall.cloud.common.annotation.dubbo.DubboConsumerClient;
 import com.mall.cloud.common.component.BaseHandlerInterceptor;
-import com.mall.cloud.common.utils.ApplicationServerUtil;
-import com.mall.cloud.common.utils.CheckEmptyUtil;
-import com.mall.cloud.model.entity.user.AdminUser;
-import com.mall.cloud.passport.api.service.UserServerService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
 
 /**
- * <p>封装Qicloud项目ConsoleWebInterceptor类.<br></p>
+ * <p>封装Qicloud项目GolbalApplictaionInterceptor类.<br></p>
  * <p>//TODO...<br></p>
  *
- * @author Powered by marklin 2020-11-08 15:23
+ * @author Powered by marklin 2020-11-10 20:28
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
-public class ConsoleWebInterceptor extends BaseHandlerInterceptor {
-    private final List<Integer> errorCodeList = Arrays.asList(404, 403, 500, 501, 999);
-    protected Logger logger = LoggerFactory.getLogger(ConsoleWebInterceptor.class);
-
-    @DubboConsumerClient
-    private UserServerService userServerService;
-
+public class GolbalApplictaionInterceptor extends BaseHandlerInterceptor {
     /**
      * 配置拦截器-nextHandlerInterceptor
      *
@@ -72,36 +56,6 @@ public class ConsoleWebInterceptor extends BaseHandlerInterceptor {
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
         response.setHeader("Access-Control-Allow-Headers",
                 "Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,token");
-        String requestError = "/error";
-        if (errorCodeList.contains(response.getStatus()) || requestError.equals(request.getServletPath())) {
-            return false;
-        }
-        logger.info("---------------SpringBoot  Interceptor  begins to execute---------------");
-        request = Objects.requireNonNull(ApplicationServerUtil.getRequest());
-        String token = request.getHeader("token");
-        if (CheckEmptyUtil.isEmpty(token)) {
-            // 识别ajax的响应头
-            String requestType = request.getHeader("X-Requested-With");
-            // 如果是ajax类型，响应logout给前台
-            if (CheckEmptyUtil.isNotEmpty(requestType) && "XMLHttpRequest".equals(requestType)) {
-                response.setContentType("application/json;charset=UTF-8");
-                response.getWriter().print("logout");
-                response.getWriter().close();
-            } else {
-                request.getRequestDispatcher("/api/console/home/toLogin").forward(request, response);
-            }
-            return false;
-        } else {
-            AdminUser adminUser = userServerService.validationAndRefreshToken(token);
-            if (CheckEmptyUtil.isEmpty(adminUser)){
-                //token验证失败
-                request.getRequestDispatcher("/api/console/home/toLogin").forward(request, response);
-                return false;
-            }else {
-                //token验证成功，请求中设置用户信息
-                request.setAttribute("user", adminUser);
-            }
-        }
         return true;
     }
 
@@ -133,7 +87,5 @@ public class ConsoleWebInterceptor extends BaseHandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception exception) throws Exception {
         super.afterCompletion(request, response, handler, exception);
-        logger.info("---------------SpringBoot  Interceptor  end to execute---------------");
     }
 }
-

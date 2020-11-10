@@ -1,12 +1,10 @@
 package com.mall.cloud.passport.service.impl;
 
-import com.mall.cloud.common.constant.Constants;
+import com.mall.cloud.common.annotation.dubbo.DubboProviderServer;
 import com.mall.cloud.common.persistence.service.BaseServerService;
 import com.mall.cloud.common.utils.SequenceServerUtil;
 import com.mall.cloud.model.result.sytem.SequenceIdResult;
 import com.mall.cloud.passport.api.service.SequenceServerService;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.dubbo.config.annotation.Service;
 
 /**
  * <p>封装Qicloud项目SequenceServerServiceImpl类.<br></p>
@@ -16,8 +14,7 @@ import org.apache.dubbo.config.annotation.Service;
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
-@Slf4j
-@Service(version = Constants.DUBBO_SERVICE_VERSION, timeout = Constants.DUBBO_TIMEOUT)
+@DubboProviderServer
 public class SequenceServerServiceImpl extends BaseServerService implements SequenceServerService {
 
     private SequenceServerUtil sequenceServer;
@@ -52,7 +49,7 @@ public class SequenceServerServiceImpl extends BaseServerService implements Sequ
             //成功返回id
             return result.getId();
         } else {
-            log.error("==========获取分布式全局id====失败=====：" + result.toString());
+            logger.error("==========获取分布式全局id====失败=====：" + result.toString());
             //后续应该加消息提示 服务失败了）
             throw new RuntimeException(result.toString());
         }

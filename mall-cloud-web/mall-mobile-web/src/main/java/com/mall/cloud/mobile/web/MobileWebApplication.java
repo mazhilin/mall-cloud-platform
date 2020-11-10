@@ -1,6 +1,6 @@
 package com.mall.cloud.mobile.web;
 
-import com.mall.cloud.common.container.annotation.ApplicationClientBootstrap;
+import com.mall.cloud.common.annotation.container.ApplicationClientBootstrap;
 import org.springframework.boot.SpringApplication;
 
 /**

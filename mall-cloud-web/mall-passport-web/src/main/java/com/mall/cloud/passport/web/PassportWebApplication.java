@@ -2,7 +2,7 @@ package com.mall.cloud.passport.web;
 
 import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
 import com.alicp.jetcache.anno.config.EnableMethodCache;
-import com.mall.cloud.common.container.annotation.ApplicationClientBootstrap;
+import com.mall.cloud.common.annotation.container.ApplicationClientBootstrap;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
 

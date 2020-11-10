@@ -85,4 +85,8 @@ public class DatagridResult implements Result {
 	public DatagridResult(List<?> dataList) {
 		this.dataList = dataList;
 	}
+
+	public DatagridResult() {
+
+	}
 }

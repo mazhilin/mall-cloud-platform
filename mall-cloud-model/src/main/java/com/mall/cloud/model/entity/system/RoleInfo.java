@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.mall.cloud.common.persistence.entity.BaseEntity;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 /**
  * <p>封装Qicloud项目RoleInfo类.<br></p>
  * <p>//TODO...<br></p>
@@ -27,4 +29,16 @@ public class RoleInfo extends BaseEntity {
      */
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
+    /**
+     * 菜单编码
+     */
+    private String code;
+    /**
+     * 菜单名称
+     */
+    private String name;
+    /**
+     * 角色作用域[1-后台 2-APP 3-SMR 4-公司管理员]
+     */
+    private Integer scope;
 }

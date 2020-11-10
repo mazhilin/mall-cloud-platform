@@ -1,6 +1,6 @@
 package com.mall.cloud.mobile.service;
 
-import com.mall.cloud.common.container.annotation.ApplicationServerBootstrap;
+import com.mall.cloud.common.annotation.container.ApplicationServerBootstrap;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

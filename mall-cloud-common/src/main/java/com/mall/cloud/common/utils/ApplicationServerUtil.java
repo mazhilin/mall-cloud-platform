@@ -146,7 +146,7 @@ public class ApplicationServerUtil extends WebUtils {
      * @return {HttpServletResponse}
      */
     public HttpServletResponse getResponse() {
-        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
+        return ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getResponse();
     }
 
     /**
