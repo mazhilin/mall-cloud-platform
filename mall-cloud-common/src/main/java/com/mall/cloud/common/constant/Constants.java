@@ -50,9 +50,14 @@ public final class Constants {
      */
     public static final String CONFIRM_PASSWORD = "confirmPassword";
     /**
-     * 后台系统默认Session名称-userInfo
+     * 后台系统默认Session名称-adminUser
      */
-    public static final String SESSION = "userInfo";
+    public static final String ADMIN_USER = "adminUser";
+
+    /**
+     * 后台系统默认Session名称-adminUser
+     */
+    public static final String APP_USER = "adminUser";
     /**
      * 系统Cookie最大时效-maxAge
      */
@@ -107,17 +112,19 @@ public final class Constants {
      */
     public static final String REQUEST_ID = "RequestId";
     /**
-     * 后台管理登录token
+     * 后台登录超时，单位秒
      */
-    public static final String WEB_LOGIN_TOKEN = "web_login_token";
+    public static final String WEB_SESSION_TIMEOUT = "web_session_timeout";
+
     /**
-     * 移动APP登录token
+     * 微信端登录超时，单位秒
      */
-    public static final String APP_LOGIN_TOKEN = "app_login_token";
+    public static final String SMR_SESSION_TIMEOUT = "smr_session_timeout";
+
     /**
-     * 微信登录token
+     * app端登录超时，单位秒
      */
-    public static final String SMR_LOGIN_TOKEN = "smr_login_token";
+    public static final String APP_SESSION_TIMEOUT = "app_session_timeout";
 
     /**
      * dubbo 服务通用版本号

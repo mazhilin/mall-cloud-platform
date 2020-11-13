@@ -2,6 +2,7 @@ package com.mall.cloud.console.web.interceptor;
 
 import com.mall.cloud.common.annotation.dubbo.DubboConsumerClient;
 import com.mall.cloud.common.component.BaseHandlerInterceptor;
+import com.mall.cloud.common.constant.Constants;
 import com.mall.cloud.common.utils.ApplicationServerUtil;
 import com.mall.cloud.common.utils.CheckEmptyUtil;
 import com.mall.cloud.model.entity.user.AdminUser;
@@ -99,7 +100,7 @@ public class ConsoleWebInterceptor extends BaseHandlerInterceptor {
                 return false;
             }else {
                 //token验证成功，请求中设置用户信息
-                request.setAttribute("user", adminUser);
+                request.setAttribute(Constants.ADMIN_USER, adminUser);
             }
         }
         return true;

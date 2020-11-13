@@ -59,4 +59,9 @@ public final class Tokens {
      * 微信登录token
      */
     public static final String SMR_LOGIN_TOKEN = "smr_login_token";
+
+    /**
+     * 微信登录token
+     */
+    public static final String USER_STATIC_TOKEN = "user_static_";
 }

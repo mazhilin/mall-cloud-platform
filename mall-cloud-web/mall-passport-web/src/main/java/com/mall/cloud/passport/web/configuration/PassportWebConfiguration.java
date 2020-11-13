@@ -45,11 +45,9 @@ public class PassportWebConfiguration implements WebMvcConfigurer {
         };
         //不需要拦截的路径
         String[] excludePathPatterns = {
-                "/api/console/login",
+                "/api/console/center/login",
                 "/api/console/home/toLogin"
         };
-        //addPathPatterns()添加拦截路径
-        //excludePathPatterns() 添加不拦截的路径
         //拦截所有请求接口
         registry.addInterceptor(applictaionInterceptor).addPathPatterns(addPathPatterns);
         //添加注册登录拦截器

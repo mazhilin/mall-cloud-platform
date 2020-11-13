@@ -454,6 +454,11 @@
                 <artifactId>easypoi-annotation</artifactId>
                 <version>${easypoi.verison}</version>
             </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>transmittable-thread-local</artifactId>
+                <version>${transmittable-thread-local.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

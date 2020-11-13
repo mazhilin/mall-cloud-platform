@@ -51,7 +51,7 @@ public class TokenServerUtil {
             Date createTime = new Date(createMillis);
             //[3]创建payload的私有声明(根据特定的业务需要添加，如果要拿这个做验证,一般是需要和JWT的接受方提前沟通)
             Map<String, Object> claims = Maps.newConcurrentMap();
-            claims.put("userName", issuer);
+            claims.put("userId", issuer);
             //[3].构建Token生成对象
             JwtBuilder builder = Jwts.builder()
                     //插入私有声明

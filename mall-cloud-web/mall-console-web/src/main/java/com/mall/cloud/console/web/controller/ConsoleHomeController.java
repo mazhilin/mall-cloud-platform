@@ -33,8 +33,20 @@ public class ConsoleHomeController extends BaseController {
      *
      * @return 返回结果
      */
-    @GetMapping(value = "isLogin", produces = "application/json;charset=UTF-8")
+    @GetMapping(value = "/isLogin", produces = "application/json;charset=UTF-8")
     public String isLogin() {
+        ResponseResult response = new ResponseResult();
+        return response.parseToJson(response);
+    }
+
+
+    /**
+     * 用户信息
+     *
+     * @return 返回结果
+     */
+    @GetMapping(value = "/userInfo", produces = "application/json;charset=UTF-8")
+    public String userInfo() {
         ResponseResult response = new ResponseResult();
         return response.parseToJson(response);
     }

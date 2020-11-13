@@ -8,4 +8,5 @@ package com.mall.cloud.common.persistence.controller;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p> 
  */
 public interface Controller {
+    String getCookie(String name);
 }

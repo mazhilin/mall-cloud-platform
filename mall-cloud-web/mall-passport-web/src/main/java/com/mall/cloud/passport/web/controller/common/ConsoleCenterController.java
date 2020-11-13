@@ -1,22 +1,19 @@
 package com.mall.cloud.passport.web.controller.common;
 
+import com.google.common.collect.Lists;
 import com.mall.cloud.common.annotation.dubbo.DubboConsumerClient;
+import com.mall.cloud.common.component.authorize.ApplicationLoginAuthorize;
 import com.mall.cloud.common.exception.ApplicationServerException;
-import com.mall.cloud.common.persistence.controller.BaseController;
+import com.mall.cloud.common.persistence.controller.Controller;
 import com.mall.cloud.common.restful.ResponseResult;
-import com.mall.cloud.common.utils.ApplicationServerUtil;
-import com.mall.cloud.common.utils.CheckEmptyUtil;
-import com.mall.cloud.common.utils.JsonServerUtil;
-import com.mall.cloud.common.utils.MD5Util;
 import com.mall.cloud.model.entity.user.AdminUser;
+import com.mall.cloud.passport.api.service.AdminAuthorizeService;
 import com.mall.cloud.passport.api.service.LoginServerService;
 import com.mall.cloud.passport.api.service.RedisOperationsService;
 import com.mall.cloud.passport.api.service.ValueOperationsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -29,7 +26,7 @@ import java.util.Objects;
  */
 @RestController
 @RequestMapping(value = "/api/console/center", produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
-public class ConsoleCenterController extends BaseController {
+public class ConsoleCenterController extends ApplicationLoginAuthorize implements Controller {
 
     @DubboConsumerClient
     private LoginServerService loginServerService;
@@ -37,6 +34,8 @@ public class ConsoleCenterController extends BaseController {
     private RedisOperationsService<String, Object> redisOperationsService;
     @DubboConsumerClient
     private ValueOperationsService<String, Object> valueOperationsService;
+    @DubboConsumerClient
+    private AdminAuthorizeService adminAuthorize;
 
 
     /**
@@ -55,40 +54,38 @@ public class ConsoleCenterController extends BaseController {
             @RequestParam(value = "auto", required = false) Integer auto)
             throws ApplicationServerException {
         ResponseResult result = new ResponseResult();
-        HttpSession session = Objects.requireNonNull(ApplicationServerUtil.getRequest()).getSession();
-        AdminUser adminUser = (AdminUser) session.getAttribute("adminUser");
-        if (CheckEmptyUtil.isNotEmpty(adminUser)) {
-            return result.parseToJson(result);
+        try {
+            AdminUser adminUser = loginServerService.queryAdminUser(account, password);
+            List<String> resourceList = Lists.newLinkedList();
+            String token = login(adminUser.getId(), resourceList, adminAuthorize);
+            result.putResult("token", token);
+        } catch (ApplicationServerException exception) {
+            logger.error("用户登陆失败，账号:{},密码：{},TRACE:e", account, password, exception);
+            result.setError("系统繁忙，请稍后再试!");
         }
-        if (CheckEmptyUtil.isEmpty(account) || CheckEmptyUtil.isEmpty(password)) {
-            result.setError("请填写用户名和密码！");
-            return result.parseToJson(result);
-        }
-        if (CheckEmptyUtil.isEmpty(account)) {
-            result.setError("请填写用户名!");
-            return result.parseToJson(result);
-        }
-        if (CheckEmptyUtil.isEmpty(password)) {
-            result.setError("请填写密码！");
-            return result.parseToJson(result);
-        }
-        adminUser = loginServerService.queryAdminUser(account, password);
-        if (CheckEmptyUtil.isEmpty(adminUser)) {
-            result.setError("账号或密码错误！");
-            return result.parseToJson(result);
-        }
-        valueOperationsService.set("mall:cloud:adminUser:" + adminUser.getId(), JsonServerUtil.getInstance().parseToJson(adminUser));
-        session.setAttribute("adminUser", adminUser);
-        session.setMaxInactiveInterval(1800);
-        if (CheckEmptyUtil.isNotEmpty(auto) && Objects.equals(auto, 1)) {
-            Cookie cookieAC = new Cookie("account", account);
-            Cookie cookiePA = new Cookie("password", MD5Util.generate(password));
-            // 设置为7天
-            cookieAC.setMaxAge(7 * 60 * 60 * 24);
-            cookieAC.setPath("/");
-            // 设置为7天
-            cookiePA.setMaxAge(7 * 60 * 60 * 24);
-            cookiePA.setPath("/");
+        return result.parseToJson(result);
+    }
+
+    /**
+     * 推出登陆
+     *
+     * @param request 请求
+     * @return 结果
+     */
+    @PostMapping(value = "/logout", produces = "application/json;charset=UTF-8")
+    public String logout(
+            @RequestParam(value = "account") String account,
+            @RequestParam(value = "password") String password,
+            @RequestParam(value = "auto", required = false) Integer auto)
+            throws ApplicationServerException {
+        ResponseResult result = new ResponseResult();
+        try {
+            result = loginServerService.login(result, account, password);
+            if (Objects.equals(auto, 1)) {
+            }
+        } catch (ApplicationServerException exception) {
+            logger.error("用户登陆失败，账号:{},密码：{},TRACE:e", account, password, exception);
+            result.setError("系统繁忙，请稍后再试!");
         }
         return result.parseToJson(result);
     }

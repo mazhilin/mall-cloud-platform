@@ -1,7 +1,14 @@
 package com.mall.cloud.common.component;
 
+import com.mall.cloud.common.exception.ApplicationServerException;
+import com.mall.cloud.common.utils.CheckEmptyUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.concurrent.TimeUnit;
 
 /**
  * <p>封装Qicloud项目BaseApplicationAspect类.<br></p>
