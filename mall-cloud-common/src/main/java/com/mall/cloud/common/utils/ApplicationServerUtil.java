@@ -85,7 +85,7 @@ public class ApplicationServerUtil extends WebUtils {
     public String getCookieVal(String name) {
         HttpServletRequest request = ApplicationServerUtil.getRequest();
         Assert.notNull(request, "request from RequestContextHolder is null");
-        return getCookieVal(request, name);
+        return getCookieValue(request, name);
     }
 
     /**
@@ -95,9 +95,22 @@ public class ApplicationServerUtil extends WebUtils {
      * @param name    cookie name
      * @return cookie value
      */
-    public String getCookieVal(HttpServletRequest request, String name) {
-        Cookie cookie = getCookie(request, name);
-        return cookie != null ? cookie.getValue() : null;
+    public String getCookieValue(HttpServletRequest request, String name) {
+        if (CheckEmptyUtil.isAnyEmpty(name, request)) {
+            return "";
+        }
+        Cookie[] cookies = request.getCookies();
+        if (CheckEmptyUtil.isNotEmpty(cookies)) {
+            for (Cookie c : cookies) {
+                if (name.equals(c.getName())) {
+                    if (CheckEmptyUtil.isNotEmpty(c.getValue())) {
+                        return c.getValue();
+                    }
+                    break;
+                }
+            }
+        }
+        return "";
     }
 
     /**

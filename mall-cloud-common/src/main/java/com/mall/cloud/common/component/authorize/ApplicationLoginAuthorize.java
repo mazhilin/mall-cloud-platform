@@ -1,6 +1,7 @@
 package com.mall.cloud.common.component.authorize;
 
 import com.mall.cloud.common.component.BaseApplicationAuthorize;
+import com.mall.cloud.common.constant.Constants;
 import com.mall.cloud.common.constant.Tokens;
 import com.mall.cloud.common.exception.PassportServerException;
 import com.mall.cloud.common.persistence.controller.BaseController;
@@ -25,7 +26,7 @@ public abstract class ApplicationLoginAuthorize extends BaseController implement
     @SneakyThrows
     @Override
     public String login(String userId, List<String> resourceList, BaseApplicationAuthorize authorize) throws PassportServerException {
-        String token = TokenServerUtil.getInstance().create(null,userId,"login", MD5Util.PUBLIC_SALT,30);
+        String token = TokenServerUtil.getInstance().create(null,userId,"login", Constants.PUBLIC_SALT,30);
         // 记录用户登录状态
         authorize.setAuthorize(userId, token);
         // 先删除以前的权限资源

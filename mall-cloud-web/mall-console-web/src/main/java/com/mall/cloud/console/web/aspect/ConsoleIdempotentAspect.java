@@ -1,5 +1,4 @@
-package com.mall.cloud.passport.web.aspect;
-
+package com.mall.cloud.console.web.aspect;
 
 import com.mall.cloud.common.component.BaseApplicationAspect;
 import com.mall.cloud.common.constant.Tokens;
@@ -21,10 +20,10 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
- * <p>封装Qicloud项目PassportIdempotentAspect类.<br></p>
+ * <p>封装Qicloud项目ConsoleIdempotentAspect类.<br></p>
  * <p>//TODO...<br></p>
  *
- * @author Powered by marklin 2020-11-11 20:44
+ * @author Powered by marklin 2020-11-13 13:49
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
@@ -32,7 +31,7 @@ import java.util.concurrent.TimeUnit;
 @Component
 @Order(value = 2)
 @Lazy
-public class PassportIdempotentAspect implements BaseApplicationAspect {
+public class ConsoleIdempotentAspect implements BaseApplicationAspect {
     private final String POST_METHOD_PATH = "post_method_path";
     @Reference
     protected RedisOperationsService<String, String> redisOperationsService;
@@ -70,7 +69,7 @@ public class PassportIdempotentAspect implements BaseApplicationAspect {
         Object result = joinPoint.proceed();
         HttpServletRequest request = ApplicationServerUtil.getRequest();
         //取到当前请求路径和用户信息token 缓存在redis里面
-        String loginToken = ApplicationServerUtil.getCookieValue(request, Tokens.WEB_LOGIN_TOKEN);
+        String loginToken = ApplicationServerUtil.getCookieValue(request, Tokens.APP_LOGIN_TOKEN);
         if (CheckEmptyUtil.isNotEmpty(loginToken)) {
             if (CheckEmptyUtil.isNotEmpty(valueOperationsService.get(Objects.requireNonNull(request).getRequestURI() + loginToken))) {
                 throw new ApplicationServerException("表单正在提交......");

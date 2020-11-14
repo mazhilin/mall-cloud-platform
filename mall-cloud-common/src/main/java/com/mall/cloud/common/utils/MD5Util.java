@@ -1,5 +1,6 @@
 package com.mall.cloud.common.utils;
 
+import com.mall.cloud.common.constant.Constants;
 import org.apache.commons.codec.binary.Hex;
 
 import java.security.MessageDigest;
@@ -15,9 +16,6 @@ import java.util.Random;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
 public class MD5Util {
-
-    // 公盐
-    public static final String PUBLIC_SALT = "pivotalcloud";
     /**
      * 十六进制下数字到字符的映射数组
      */
@@ -149,7 +147,7 @@ public class MD5Util {
      * @return MD5加密字符串
      */
     public static String encryptPassword(String password, String salt) {
-        return encodeByMD5(PUBLIC_SALT + password + salt);
+        return encodeByMD5(Constants.PUBLIC_SALT + password + salt);
     }
 
     /**
@@ -161,7 +159,7 @@ public class MD5Util {
      */
     public static String encryptPassword(String password) {
         String pwdMd5 = encodeByMD5Real(password);
-        return encodeByMD5(PUBLIC_SALT + pwdMd5);
+        return encodeByMD5(Constants.PUBLIC_SALT  + pwdMd5);
     }
 
     /**
@@ -225,9 +223,11 @@ public class MD5Util {
         return hexDigits[d1] + hexDigits[d2];
     }
 
-    public static void main(String agr[]) {
-        System.out.println(MD5Util.encodeByMD5(MD5Util.PUBLIC_SALT+"123456@Abc"));
+    public static void main(String agrs[]) {
 
-        System.out.println(MD5Util.encodeByMD5(MD5Util.PUBLIC_SALT+"36237ee4e2207807adde67236d2dc7bd"));
+
+        System.out.println(MD5Util.encryptPassword("123456@Abc"));
+
+        System.out.println(MD5Util.encodeByMD5(Constants.PUBLIC_SALT +"36237ee4e2207807adde67236d2dc7bd").toLowerCase());
     }
 }

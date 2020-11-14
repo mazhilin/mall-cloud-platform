@@ -3,6 +3,7 @@ package com.mall.cloud.passport.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.google.common.collect.Maps;
 import com.mall.cloud.common.annotation.dubbo.DubboProviderServer;
+import com.mall.cloud.common.constant.Constants;
 import com.mall.cloud.common.exception.ApplicationServerException;
 import com.mall.cloud.common.persistence.service.BaseServerService;
 import com.mall.cloud.common.restful.ResponseResult;
@@ -42,7 +43,7 @@ public class LoginServerServiceImpl extends BaseServerService implements LoginSe
     public AdminUser queryAdminUser(String account, String password) {
         QueryWrapper<AdminUser> query = new QueryWrapper<>();
         query.lambda().eq(AdminUser::getAccount, account);
-        query.lambda().eq(AdminUser::getPassword, MD5Util.encodeByMD5(MD5Util.PUBLIC_SALT + password).toLowerCase());
+        query.lambda().eq(AdminUser::getPassword, MD5Util.encodeByMD5(Constants.PUBLIC_SALT + password).toLowerCase());
         query.lambda().eq(AdminUser::getStatus, 1);
         return adminUserMapper.selectOne(query);
     }
@@ -74,7 +75,7 @@ public class LoginServerServiceImpl extends BaseServerService implements LoginSe
     @Override
     public ResponseResult login(ResponseResult response, String account, String password) throws ApplicationServerException {
         // [1].校验用户名和密码是否正确
-        AdminUser adminUser = this.queryAdminUser(account, MD5Util.encodeByMD5(MD5Util.PUBLIC_SALT+password).toLowerCase());
+        AdminUser adminUser = this.queryAdminUser(account, MD5Util.encodeByMD5(Constants.PUBLIC_SALT+password).toLowerCase());
         if (CheckEmptyUtil.isEmpty(adminUser)) {
             response.setError("用户不存在!");
             return response;

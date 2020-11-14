@@ -136,6 +136,22 @@ public final class CheckEmptyUtil {
         return true;
     }
 
+    /**
+     * 只要其中一个对象是empty，返回true，否则返回false
+     *
+     * @param o
+     * @return
+     */
+    public static final boolean isAnyEmpty(Object... o) {
+        for (int i = 0; i < o.length; i++) {
+            Object obj = o[i];
+            if (CheckEmptyUtil.isEmpty(obj)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static boolean isAndNotEmpty(Object... objects) {
         if (objects == null || objects.length == 0) {
             return false;

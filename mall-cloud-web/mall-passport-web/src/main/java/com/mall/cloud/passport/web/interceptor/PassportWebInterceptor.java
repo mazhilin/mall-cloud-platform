@@ -1,6 +1,11 @@
 package com.mall.cloud.passport.web.interceptor;
 
+import com.mall.cloud.common.annotation.ApplicationAuthorize;
 import com.mall.cloud.common.component.BaseHandlerInterceptor;
+import com.mall.cloud.common.constant.ScopeType;
+import com.mall.cloud.common.constant.Tokens;
+import com.mall.cloud.common.utils.CheckEmptyUtil;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,7 +60,7 @@ public class PassportWebInterceptor extends BaseHandlerInterceptor {
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
         response.setHeader("Access-Control-Allow-Headers",
-                "Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,token");
+                "Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers");
         return true;
     }
 

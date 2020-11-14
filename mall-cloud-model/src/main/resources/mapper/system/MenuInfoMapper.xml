@@ -15,6 +15,9 @@
         <result column="scope" jdbcType="INTEGER" property="scope"/>
         <result column="sort" jdbcType="DECIMAL" property="sort"/>
         <result column="is_show_menu" jdbcType="INTEGER" property="isShowMenu"/>
+        <result column="is_inner_menu" jdbcType="INTEGER" property="isInnerMenu"/>
+        <result column="is_delete" jdbcType="INTEGER" property="isDelete"/>
+        <result column="menu_auth_type" jdbcType="INTEGER" property="menuAuthType"/>
         <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_by" jdbcType="VARCHAR" property="createBy"/>

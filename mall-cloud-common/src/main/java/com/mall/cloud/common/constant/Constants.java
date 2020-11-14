@@ -24,19 +24,23 @@ public final class Constants {
     /**
      * 系统状态-禁用状态[0,禁用-disable]
      */
-    public static final Integer DEFAULT = 0;
-    /**
-     * 系统状态-禁用状态[0,禁用-disable]
-     */
     public static final Integer DISABLE = 0;
     /**
      * 系统状态-启用状态[1, 启用-enable]
      */
     public static final Integer ENABLE = 1;
     /**
-     * 系统状态-删除状态[2, 删除-delete]
+     * 系统状态-移除状态[2, 移除-remove]
      */
-    public static final Integer DELETE = 2;
+    public static final Integer REMOVE = 2;
+    /**
+     * 系统状态-是否状态[0,否-NO]
+     */
+    public static final Integer NO = 0;
+    /**
+     * 系统状态-是否状态[1, 是-YES]
+     */
+    public static final Integer YES = 1;
     /**
      * 系统账户参数-account
      */
@@ -53,11 +57,18 @@ public final class Constants {
      * 后台系统默认Session名称-adminUser
      */
     public static final String ADMIN_USER = "adminUser";
-
     /**
      * 后台系统默认Session名称-adminUser
      */
     public static final String APP_USER = "adminUser";
+    /**
+     * MD5加密公共盐
+     */
+    public static final String PUBLIC_SALT = "pivotalcloud";
+
+
+
+
     /**
      * 系统Cookie最大时效-maxAge
      */
@@ -70,22 +81,6 @@ public final class Constants {
      * 系统Cookie路径-path
      */
     public static final String COOKIE_PATH = "/";
-    /**
-     * 跳转Monitor错误url
-     */
-    public static final String REDIRECT_MONITOR_ERROR_URL = "/monitor/views/error.html";
-    /**
-     * 跳转Monitor登录url
-     */
-    public static final String REDIRECT_MONITOR_LOGIN_URL = "/monitor/views/login.html";
-    /**
-     * 跳转Monitor首页url
-     */
-    public static final String REDIRECT_MONITOR_INDEX_URL = "/monitor/views/index.html";
-    /**
-     * 跳转Monitor访问禁止页面url
-     */
-    public static final String REDIRECT_MONITOR_FORBID_URL = "/monitor/views/forbid.html";
 
     public static final String REQUEST_WITH = "X-Requested-With";
     public static final String REQUEST_HTTP = "XMLHttpRequest";

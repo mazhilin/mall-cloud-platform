@@ -21,14 +21,14 @@ public final class Resources {
     /**
      * 后台用户登录token
      */
-    public static final String WEB_USER_LOGIN_TOKEN = "web:login:token:user:id";
+    public static final String WEB_USER_LOGIN_TOKEN = "web:login:token:user:id:";
 
     /**
      * APP用户登录token
      */
-    public static final String APP_USER_LOGIN_TOKEN = "app:login:token:user:id";
+    public static final String APP_USER_LOGIN_TOKEN = "app:login:token:user:id:";
     /**
      * 微信用户登录token
      */
-    public static final String SMR_USER_LOGIN_TOKEN = "smr:login:token:user:id";
+    public static final String SMR_USER_LOGIN_TOKEN = "smr:login:token:user:id:";
 }

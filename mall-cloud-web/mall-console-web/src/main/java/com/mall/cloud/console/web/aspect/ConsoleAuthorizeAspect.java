@@ -1,16 +1,15 @@
-package com.mall.cloud.passport.web.aspect;
+package com.mall.cloud.console.web.aspect;
 
 import com.mall.cloud.common.annotation.ApplicationAuthorize;
 import com.mall.cloud.common.annotation.dubbo.DubboConsumerClient;
 import com.mall.cloud.common.component.BaseApplicationAspect;
-import com.mall.cloud.common.constant.Resources;
 import com.mall.cloud.common.constant.ScopeType;
 import com.mall.cloud.common.constant.Tokens;
+import com.mall.cloud.common.exception.ConsoleServerException;
 import com.mall.cloud.common.exception.PassportServerException;
 import com.mall.cloud.common.utils.ApplicationServerUtil;
 import com.mall.cloud.common.utils.CheckEmptyUtil;
 import com.mall.cloud.passport.api.service.*;
-import org.apache.dubbo.config.annotation.Reference;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -26,10 +25,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 
 /**
- * <p>封装Qicloud项目PassportAuthorizeAspect类.<br></p>
+ * <p>封装Qicloud项目ConsoleAuthorizeAspect类.<br></p>
  * <p>//TODO...<br></p>
  *
- * @author Powered by marklin 2020-11-11 21:33
+ * @author Powered by marklin 2020-11-13 13:47
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
@@ -37,20 +36,19 @@ import java.lang.reflect.Method;
 @Component
 @Order(value = 2)
 @Lazy
-public class PassportAuthorizeAspect implements BaseApplicationAspect {
-
-    private static Logger logger = LoggerFactory.getLogger(PassportAuthorizeAspect.class);
+public class ConsoleAuthorizeAspect implements BaseApplicationAspect {
+    private static final Logger logger = LoggerFactory.getLogger(ConsoleAuthorizeAspect.class);
     @DubboConsumerClient
     private AdminAuthorizeService adminAuthorize;
     @DubboConsumerClient
     private AppAuthorizeService appAuthorize;
     @DubboConsumerClient
     private SmrAuthorizeService smrAuthorize;
-    @Reference
+    @DubboConsumerClient
     private ValueOperationsService<String, String> valueOperationsService;
-    @Reference
+    @DubboConsumerClient
     private SetOperationsService<String, String> setOperationsService;
-    @Reference
+    @DubboConsumerClient
     private RedisOperationsService<String, String> redisOperationsService;
 
 
@@ -125,13 +123,12 @@ public class PassportAuthorizeAspect implements BaseApplicationAspect {
         logger.info("token-parameter-value::{}", token);
         if (CheckEmptyUtil.isNotEmpty(authorize) && authorizeLogin) {
             if (CheckEmptyUtil.isEmpty(token)) {
-                throw new PassportServerException("登录超时，请重新登录！");
+                throw new ConsoleServerException("登录超时，请重新登录！");
             }
         }
         // 获取登录登录用户的ID
         String userId = null;
         String resourceKey = null;
-
 
         if (ScopeType.WEB.equals(authorizeScope)) {
             userId = adminAuthorize.getUserId(token);
@@ -172,7 +169,6 @@ public class PassportAuthorizeAspect implements BaseApplicationAspect {
                 }
             }
         }
-        // 设置值传递到下个AOP（如系统日志）
         // 执行方法体
         Object object = joinPoint.proceed();
         return object;

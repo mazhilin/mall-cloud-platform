@@ -16,37 +16,9 @@ public final class Tokens {
      */
     public static final String TOKEN_SUFFIX = "_token";
     /**
-     * 用户Token
-     */
-    public static final String USER_TOKEN = "user" + TOKEN_SUFFIX;
-    /**
      * API应用Token
      */
     public static final String API_TOKEN = "api" + TOKEN_SUFFIX;
-    /**
-     * 浏览器端Token
-     */
-    public static final String BROWSER_TOKEN = "browser" + TOKEN_SUFFIX;
-    /**
-     * 移动端Token
-     */
-    public static final String MOBILE_TOKEN = "mobile" + TOKEN_SUFFIX;
-    /**
-     * 接口访问Token
-     */
-    public static final String ACCESS_TOKEN = "access" + TOKEN_SUFFIX;
-    /**
-     * 接口刷新Token
-     */
-    public static final String REFRESH_TOKEN = "refresh" + TOKEN_SUFFIX;
-    /**
-     * PC端To移动端Token
-     */
-    public static final String WEB_TOKEN = "web" + TOKEN_SUFFIX;
-    /**
-     * 移动端ToPC端Token
-     */
-    public static final String APP_TOKEN = "app" + TOKEN_SUFFIX;
     /**
      * 后台管理登录token
      */

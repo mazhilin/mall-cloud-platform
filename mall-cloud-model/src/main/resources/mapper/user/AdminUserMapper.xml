@@ -12,6 +12,8 @@
         <result column="gender" jdbcType="INTEGER" property="gender"/>
         <result column="profile_picture" jdbcType="VARCHAR" property="profilePicture"/>
         <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="is_delete" jdbcType="INTEGER" property="isDelete"/>
+        <result column="login_time" jdbcType="TIMESTAMP" property="loginTime"/>
         <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_by" jdbcType="VARCHAR" property="createBy"/>

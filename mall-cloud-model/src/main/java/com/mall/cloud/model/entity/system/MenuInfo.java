@@ -38,7 +38,7 @@ public class MenuInfo extends BaseEntity {
      */
     private String name;
     /**
-     * 菜单类型[0-菜单目录 1-菜单按钮]
+     * 菜单类型[0-根目录 1-菜单 2-按钮]
      */
     private Integer type;
     /**
@@ -73,4 +73,12 @@ public class MenuInfo extends BaseEntity {
      * 是否左侧展示[0-否 1-是]
      */
     private Integer isShowInMenu;
+    /**
+     * 是否内置菜单[0-否 1-是]
+     */
+    private Integer isInnerMenu;
+    /**
+     * 菜单权限类型[0-系统授权 1-公司授权 2-员工授权 3-公共授权]
+     */
+    private Integer menuAuthType;
 }

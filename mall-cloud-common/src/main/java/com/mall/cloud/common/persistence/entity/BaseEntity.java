@@ -23,33 +23,38 @@ import java.time.LocalDateTime;
 public abstract class BaseEntity  implements Entity {
 	private static final long serialVersionUID = -847020715802664453L;
 	/**
-	 * 创建人-createBy
+	 * 创建人
 	 */
 	@ApiModelProperty(value = "创建人")
 	private String createBy;
 	/**
-	 * 创建时间-createDate
+	 * 创建时间
 	 */
 	@ApiModelProperty(value = "创建时间")
 	@DateTimeFormat(pattern = Formats.DATE_TIME_TO_PM)
 	@JSONField(format = Formats.DATE_TIME_TO_PM)
 	private LocalDateTime createTime;
 	/**
-	 * 更新人-updateBy
+	 * 更新人
 	 */
 	@ApiModelProperty(value = "更新人")
 	private String updateBy;
 	/**
-	 * 更新时间-updateDate
+	 * 更新时间
 	 */
 	@ApiModelProperty(value = "更新时间")
 	@DateTimeFormat(pattern = Formats.DATE_TIME_TO_PM)
 	@JSONField(format = Formats.DATE_TIME_TO_PM)
 	private LocalDateTime updateTime;
 	/**
-	 * 系统状态-status
+	 * 是否删除[0-否 1-是]
 	 */
-	@ApiModelProperty(value = "系统状态-[0-禁用 1-启用 2-删除]")
+	@ApiModelProperty(value = "是否删除[0-否 1-是]")
+	private Integer isDelete;
+	/**
+	 * 系统状态-[0-禁用 1-启用 2-移除]
+	 */
+	@ApiModelProperty(value = "系统状态-[0-禁用 1-启用 2-移除]")
 	private Integer status;
 	/**
 	 * 备注描述-remark
