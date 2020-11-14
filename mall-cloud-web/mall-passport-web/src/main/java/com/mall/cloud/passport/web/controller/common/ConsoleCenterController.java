@@ -31,7 +31,6 @@ import java.util.Objects;
 @RestController
 @RequestMapping(value = "/api/console/center", produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
 public class ConsoleCenterController extends ApplicationLoginAuthorize implements Controller {
-
     @DubboConsumerClient
     private LoginServerService loginServerService;
     @DubboConsumerClient
@@ -82,11 +81,13 @@ public class ConsoleCenterController extends ApplicationLoginAuthorize implement
         }
         // [3] 更新用户登录时间
         adminUser.setLoginTime(LocalDateTime.now());
+        adminUser.setPassword(null);
         // TODO...
         try {
             List<String> resourceList = Lists.newLinkedList();
             String token = login(adminUser.getId(), resourceList, adminAuthorize);
             result.putResult(Tokens.WEB_LOGIN_TOKEN, token);
+            result.putResult(Constants.ADMIN_USER, adminUser);
         } catch (ApplicationServerException exception) {
             logger.error("用户登陆失败，账号:{},密码：{},TRACE:e", account, password, exception);
             result.setError("系统繁忙，请稍后再试!");
@@ -98,7 +99,7 @@ public class ConsoleCenterController extends ApplicationLoginAuthorize implement
      * 推出登陆
      * @return 结果
      */
-    @ApplicationAuthorize(authorizeResources = false, scope = ScopeType.WEB)
+    @ApplicationAuthorize(authorizeResources = false, authorizeScope = ScopeType.WEB)
     @PostMapping(value = "/logout", produces = "application/json;charset=UTF-8")
     public String logout(
             @RequestParam(value = "account") String account,
@@ -126,7 +127,7 @@ public class ConsoleCenterController extends ApplicationLoginAuthorize implement
      * @return 返回结果
      * @throws ApplicationServerException
      */
-    @ApplicationAuthorize(authorizeResources = false, scope = ScopeType.WEB)
+    @ApplicationAuthorize(authorizeResources = false, authorizeScope = ScopeType.WEB)
     @PostMapping(value = "/updatePassword", produces = "application/json;charset=UTF-8")
     public String updatePassword(
             @RequestParam(value = "password") String password,

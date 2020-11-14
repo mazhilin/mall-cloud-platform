@@ -1,4 +1,4 @@
-package com.mall.cloud.common.utils;
+package com.mall.cloud.common.core.holder;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;

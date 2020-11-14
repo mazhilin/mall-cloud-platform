@@ -1,5 +1,6 @@
 package com.mall.cloud.mobile.service.impl;
 
+import com.mall.cloud.common.annotation.dubbo.DubboProviderServer;
 import com.mall.cloud.common.constant.Constants;
 import com.mall.cloud.common.persistence.service.BaseServerService;
 import com.mall.cloud.mobile.api.service.CartServerService;
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Component;
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
-@Service(version = Constants.DUBBO_SERVICE_VERSION, timeout = Constants.DUBBO_TIMEOUT)
-@Component
+@DubboProviderServer
 public class CartServerServiceImpl extends BaseServerService implements CartServerService {
 }

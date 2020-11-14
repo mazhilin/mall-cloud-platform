@@ -36,7 +36,7 @@ import java.lang.annotation.*;
 @EnableAsync
 @EnableSwaggerBootstrapUI
 @EnableAspectJAutoProxy
-@SpringBootApplication(scanBasePackages = "{com.mall.cloud.*}")
+@SpringBootApplication(scanBasePackages = "{com.mall.cloud}")
 @ComponentScan(excludeFilters = {@ComponentScan.Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),
         @ComponentScan.Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class)})
 public @interface ApplicationClientBootstrap {

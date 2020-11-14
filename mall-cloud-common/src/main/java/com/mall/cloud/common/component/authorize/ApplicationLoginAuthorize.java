@@ -6,13 +6,11 @@ import com.mall.cloud.common.constant.Tokens;
 import com.mall.cloud.common.exception.PassportServerException;
 import com.mall.cloud.common.persistence.controller.BaseController;
 import com.mall.cloud.common.utils.EncodeUtil;
-import com.mall.cloud.common.utils.MD5Util;
 import com.mall.cloud.common.utils.TokenServerUtil;
 import lombok.SneakyThrows;
 
 import javax.servlet.http.Cookie;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * <p>封装Qicloud项目ApplicationLoginAuthorize类.<br></p>
@@ -23,10 +21,20 @@ import java.util.UUID;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
 public abstract class ApplicationLoginAuthorize extends BaseController implements BaseLoginAuthorize {
+
+    /**
+     * 登录
+     *
+     * @param userId       用户id
+     * @param resourceList 用户资源列表
+     * @param authorize    authorize鉴权客户端类型
+     * @return
+     * @throws PassportServerException
+     */
     @SneakyThrows
     @Override
     public String login(String userId, List<String> resourceList, BaseApplicationAuthorize authorize) throws PassportServerException {
-        String token = TokenServerUtil.getInstance().create(null,userId,"login", Constants.PUBLIC_SALT,30);
+        String token = TokenServerUtil.getInstance().create(null, userId, "login", Constants.PUBLIC_SALT, 30);
         // 记录用户登录状态
         authorize.setAuthorize(userId, token);
         // 先删除以前的权限资源
@@ -50,6 +58,13 @@ public abstract class ApplicationLoginAuthorize extends BaseController implement
         return token;
     }
 
+    /**
+     * 退出登录
+     *
+     * @param token     token
+     * @param authorize authorize鉴权客户端类型
+     * @return
+     */
     @Override
     public boolean logout(String token, BaseApplicationAuthorize authorize) {
         String userId = authorize.getUserId(token);

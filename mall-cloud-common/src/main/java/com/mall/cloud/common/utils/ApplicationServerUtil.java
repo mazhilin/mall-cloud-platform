@@ -82,7 +82,7 @@ public class ApplicationServerUtil extends WebUtils {
      * @param name cookie name
      * @return cookie value
      */
-    public String getCookieVal(String name) {
+    public String getCookie(String name) {
         HttpServletRequest request = ApplicationServerUtil.getRequest();
         Assert.notNull(request, "request from RequestContextHolder is null");
         return getCookieValue(request, name);

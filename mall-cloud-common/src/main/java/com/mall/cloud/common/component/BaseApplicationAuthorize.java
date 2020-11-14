@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  * <p>封装Qicloud项目BaseApplicationAuthorize类.<br></p>
- * <p>//TODO...<br></p>
+ * <p>系统应用鉴权<br></p>
  *
  * @author Powered by marklin 2020-11-12 20:05
  * @version 1.0.0
@@ -19,13 +19,13 @@ public interface BaseApplicationAuthorize extends ApplicationListener<ContextClo
     /**
      * 判断用户是否登录
      *
-     * @param token
-     * @return
+     * @param token 用户Token
+     * @return 返回结果
      */
     boolean isLogin(String token);
 
     /**
-     * 获取当前登录用户 由于core包不能引入具体的model包，所以只能返回map
+     * 获取当前登录用户
      *
      * @return
      */
@@ -100,10 +100,10 @@ public interface BaseApplicationAuthorize extends ApplicationListener<ContextClo
     String getResources(String userId);
 
     /**
-     * 后台用户登出，需要删掉jsp的auth标签的redis的code。
+     * 后台用户登出
      *
-     * @param userId
-     * @return
+     * @param userId 用户id
+     * @return 返回结果
      */
     boolean deleteResourceCode(String userId);
 }

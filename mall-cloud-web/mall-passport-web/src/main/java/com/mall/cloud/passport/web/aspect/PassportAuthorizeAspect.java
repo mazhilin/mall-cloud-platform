@@ -3,7 +3,6 @@ package com.mall.cloud.passport.web.aspect;
 import com.mall.cloud.common.annotation.ApplicationAuthorize;
 import com.mall.cloud.common.annotation.dubbo.DubboConsumerClient;
 import com.mall.cloud.common.component.BaseApplicationAspect;
-import com.mall.cloud.common.constant.Resources;
 import com.mall.cloud.common.constant.ScopeType;
 import com.mall.cloud.common.constant.Tokens;
 import com.mall.cloud.common.exception.PassportServerException;
@@ -91,10 +90,9 @@ public class PassportAuthorizeAspect implements BaseApplicationAspect {
         /**
          * 获取注解属性
          */
-        boolean required = authorize.required();
         boolean authorizeLogin = authorize.authorizeLogin();
         boolean authorizeResources = authorize.authorizeResources();
-        ScopeType authorizeScope = authorize.scope();
+        ScopeType authorizeScope = authorize.authorizeScope();
         /**
          * 根据scope指定的端类型使用不同的token名从http请求头以及cookie中获取会话码
          */

@@ -36,7 +36,7 @@ public class ConsoleHomeController extends BaseController implements Controller 
      *
      * @return 返回结果
      */
-    @ApplicationAuthorize(authorizeResources = false, scope = ScopeType.WEB)
+    @ApplicationAuthorize(authorizeResources = false, authorizeScope = ScopeType.WEB)
     @PostMapping(value = "/toLogin", produces = "application/json;charset=UTF-8")
     public String toLogin() {
         ResponseResult result = new ResponseResult();
@@ -52,7 +52,7 @@ public class ConsoleHomeController extends BaseController implements Controller 
      *
      * @return 返回结果
      */
-    @ApplicationAuthorize(authorizeResources = false, scope = ScopeType.WEB)
+    @ApplicationAuthorize(authorizeResources = false, authorizeScope = ScopeType.WEB)
     @PostMapping(value = "/isLogin", produces = "application/json;charset=UTF-8")
     public String isLogin() {
         ResponseResult result = new ResponseResult();
@@ -69,7 +69,7 @@ public class ConsoleHomeController extends BaseController implements Controller 
      *
      * @return 返回结果
      */
-    @ApplicationAuthorize(authorizeResources = false, scope = ScopeType.WEB)
+    @ApplicationAuthorize(authorizeResources = false, authorizeScope = ScopeType.WEB)
     @PostMapping(value = "/userInfo", produces = "application/json;charset=UTF-8")
     public String userInfo() {
         ResponseResult result = new ResponseResult();
@@ -83,7 +83,7 @@ public class ConsoleHomeController extends BaseController implements Controller 
      *
      * @return 返回结果
      */
-    @ApplicationAuthorize(authorizeResources = false, scope = ScopeType.WEB)
+    @ApplicationAuthorize(authorizeResources = false, authorizeScope = ScopeType.WEB)
     @PostMapping(value = "/menuTreeList", produces = "application/json;charset=UTF-8")
     public String menuTreeList(
             @RequestParam(value = "parentId", required = false, defaultValue = "") String parentId

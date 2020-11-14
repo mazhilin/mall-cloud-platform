@@ -1,6 +1,5 @@
 package com.mall.cloud.common.annotation;
 
-import com.mall.cloud.common.constant.PlatformType;
 import com.mall.cloud.common.constant.ScopeType;
 
 import java.lang.annotation.*;
@@ -19,10 +18,6 @@ import java.lang.annotation.*;
 @Inherited
 public @interface ApplicationAuthorize {
     /**
-     * 是否必须
-     */
-    boolean required() default true;
-    /**
      * 鉴权用户是否登录
      *
      * @return
@@ -37,5 +32,5 @@ public @interface ApplicationAuthorize {
     /**
      * 作用域-scope鉴权范围，指定端范围，默认为为后台。指定端后，登录用户只鉴权改端的登录用户，资源只鉴权该端的资源。
      */
-    ScopeType scope() default ScopeType.WEB;
+    ScopeType authorizeScope() default ScopeType.WEB;
 }

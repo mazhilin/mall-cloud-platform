@@ -111,21 +111,4 @@ public class TokenServerUtil {
             return false;
         }
     }
-
-    public static void main(String[] args) {
-        try {
-            String id = "123";
-            String token = TokenServerUtil.getInstance().create("123", "Token", "Token", "123456@Abc", Tokens.TOKEN_TTL_TIME);
-            System.out.println("生成token:" + token);
-            System.out.println(Passports.PASSPORT_BLOGGER_LOGIN_TOKEN + id + ":" + token);
-            String parseToken = TokenServerUtil.getInstance().parse(token, "123456@Abc");
-            System.out.println("解析token：" + parseToken);
-            Boolean verifyToken = TokenServerUtil.getInstance().verify(token, "123456@Abc");
-            System.out.println("校验token：" + verifyToken);
-            System.out.println("" + Passports.PASSPORT_BLOGGER_LOGIN_TOKEN);
-            System.out.println("" + Passports.PASSPORT_MALL_LOGIN_TOKEN);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

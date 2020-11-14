@@ -120,15 +120,20 @@ public final class Constants {
      * app端登录超时，单位秒
      */
     public static final String APP_SESSION_TIMEOUT = "app_session_timeout";
-
     /**
      * dubbo 服务通用版本号
      */
     public static final String DUBBO_SERVICE_VERSION = "1.0.0";
-
-    public static final int DUBBO_TIMEOUT = 360000;
-
-    public static final boolean DUBBO_CHECK = false;
-
-    public static final int DUBBO_RETRIES = 1;
+    /**
+     * dubbo 服务通用超时时间
+     */
+    public static final int DUBBO_SERVICE_TIMEOUT = 360000;
+    /**
+     * dubbo 服务通用检查状态
+     */
+    public static final boolean DUBBO_SERVICE_CHECK = false;
+    /**
+     * dubbo 服务通用重试次数
+     */
+    public static final int DUBBO_SERVICE_RETRIES = 1;
 }

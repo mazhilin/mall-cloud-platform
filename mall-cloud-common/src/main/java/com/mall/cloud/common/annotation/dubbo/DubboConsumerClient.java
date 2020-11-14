@@ -21,8 +21,8 @@ import java.lang.annotation.*;
 @Component
 @Reference(
         version = Constants.DUBBO_SERVICE_VERSION,
-        timeout = Constants.DUBBO_TIMEOUT,
-        check = Constants.DUBBO_CHECK,
-        retries = Constants.DUBBO_RETRIES)
+        timeout = Constants.DUBBO_SERVICE_TIMEOUT,
+        check = Constants.DUBBO_SERVICE_CHECK,
+        retries = Constants.DUBBO_SERVICE_RETRIES)
 public @interface DubboConsumerClient {
 }

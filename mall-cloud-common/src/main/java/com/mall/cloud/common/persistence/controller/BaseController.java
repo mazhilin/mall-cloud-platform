@@ -2,13 +2,13 @@ package com.mall.cloud.common.persistence.controller;
 
 import com.mall.cloud.common.component.BaseApplicationAuthorize;
 import com.mall.cloud.common.exception.ApplicationServerException;
+import com.mall.cloud.common.utils.ApplicationServerUtil;
 import com.mall.cloud.common.utils.CheckEmptyUtil;
 import com.mall.cloud.common.utils.ObjectBeanUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
@@ -33,16 +33,8 @@ public abstract class BaseController implements Controller {
 
     @Override
     public String getCookie(String name) {
-        Cookie[] cookies = request.getCookies();
-        if (cookies == null) {
-            return null;
-        }
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals(name)) {
-                return cookie.getValue();
-            }
-        }
-        return null;
+        String cookie = ApplicationServerUtil.getCookie(name);
+        return CheckEmptyUtil.isNotEmpty(cookie)?cookie:null;
     }
 
     /**
@@ -57,7 +49,9 @@ public abstract class BaseController implements Controller {
         if (authorize == null) {
             return null;
         }
-        String token = getCookie(authorize.getAuthorizeCookie());
+        String authorizeCookie = authorize.getAuthorizeCookie();
+        logger.info("authorizeCookie:: {}", authorizeCookie);
+        String token = getCookie(authorizeCookie);
         if (!authorize.isLogin(token)) {
             return null;
         }

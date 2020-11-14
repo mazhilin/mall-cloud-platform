@@ -1,5 +1,6 @@
 package com.mall.cloud.common.configuration;
 
+import com.mall.cloud.common.threadlocal.ApplicationThreadLocal;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -26,9 +27,10 @@ public class GlobalContainerConfiguration {
 		cors.addAllowedMethod("*");
 		return cors;
 	}
-	
+
 	/**
 	 * 设置CorsFilter拦截器
+	 *
 	 * @return
 	 */
 	@Bean
@@ -37,4 +39,11 @@ public class GlobalContainerConfiguration {
 		source.registerCorsConfiguration("/**", buildConfig());
 		return new CorsFilter(source);
 	}
+
+
+	@Bean
+	public ApplicationThreadLocal applicationThreadLocal() {
+		return new ApplicationThreadLocal();
+	}
+
 }

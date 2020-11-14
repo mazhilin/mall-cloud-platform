@@ -79,23 +79,16 @@ public class ConsoleAuthorizeAspect implements BaseApplicationAspect {
     @Override
     @Around(value = "serverPointcut()")
     public Object handlerAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        /**
-         * 获取注解
-         */
+        // [1]. 获取登录鉴权ApplicationAuthorize注解
         Signature signature = joinPoint.getSignature();
         MethodSignature methodSignature = (MethodSignature) signature;
         Method method = methodSignature.getMethod();
         ApplicationAuthorize authorize = method.getAnnotation(ApplicationAuthorize.class);
-        /**
-         * 获取注解属性
-         */
-        boolean required = authorize.required();
+        // [2]. 获取注解属性值
         boolean authorizeLogin = authorize.authorizeLogin();
         boolean authorizeResources = authorize.authorizeResources();
-        ScopeType authorizeScope = authorize.scope();
-        /**
-         * 根据scope指定的端类型使用不同的token名从http请求头以及cookie中获取会话码
-         */
+        ScopeType authorizeScope = authorize.authorizeScope();
+        // 根据scope指定的端类型使用不同的token名从http请求头以及cookie中获取会话码
         HttpServletRequest request = ApplicationServerUtil.getRequest();
         String token = null;
         String tokenName = null;
@@ -169,9 +162,7 @@ public class ConsoleAuthorizeAspect implements BaseApplicationAspect {
                 }
             }
         }
-        // 执行方法体
-        Object object = joinPoint.proceed();
-        return object;
+        return joinPoint.proceed();
     }
 
     /**

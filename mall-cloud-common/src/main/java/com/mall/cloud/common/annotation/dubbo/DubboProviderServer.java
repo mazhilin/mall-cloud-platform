@@ -19,6 +19,8 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE})
 @Inherited
 @Component
-@Service(version = Constants.DUBBO_SERVICE_VERSION, timeout = Constants.DUBBO_TIMEOUT)
+@Service(version = Constants.DUBBO_SERVICE_VERSION,
+        timeout = Constants.DUBBO_SERVICE_TIMEOUT
+)
 public @interface DubboProviderServer {
 }
