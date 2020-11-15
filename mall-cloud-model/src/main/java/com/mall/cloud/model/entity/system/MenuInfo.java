@@ -23,7 +23,7 @@ import java.math.BigDecimal;
 @EqualsAndHashCode(callSuper = true)
 @TableName(value = "mall_menu_info")
 public class MenuInfo extends BaseEntity {
-    private static final long serialVersionUID = 7092505342406176920L;
+    private static final long serialVersionUID = 7160703787183794716L;
     /**
      * 菜单id
      */
@@ -72,7 +72,7 @@ public class MenuInfo extends BaseEntity {
     /**
      * 是否左侧展示[0-否 1-是]
      */
-    private Integer isShowInMenu;
+    private Integer isShowMenu;
     /**
      * 是否内置菜单[0-否 1-是]
      */
@@ -80,5 +80,5 @@ public class MenuInfo extends BaseEntity {
     /**
      * 菜单权限类型[0-系统授权 1-公司授权 2-员工授权 3-公共授权]
      */
-    private Integer menuAuthType;
+    private Integer menuAuth;
 }

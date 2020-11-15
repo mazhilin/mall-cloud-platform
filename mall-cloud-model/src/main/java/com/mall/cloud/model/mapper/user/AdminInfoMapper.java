@@ -13,6 +13,5 @@ import org.mybatis.spring.annotation.MapperScan;
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
-@Mapper
 public interface AdminInfoMapper extends BaseMybatisMapper<AdminInfo> {
 }

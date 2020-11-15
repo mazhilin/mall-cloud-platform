@@ -26,7 +26,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@TableName(value = "mall_admin_user",autoResultMap = true,resultMap = "BaseResultMap",keepGlobalPrefix = false)
+@TableName(value = "mall_admin_user")
 public class AdminUser extends BaseEntity {
     private static final long serialVersionUID = 3854519652448554552L;
     /**

@@ -57,7 +57,7 @@ public class AdminAuthorizeServiceImpl extends GeneralApplicationAuthorize
         String userId = getUserId(token);
         AdminUser adminUser = adminUserMapper.selectById(userId);
         Map<String, Object> user = Maps.newConcurrentMap();
-        user.put("adminUser", adminUser);
+        user.put(Constants.ADMIN_USER, adminUser);
         return user;
     }
 

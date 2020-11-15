@@ -56,7 +56,7 @@ public abstract class GeneralApplicationAuthorize implements BaseApplicationAuth
     @Override
     public synchronized void deleteAuthorize(String token) {
         if (StringUtils.hasText(token)) {
-            redisOperationsService.delete(token + getTokenKey());
+            redisOperationsService.delete(getTokenKey()+token);
         }
     }
 
@@ -69,7 +69,7 @@ public abstract class GeneralApplicationAuthorize implements BaseApplicationAuth
     @Override
     public synchronized void setAuthorize(String userId, String token) {
         // 将用户登录token放到redis中，对应用户id，用于记录用户的登录状态。默认30分钟有效。
-        valueOperationsService.set(token + getTokenKey(), userId, getSessionTimeOut(), TimeUnit.SECONDS);
+        valueOperationsService.set(getTokenKey()+token, userId, getSessionTimeOut(), TimeUnit.SECONDS);
     }
 
     /**
@@ -83,7 +83,7 @@ public abstract class GeneralApplicationAuthorize implements BaseApplicationAuth
         if (token == null) {
             return null;
         }
-        return valueOperationsService.get(token + getTokenKey());
+        return valueOperationsService.get(getTokenKey()+token);
     }
 
     /**

@@ -10,10 +10,12 @@ import com.mall.cloud.common.constant.Resources;
 import com.mall.cloud.common.persistence.service.BaseServerService;
 import com.mall.cloud.common.utils.CheckEmptyUtil;
 import com.mall.cloud.model.entity.user.AdminUser;
+import com.mall.cloud.model.mapper.user.AdminUserMapper;
 import com.mall.cloud.passport.api.service.RedisOperationsService;
 import com.mall.cloud.passport.api.service.UserServerService;
 import com.mall.cloud.passport.api.service.ValueOperationsService;
 
+import javax.annotation.Resource;
 import java.time.Duration;
 
 /**
@@ -30,6 +32,8 @@ public class UserServerServiceImpl extends BaseServerService implements UserServ
     private RedisOperationsService<String, Object> redisOperationsService;
     @DubboConsumerClient
     private ValueOperationsService<String, Object> valueOperationsService;
+    @Resource
+    private AdminUserMapper adminUserMapper;
 
     /**
      * 验证并刷新token
@@ -62,5 +66,16 @@ public class UserServerServiceImpl extends BaseServerService implements UserServ
             return null;
         }
         return adminUser;
+    }
+
+    /**
+     * 查询用户信息
+     *
+     * @param userId 用户id
+     * @return 返回结果
+     */
+    @Override
+    public AdminUser queryUserInfo(String userId) {
+        return adminUserMapper.selectById(userId);
     }
 }

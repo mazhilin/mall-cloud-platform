@@ -2,6 +2,7 @@ package com.mall.cloud.passport.web.controller.user;
 
 import com.mall.cloud.common.persistence.controller.BaseController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**

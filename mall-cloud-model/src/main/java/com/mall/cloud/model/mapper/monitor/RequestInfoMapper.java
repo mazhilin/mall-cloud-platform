@@ -2,7 +2,6 @@ package com.mall.cloud.model.mapper.monitor;
 
 import com.mall.cloud.common.persistence.mapper.BaseMybatisMapper;
 import com.mall.cloud.model.entity.monitor.RequestInfo;
-import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>封装Qicloud项目RequestInfoMapper类.<br></p>
@@ -12,6 +11,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
-@Mapper
 public interface RequestInfoMapper extends BaseMybatisMapper<RequestInfo> {
 }

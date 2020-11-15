@@ -1,8 +1,8 @@
 package com.mall.cloud.common.persistence.controller;
 
+import com.google.common.collect.Maps;
 import com.mall.cloud.common.component.BaseApplicationAuthorize;
 import com.mall.cloud.common.exception.ApplicationServerException;
-import com.mall.cloud.common.utils.ApplicationServerUtil;
 import com.mall.cloud.common.utils.CheckEmptyUtil;
 import com.mall.cloud.common.utils.ObjectBeanUtil;
 import org.slf4j.Logger;
@@ -31,18 +31,30 @@ public abstract class BaseController implements Controller {
     @Autowired
     protected HttpServletResponse response;
 
+    /**
+     * 获取Token鉴权用户
+     *
+     * @param name token名称
+     * @return 返回结果
+     */
     @Override
     public String getCookie(String name) {
-        String cookie = ApplicationServerUtil.getCookie(name);
-        return CheckEmptyUtil.isNotEmpty(cookie)?cookie:null;
+        // 从请求头获取AuthorizeToken
+        String token = request.getHeader(name);
+        // 从header中获取token
+        if (CheckEmptyUtil.isEmpty(token) && CheckEmptyUtil.isNotEmpty(request.getHeader(name))) {
+            token = request.getParameter(name);
+        }
+        logger.info("token-value::{}", token);
+        return token;
     }
 
     /**
      * 获取当前登录用户
-     * @param authorize
-     * @param target
-     * @param <T>
-     * @return
+     *
+     * @param authorize 用户鉴权Token
+     * @param <T>       返回类型
+     * @return 返回结果
      */
     @SuppressWarnings("unchecked")
     public <T> T getCurrentUser(BaseApplicationAuthorize authorize, Class<T> target) {
@@ -57,41 +69,24 @@ public abstract class BaseController implements Controller {
         }
         Object object = null;
         try {
-            /**
-             * 由于获取的map的key和数据库的字段名是一致的（带有“_”），但是映射bean的操作必须map的key和bean的字段名一致，
-             * 所以将带有“_”的key名先转成驼峰标识的。
-             */
-            Map<String, Object> userMap = authorize.getCurrentUser(token);
-            if (target.getName().equals(Map.class.getName()) || target.getName().equals(HashMap.class.getName())) {
-                return (T) userMap;
-            }
-            Map<String, Object> newUserMap = new HashMap<String, Object>();
-            if (CheckEmptyUtil.isNotEmpty(userMap)) {
-                for (Map.Entry<String, Object> en : userMap.entrySet()) {
-                    if (CheckEmptyUtil.isNotEmpty(en)) {
-                        String[] keySplits = en.getKey().split("_");
-                        if (keySplits.length > 0) {
-                            StringBuffer newKey = new StringBuffer("");
-                            for (int i = 0; i < keySplits.length; i++) {
-                                if (i != 0) {
-                                    newKey.append(CheckEmptyUtil.upperCaseFirstChar(keySplits[i]));
-                                } else {
-                                    newKey.append(keySplits[i]);
-                                }
-                            }
-                            newUserMap.put(newKey.toString(), en.getValue());
-                        } else {
-                            newUserMap.put(en.getKey(), en.getValue());
-                        }
+            Map<String, Object> authorizeDataMap = authorize.getCurrentUser(token);
+            if (CheckEmptyUtil.isNotEmpty(authorizeDataMap)) {
+                if (target.getName().equals(Map.class.getName())
+                        || target.getName().equals(HashMap.class.getName())) {
+                    return (T) authorizeDataMap;
+                }
+                Map<String, Object> builderDataMap = Maps.newConcurrentMap();
+                for (Map.Entry<String, Object> entry : authorizeDataMap.entrySet()) {
+                    System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+                    if (CheckEmptyUtil.isNotEmpty(entry)) {
+                        builderDataMap.put(entry.getKey(), entry.getValue());
+                        System.out.println(builderDataMap);
                     }
                 }
-            }
-            /**
-             * map映射bean
-             */
-            object = target.newInstance();
-            if (CheckEmptyUtil.isNotEmpty(object)) {
-                ObjectBeanUtil.convert(object, newUserMap);
+                object = target.newInstance();
+                if (CheckEmptyUtil.isNotEmpty(object)) {
+                    ObjectBeanUtil.convert(object, builderDataMap);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

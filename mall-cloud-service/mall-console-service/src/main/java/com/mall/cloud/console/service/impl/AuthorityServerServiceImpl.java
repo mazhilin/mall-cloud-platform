@@ -112,25 +112,27 @@ public class AuthorityServerServiceImpl extends BaseServerService implements Aut
      * @throws ConsoleServerException 异常
      */
     @Override
-    public ResponseResult menuTreeList(ResponseResult result, String userId, String parentId) throws ConsoleServerException {
+    public ResponseResult showMenuList(ResponseResult result, String userId, String parentId) throws ConsoleServerException {
         // 判断父级菜单ID是否为空
+        MenuInfo menuInfo = null;
         if (CheckEmptyUtil.isEmpty(parentId)) {
             QueryWrapper<MenuInfo> queryMenu = new QueryWrapper<>();
             queryMenu.lambda().eq(MenuInfo::getCode, "root");
             queryMenu.lambda().eq(MenuInfo::getIsInnerMenu, Constants.YES);
-            MenuInfo menuInfo = menuInfoMapper.selectOne(queryMenu);
-            parentId = menuInfo.getParentId();
+            menuInfo = menuInfoMapper.selectOne(queryMenu);
+            if (CheckEmptyUtil.isNotEmpty(menuInfo)){
+                parentId = menuInfo.getParentId();
+            }
         }
         // 判断用户类型是否为管理员
         List<MenuInfo> rootMenuList = Lists.newLinkedList();
-        ;
         List<MenuInfo> childMenuList = Lists.newLinkedList();
         AdminUser adminUser = adminUserMapper.selectById(userId);
         if (Objects.equals(UserType.ADMIN.code(), adminUser.getType())) {
             // 获取根目录下的一级菜单
             QueryWrapper<MenuInfo> queryRoots = new QueryWrapper<>();
             queryRoots.lambda().eq(MenuInfo::getParentId, parentId);
-            queryRoots.lambda().eq(MenuInfo::getMenuAuthType, MenuAuthType.ADMIN.code());
+            queryRoots.lambda().eq(MenuInfo::getMenuAuth, MenuAuthType.ADMIN.code());
             queryRoots.lambda().eq(MenuInfo::getStatus, Constants.ENABLE);
             queryRoots.lambda().eq(MenuInfo::getIsDelete, Constants.NO);
             queryRoots.lambda().orderByAsc(MenuInfo::getSort);
@@ -141,7 +143,7 @@ public class AuthorityServerServiceImpl extends BaseServerService implements Aut
             }
             QueryWrapper<MenuInfo> queryhilds = new QueryWrapper<>();
             queryRoots.lambda().eq(MenuInfo::getParentId, parentId);
-            queryRoots.lambda().eq(MenuInfo::getMenuAuthType, MenuAuthType.ADMIN.code());
+            queryRoots.lambda().eq(MenuInfo::getMenuAuth, MenuAuthType.ADMIN.code());
             queryRoots.lambda().eq(MenuInfo::getStatus, Constants.ENABLE);
             queryRoots.lambda().eq(MenuInfo::getIsDelete, Constants.NO);
             queryRoots.lambda().orderByAsc(MenuInfo::getSort);

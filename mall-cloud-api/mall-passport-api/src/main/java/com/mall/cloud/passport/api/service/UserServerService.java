@@ -20,4 +20,11 @@ public interface UserServerService extends BaseService {
      * @return 用户数据
      */
     AdminUser validationAndRefreshToken(String token);
+
+    /**
+     * 查询用户信息
+     * @param userId 用户id
+     * @return 返回结果
+     */
+    AdminUser queryUserInfo(String userId);
 }

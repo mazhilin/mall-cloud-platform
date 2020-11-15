@@ -3,12 +3,14 @@ package com.mall.cloud.console.web.aspect;
 import com.mall.cloud.common.annotation.ApplicationAuthorize;
 import com.mall.cloud.common.annotation.dubbo.DubboConsumerClient;
 import com.mall.cloud.common.component.BaseApplicationAspect;
+import com.mall.cloud.common.constant.Constants;
 import com.mall.cloud.common.constant.ScopeType;
 import com.mall.cloud.common.constant.Tokens;
 import com.mall.cloud.common.exception.ConsoleServerException;
 import com.mall.cloud.common.exception.PassportServerException;
 import com.mall.cloud.common.utils.ApplicationServerUtil;
 import com.mall.cloud.common.utils.CheckEmptyUtil;
+import com.mall.cloud.model.entity.user.AdminUser;
 import com.mall.cloud.passport.api.service.*;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -50,6 +52,8 @@ public class ConsoleAuthorizeAspect implements BaseApplicationAspect {
     private SetOperationsService<String, String> setOperationsService;
     @DubboConsumerClient
     private RedisOperationsService<String, String> redisOperationsService;
+    @DubboConsumerClient
+    private UserServerService userServerService;
 
 
     /**
@@ -143,6 +147,9 @@ public class ConsoleAuthorizeAspect implements BaseApplicationAspect {
                 // 重新设置登录会话时长
                 if (ScopeType.WEB.equals(authorizeScope)) {
                     adminAuthorize.setAuthorize(userId, token);
+                    AdminUser adminUser = userServerService.queryUserInfo(userId);
+                    adminUser.setPassword(null);
+                    request.setAttribute(Constants.ADMIN_USER, adminUser);
                 } else if (ScopeType.APP.equals(authorizeScope)) {
                     appAuthorize.setAuthorize(userId, token);
                 } else if (ScopeType.SMR.equals(authorizeScope)) {

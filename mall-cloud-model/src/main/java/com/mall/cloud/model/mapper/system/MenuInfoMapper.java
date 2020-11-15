@@ -15,8 +15,6 @@ import java.util.List;
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
-@Mapper
-public interface MenuInfoMapper extends BaseMybatisMapper<MenuInfo> {
 
-    List<MenuInfo> queryMenuTreeList(@Param("id") Long id, @Param("parentOrganizationId") Long parentOrganizationId);
+public interface MenuInfoMapper extends BaseMybatisMapper<MenuInfo> {
 }

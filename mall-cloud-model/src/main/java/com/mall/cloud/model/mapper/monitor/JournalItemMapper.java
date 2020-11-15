@@ -12,6 +12,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
-@Mapper
 public interface JournalItemMapper extends BaseMybatisMapper<JournalItem> {
 }

@@ -97,23 +97,18 @@ public class ConsoleCenterController extends ApplicationLoginAuthorize implement
 
     /**
      * 推出登陆
+     *
      * @return 结果
      */
-    @ApplicationAuthorize(authorizeResources = false, authorizeScope = ScopeType.WEB)
+    @ApplicationAuthorize(authorizeResources = false, authorizeLogin = false,authorizeScope = ScopeType.WEB)
     @PostMapping(value = "/logout", produces = "application/json;charset=UTF-8")
     public String logout(
-            @RequestParam(value = "account") String account,
-            @RequestParam(value = "password") String password,
-            @RequestParam(value = "auto", required = false) Integer auto)
-            throws ApplicationServerException {
+            @RequestParam(value = "token") String token
+    ) throws ApplicationServerException {
         ResponseResult result = new ResponseResult();
-        try {
-            result = loginServerService.login(result, account, password);
-            if (Objects.equals(auto, 1)) {
-            }
-        } catch (ApplicationServerException exception) {
-            logger.error("用户登陆失败，账号:{},密码：{},TRACE:e", account, password, exception);
-            result.setError("系统繁忙，请稍后再试!");
+        String loginToken = this.getCookie(adminAuthorize.getAuthorizeCookie());
+        if (CheckEmptyUtil.isNotEmpty(loginToken) && Objects.equals(loginToken, token)) {
+            logout(token, adminAuthorize);
         }
         return result.parseToJson(result);
     }

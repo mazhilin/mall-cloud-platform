@@ -69,6 +69,6 @@ public interface AuthorityServerService extends BaseService {
      * @return 结果
      * @throws ConsoleServerException 异常
      */
-    ResponseResult menuTreeList(ResponseResult result, String userId, String parentId) throws ConsoleServerException;
+    ResponseResult showMenuList(ResponseResult result, String userId, String parentId) throws ConsoleServerException;
 
 }

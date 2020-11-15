@@ -5,24 +5,24 @@
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="code" jdbcType="VARCHAR" property="code"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="type" jdbcType="TINYINT" property="type"/>
         <result column="style" jdbcType="VARCHAR" property="style"/>
         <result column="parent_id" jdbcType="VARCHAR" property="parentId"/>
         <result column="event" jdbcType="VARCHAR" property="event"/>
-        <result column="event" jdbcType="INTEGER" property="event"/>
-        <result column="is_leaf" jdbcType="INTEGER" property="isLeaf"/>
-        <result column="level" jdbcType="INTEGER" property="level"/>
-        <result column="scope" jdbcType="INTEGER" property="scope"/>
+        <result column="event" jdbcType="TINYINT" property="event"/>
+        <result column="is_leaf" jdbcType="TINYINT" property="isLeaf"/>
+        <result column="level" jdbcType="TINYINT" property="level"/>
+        <result column="scope" jdbcType="TINYINT" property="scope"/>
         <result column="sort" jdbcType="DECIMAL" property="sort"/>
-        <result column="is_show_menu" jdbcType="INTEGER" property="isShowMenu"/>
-        <result column="is_inner_menu" jdbcType="INTEGER" property="isInnerMenu"/>
-        <result column="is_delete" jdbcType="INTEGER" property="isDelete"/>
-        <result column="menu_auth_type" jdbcType="INTEGER" property="menuAuthType"/>
+        <result column="is_show_menu" jdbcType="TINYINT" property="isShowMenu"/>
+        <result column="is_inner_menu" jdbcType="TINYINT" property="isInnerMenu"/>
+        <result column="is_delete" jdbcType="TINYINT" property="isDelete"/>
+        <result column="menu_auth" jdbcType="TINYINT" property="menuAuth"/>
         <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_by" jdbcType="VARCHAR" property="createBy"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
-        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
     </resultMap>
 </mapper>
