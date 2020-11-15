@@ -2,6 +2,7 @@ package com.mall.cloud.mobile.web;
 
 import com.mall.cloud.common.annotation.container.ApplicationClientBootstrap;
 import org.springframework.boot.SpringApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * <p>封装Qicloud项目MobileWebApplication类.<br></p> 
@@ -13,6 +14,8 @@ import org.springframework.boot.SpringApplication;
 @ApplicationClientBootstrap
 public class MobileWebApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(MobileWebApplication.class, args);
+		ConfigurableApplicationContext applicationContext=SpringApplication.run(MobileWebApplication.class, args);
+		applicationContext.registerShutdownHook();
+		applicationContext.start();
 	}
 }

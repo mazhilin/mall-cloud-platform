@@ -5,6 +5,7 @@ import com.alicp.jetcache.anno.config.EnableMethodCache;
 import com.mall.cloud.common.annotation.container.ApplicationClientBootstrap;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.SpringApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * <p>封装Qicloud项目PassportWebApplication类.<br></p> 
@@ -19,6 +20,8 @@ import org.springframework.boot.SpringApplication;
 @EnableCreateCacheAnnotation
 public class PassportWebApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(PassportWebApplication.class, args);
+		ConfigurableApplicationContext applicationContext=SpringApplication.run(PassportWebApplication.class, args);
+		applicationContext.registerShutdownHook();
+		applicationContext.start();
 	}
 }
