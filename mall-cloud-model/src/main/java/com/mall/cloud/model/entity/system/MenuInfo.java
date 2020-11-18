@@ -1,12 +1,14 @@
 package com.mall.cloud.model.entity.system;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.mall.cloud.common.persistence.entity.BaseEntity;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * <p>封装Qicloud项目MenuInfo类.<br></p>
@@ -66,6 +68,10 @@ public class MenuInfo extends BaseEntity {
      */
     private Integer scope;
     /**
+     * 权限标识
+     */
+    private String permission;
+    /**
      * 菜单排序
      */
     private BigDecimal sort;
@@ -81,4 +87,16 @@ public class MenuInfo extends BaseEntity {
      * 菜单权限类型[0-系统授权 1-公司授权 2-员工授权 3-公共授权]
      */
     private Integer menuAuth;
+
+    /**
+     * 是否路由缓冲[0-否 1-是]
+     */
+    private Integer keepAlive;
+
+
+    /**
+     * 查询子菜单
+     */
+    @TableField(exist = false)
+    private List<MenuInfo> childMenuList;
 }

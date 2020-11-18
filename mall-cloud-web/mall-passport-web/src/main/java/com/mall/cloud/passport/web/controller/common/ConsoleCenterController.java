@@ -29,7 +29,7 @@ import java.util.Objects;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
 @RestController
-@RequestMapping(value = "/api/console/center", produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
+@RequestMapping(value = "/api/console/center/", produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
 public class ConsoleCenterController extends ApplicationLoginAuthorize implements Controller {
     @DubboConsumerClient
     private LoginServerService loginServerService;
@@ -52,7 +52,8 @@ public class ConsoleCenterController extends ApplicationLoginAuthorize implement
      * @return 返回结果
      * @throws ApplicationServerException 应用服务异常
      */
-    @PostMapping(value = "/login",produces = "application/json;charset=UTF-8")
+    @PostMapping(value = "login",produces = "application/json;charset=UTF-8")
+    @ResponseBody
     public String login(
             @RequestParam(value = "account") String account,
             @RequestParam(value = "password") String password,
@@ -101,7 +102,8 @@ public class ConsoleCenterController extends ApplicationLoginAuthorize implement
      * @return 结果
      */
     @ApplicationAuthorize(authorizeResources = false, authorizeLogin = false,authorizeScope = ScopeType.WEB)
-    @PostMapping(value = "/logout", produces = "application/json;charset=UTF-8")
+    @PostMapping(value = "logout", produces = "application/json;charset=UTF-8")
+    @ResponseBody
     public String logout(
             @RequestParam(value = "token") String token
     ) throws ApplicationServerException {
@@ -123,7 +125,7 @@ public class ConsoleCenterController extends ApplicationLoginAuthorize implement
      * @throws ApplicationServerException
      */
     @ApplicationAuthorize(authorizeResources = false, authorizeScope = ScopeType.WEB)
-    @PostMapping(value = "/updatePassword", produces = "application/json;charset=UTF-8")
+    @PostMapping(value = "updatePassword", produces = "application/json;charset=UTF-8")
     public String updatePassword(
             @RequestParam(value = "password") String password,
             @RequestParam(value = "confirmPassword") String confirmPassword)

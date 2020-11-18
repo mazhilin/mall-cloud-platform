@@ -25,17 +25,17 @@ import java.util.Map;
 public class DatagridResult implements Result {
 	private static final long serialVersionUID = -954766243250722604L;
 	/**
-	 * 数据列表总数-totalCount
+	 * 数据列表总数-pageCount
 	 */
-	private Long totalCount = 0L;
+	private Long pageCount = 0L;
 	/**
 	 * 页数-pageSize
 	 */
 	private Integer pageSize = 1;
 	/**
-	 * 页条目数-pageCount
+	 * 页条目数-pageLimit
 	 */
-	private Integer pageCount = 10;
+	private Integer pageLimit = 10;
 	/**
 	 * 总页数-totalPage
 	 */
@@ -52,27 +52,27 @@ public class DatagridResult implements Result {
 	 * 返回其它数据-otherData
 	 */
 	private Object otherData;
-	
-	public DatagridResult(int pageSize, int pageCount, Long totalCount) {
+
+	public DatagridResult(int pageSize, int pageLimit, Long pageCount) {
 		this.pageSize = pageSize;
+		this.pageLimit = pageLimit;
 		this.pageCount = pageCount;
-		this.totalCount = totalCount;
 		this.dataList = Lists.newArrayList();
 		long totalPage;
-		if (totalCount % pageCount == 0) {
-			totalPage = totalCount / pageCount;
+		if (pageCount % pageLimit == 0) {
+			totalPage = pageCount / pageLimit;
 		} else {
-			totalPage = totalCount / pageCount + 1;
+			totalPage = pageCount / pageLimit + 1;
 		}
 		this.totalPage = totalPage;
 	}
-	
-	public DatagridResult(int pageSize, int pageCount, PageInfo<?> pageInfo) {
+
+	public DatagridResult(int pageSize, int pageLimit, PageInfo<?> pageInfo) {
 		this.pageSize = pageSize;
-		this.pageCount = pageCount;
+		this.pageLimit = pageLimit;
 		long totalCount = pageInfo.getTotal();
 		this.dataList = pageInfo.getList();
-		this.totalCount = totalCount;
+		this.pageCount = totalCount;
 		long totalPage;
 		if (totalCount % pageCount == 0) {
 			totalPage = totalCount / pageCount;

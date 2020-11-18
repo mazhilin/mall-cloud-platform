@@ -1,6 +1,5 @@
 package com.mall.cloud.console.service.impl;
 
-import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.google.common.collect.Lists;
 import com.mall.cloud.common.annotation.dubbo.DubboProviderServer;
@@ -116,41 +115,111 @@ public class AuthorityServerServiceImpl extends BaseServerService implements Aut
         // 判断父级菜单ID是否为空
         MenuInfo menuInfo = null;
         if (CheckEmptyUtil.isEmpty(parentId)) {
-            QueryWrapper<MenuInfo> queryMenu = new QueryWrapper<>();
-            queryMenu.lambda().eq(MenuInfo::getCode, "root");
-            queryMenu.lambda().eq(MenuInfo::getIsInnerMenu, Constants.YES);
-            menuInfo = menuInfoMapper.selectOne(queryMenu);
-            if (CheckEmptyUtil.isNotEmpty(menuInfo)){
-                parentId = menuInfo.getParentId();
+            QueryWrapper<MenuInfo> queryRootMenu = new QueryWrapper<>();
+            queryRootMenu.lambda().eq(MenuInfo::getCode, "root");
+            queryRootMenu.lambda().eq(MenuInfo::getIsInnerMenu, Constants.YES);
+            queryRootMenu.lambda().select(MenuInfo::getId);
+            menuInfo = menuInfoMapper.selectOne(queryRootMenu);
+            if (CheckEmptyUtil.isNotEmpty(menuInfo)) {
+                parentId = menuInfo.getId();
             }
         }
-        // 判断用户类型是否为管理员
-        List<MenuInfo> rootMenuList = Lists.newLinkedList();
-        List<MenuInfo> childMenuList = Lists.newLinkedList();
         AdminUser adminUser = adminUserMapper.selectById(userId);
-        if (Objects.equals(UserType.ADMIN.code(), adminUser.getType())) {
-            // 获取根目录下的一级菜单
-            QueryWrapper<MenuInfo> queryRoots = new QueryWrapper<>();
-            queryRoots.lambda().eq(MenuInfo::getParentId, parentId);
-            queryRoots.lambda().eq(MenuInfo::getMenuAuth, MenuAuthType.ADMIN.code());
-            queryRoots.lambda().eq(MenuInfo::getStatus, Constants.ENABLE);
-            queryRoots.lambda().eq(MenuInfo::getIsDelete, Constants.NO);
-            queryRoots.lambda().orderByAsc(MenuInfo::getSort);
-            rootMenuList = menuInfoMapper.selectList(queryRoots);
-            //若不存在父级ID，则先查出根目录下的第一级菜单列表，再查询第一个菜单的子级菜单列表
-            if (CollUtil.isNotEmpty(rootMenuList)) {
-                parentId = rootMenuList.get(0).getId();
-            }
-            QueryWrapper<MenuInfo> queryhilds = new QueryWrapper<>();
-            queryRoots.lambda().eq(MenuInfo::getParentId, parentId);
-            queryRoots.lambda().eq(MenuInfo::getMenuAuth, MenuAuthType.ADMIN.code());
-            queryRoots.lambda().eq(MenuInfo::getStatus, Constants.ENABLE);
-            queryRoots.lambda().eq(MenuInfo::getIsDelete, Constants.NO);
-            queryRoots.lambda().orderByAsc(MenuInfo::getSort);
-            childMenuList = menuInfoMapper.selectList(queryhilds);
+        Integer menuAuthType;
+        UserType userType = UserType.get(adminUser.getType());
+        switch (Objects.requireNonNull(userType)) {
+            case ADMIN:
+                menuAuthType = MenuAuthType.ADMIN.code();
+                break;
+            case COMPANY:
+                menuAuthType = MenuAuthType.COMPANY.code();
+                break;
+            case EMPLOYEE:
+                menuAuthType = MenuAuthType.EMPLOYEE.code();
+                break;
+            default:
+                menuAuthType = MenuAuthType.DEFAULT.code();
+                break;
         }
-        result.putResult("rootMenuList", rootMenuList);
-        result.putResult("childMenuList", childMenuList);
+        // 查询一级菜单列表
+        List<MenuInfo> parentMenuList = this.queryRootMenuList(parentId, menuAuthType);
+        List<MenuInfo> menuTreeList = this.sortMenuList(parentMenuList, menuAuthType);
+        result.putResult("menuList", CheckEmptyUtil.isNotEmpty(menuTreeList) ? menuTreeList : Lists.newLinkedList());
         return result;
     }
+
+    /**
+     * 获取一级菜单目录
+     *
+     * @param parentId     父级菜单id
+     * @param menuAuthType 菜单授权类型
+     * @return 返回一级菜单列表
+     */
+    private List<MenuInfo> queryRootMenuList(String parentId, Integer menuAuthType) {
+        // 获取根目录下的一级菜单
+        QueryWrapper<MenuInfo> queryParentMenu = new QueryWrapper<>();
+        queryParentMenu.lambda().eq(MenuInfo::getParentId, parentId);
+        queryParentMenu.lambda().eq(MenuInfo::getMenuAuth, menuAuthType);
+        queryParentMenu.lambda().eq(MenuInfo::getStatus, Constants.ENABLE);
+        queryParentMenu.lambda().eq(MenuInfo::getIsDelete, Constants.NO);
+        queryParentMenu.lambda().orderByAsc(MenuInfo::getSort);
+        return menuInfoMapper.selectList(queryParentMenu);
+    }
+
+    /**
+     * 处理对应菜单数据列表
+     *
+     * @param parentMenuList 父级菜单列表
+     * @param menuAuthType   菜单授权类型
+     * @return 返回列表
+     */
+    private List<MenuInfo> sortMenuList(List<MenuInfo> parentMenuList, Integer menuAuthType) {
+        List<MenuInfo> menuList = Lists.newLinkedList();
+        //
+        if (CheckEmptyUtil.isNotEmpty(parentMenuList)) {
+            for (int index = 0, item = parentMenuList.size(); index < item; index++) {
+                menuList.add(parentMenuList.get(index));
+            }
+            parentMenuList.parallelStream().forEachOrdered(item -> {
+                item.setChildMenuList(queryChildMenuList(item.getId(), menuAuthType));
+            });
+        }
+        return menuList;
+    }
+
+    /**
+     * 获取二级菜单目录
+     *
+     * @param parentId     父级菜单id
+     * @param menuAuthType 菜单授权类型
+     * @return 返回一级菜单列表
+     */
+    private List<MenuInfo> queryChildMenuList(String parentId, Integer menuAuthType) {
+        // 获取根目录下的二级菜单
+        QueryWrapper<MenuInfo> queryChildMenu = new QueryWrapper<>();
+        queryChildMenu.lambda().eq(MenuInfo::getParentId, parentId);
+        queryChildMenu.lambda().eq(MenuInfo::getMenuAuth, menuAuthType);
+        queryChildMenu.lambda().eq(MenuInfo::getStatus, Constants.ENABLE);
+        queryChildMenu.lambda().eq(MenuInfo::getIsDelete, Constants.NO);
+        queryChildMenu.lambda().orderByAsc(MenuInfo::getSort);
+        List<MenuInfo> queryResultList = menuInfoMapper.selectList(queryChildMenu);
+        List<MenuInfo> childMenuList = Lists.newLinkedList();
+        if (CheckEmptyUtil.isNotEmpty(queryResultList)) {
+            queryResultList.parallelStream().forEachOrdered(item -> {
+                if (Objects.equals(item.getParentId(), parentId)) {
+                    childMenuList.add(item);
+                }
+            });
+        }
+        Objects.requireNonNull(childMenuList).parallelStream().forEachOrdered(item -> {
+            if (CheckEmptyUtil.isEmpty(item.getEvent())) {
+                item.setChildMenuList(queryChildMenuList(item.getId(), menuAuthType));
+            }
+        });
+        if (childMenuList.size() == 0) {
+            return null;
+        }
+        return childMenuList;
+    }
+
 }

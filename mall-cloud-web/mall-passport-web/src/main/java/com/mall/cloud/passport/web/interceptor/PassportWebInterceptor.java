@@ -1,15 +1,12 @@
 package com.mall.cloud.passport.web.interceptor;
 
-import com.mall.cloud.common.annotation.ApplicationAuthorize;
 import com.mall.cloud.common.component.BaseHandlerInterceptor;
-import com.mall.cloud.common.constant.ScopeType;
-import com.mall.cloud.common.constant.Tokens;
-import com.mall.cloud.common.utils.CheckEmptyUtil;
-import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayOutputStream;
+import java.util.zip.GZIPOutputStream;
 
 /**
  * <p>封装Qicloud项目PassportWebInterceptor类.<br></p>

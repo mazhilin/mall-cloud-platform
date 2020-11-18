@@ -15,21 +15,22 @@ import java.util.Arrays;
  */
 public enum MenuAuthType implements BaseHandler {
     /**
-     * 授权-系统管理员-0
+     * 授权-公共授权-0
      */
-    ADMIN(0, "系统授权"),
+    DEFAULT(0, "公共授权"),
+    /**
+     * 授权-系统管理员-1
+     */
+    ADMIN(1, "系统授权"),
     /**
      * 授权-公司管理员-1
      */
-    COMPANY(1, "公司授权"),
+    COMPANY(2, "公司授权"),
     /**
      * 授权-公司员工-2
      */
-    EMPLOYEE(2, "员工授权"),
-    /**
-     * 授权-公共授权-3
-     */
-    DEFAULT(3, "公共授权");
+    EMPLOYEE(3, "员工授权");
+
 
 
     /**

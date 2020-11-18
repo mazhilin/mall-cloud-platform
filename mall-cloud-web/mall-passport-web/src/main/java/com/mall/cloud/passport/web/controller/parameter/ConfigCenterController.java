@@ -12,6 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p> 
  */
 @RestController
-@RequestMapping("/api/config")
+@RequestMapping("/api/config/center")
 public class ConfigCenterController extends BaseController {
 }

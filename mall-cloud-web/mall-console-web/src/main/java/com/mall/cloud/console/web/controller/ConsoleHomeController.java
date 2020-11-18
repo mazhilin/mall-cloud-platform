@@ -10,7 +10,6 @@ import com.mall.cloud.common.persistence.controller.BaseController;
 import com.mall.cloud.common.persistence.controller.Controller;
 import com.mall.cloud.common.restful.ResponseResult;
 import com.mall.cloud.common.utils.CheckEmptyUtil;
-import com.mall.cloud.common.utils.ObjectBeanUtil;
 import com.mall.cloud.common.utils.SequenceServerUtil;
 import com.mall.cloud.console.api.service.AuthorityServerService;
 import com.mall.cloud.model.entity.user.AdminUser;
@@ -34,19 +33,6 @@ public class ConsoleHomeController extends BaseController implements Controller 
     private AdminAuthorizeService adminAuthorize;
     @DubboConsumerClient
     private AuthorityServerService authorityServerService;
-
-    public static void main(String[] args) {
-        //
-        AdminUser adminUser = new AdminUser();
-        adminUser.setId(String.valueOf(SequenceServerUtil.getInstance().produceId()));
-        adminUser.setName("mmmm");
-        System.out.println(ObjectBeanUtil.beanToMap(adminUser));
-
-        Map<String, Object> stringObjectMap = ObjectBeanUtil.beanToMap(adminUser);
-        System.out.println(ObjectBeanUtil.mapToBean(stringObjectMap, adminUser));
-
-    }
-
     /**
      * 返回登录信息
      *

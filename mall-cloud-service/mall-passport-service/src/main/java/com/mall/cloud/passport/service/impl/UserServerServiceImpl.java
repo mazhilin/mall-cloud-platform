@@ -7,10 +7,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.mall.cloud.common.annotation.dubbo.DubboConsumerClient;
 import com.mall.cloud.common.annotation.dubbo.DubboProviderServer;
 import com.mall.cloud.common.constant.Resources;
+import com.mall.cloud.common.exception.PassportServerException;
 import com.mall.cloud.common.persistence.service.BaseServerService;
+import com.mall.cloud.common.restful.DatagridResult;
+import com.mall.cloud.common.restful.ResponseResult;
 import com.mall.cloud.common.utils.CheckEmptyUtil;
 import com.mall.cloud.model.entity.user.AdminUser;
 import com.mall.cloud.model.mapper.user.AdminUserMapper;
+import com.mall.cloud.passport.api.param.RequestUserParam;
 import com.mall.cloud.passport.api.service.RedisOperationsService;
 import com.mall.cloud.passport.api.service.UserServerService;
 import com.mall.cloud.passport.api.service.ValueOperationsService;
@@ -77,5 +81,81 @@ public class UserServerServiceImpl extends BaseServerService implements UserServ
     @Override
     public AdminUser queryUserInfo(String userId) {
         return adminUserMapper.selectById(userId);
+    }
+
+    /**
+     * 系统中心-用户管理-分页查询列表
+     *
+     * @param pageSize  页码数
+     * @param pageLimit 条目数
+     * @param param     用户请求参数
+     * @return 返回结果
+     * @throws PassportServerException 异常消息
+     */
+    @Override
+    public DatagridResult list(Integer pageSize, Integer pageLimit, RequestUserParam param) throws PassportServerException {
+    return null;
+    }
+
+    /**
+     * 系统中心-用户管理-查询用户详情
+     *
+     * @param id 用户id
+     * @return 返回结果
+     */
+    @Override
+    public AdminUser show(String id) {
+        return null;
+    }
+
+    /**
+     * 系统中心-用户管理-查询用户详情
+     *
+     * @param id 用户id
+     * @return 返回结果
+     */
+    @Override
+    public AdminUser detail(String id) {
+        return null;
+    }
+
+    /**
+     * 系统中心-用户管理-新增
+     *
+     * @param param 用户请求参数
+     * @return 返回结果
+     * @throws PassportServerException 异常消息
+     */
+    @Override
+    public Integer save(RequestUserParam param) throws PassportServerException {
+        return null;
+    }
+
+    /**
+     * 系统中心-用户管理-编辑
+     *
+     * @param result 请求/响应结果
+     * @param param  用户请求参数
+     * @return 返回结果
+     * @throws PassportServerException 异常消息
+     */
+    @Override
+    public ResponseResult edit(ResponseResult result, RequestUserParam param) throws PassportServerException {
+        return null;
+    }
+
+    /**
+     * 系统中心-用户管理-修改用户状态
+     *
+     * @param result     请求/响应结果
+     * @param id         用戶id
+     * @param status     请求参数状态
+     * @param operatorId 操作人id
+     * @return 返回结果
+     * @throws PassportServerException 异常消息
+     */
+    @Override
+    public ResponseResult update(ResponseResult result, String id, Integer status, String operatorId) throws PassportServerException {
+        return null;
     }
 }

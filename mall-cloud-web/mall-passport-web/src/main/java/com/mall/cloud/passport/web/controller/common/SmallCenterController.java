@@ -37,7 +37,6 @@ public class SmallCenterController extends BaseController {
             @RequestParam(value = "password") String password,
             @RequestParam(value = "clientType", required = false, defaultValue = "smr") String clientType,
             @RequestParam(value = "userType", required = false, defaultValue = "0") Integer userType) throws Exception {
-
         return new ResponseResult();
     }
 }
