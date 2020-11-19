@@ -16,7 +16,7 @@ import com.mall.cloud.model.entity.user.AdminUser;
 import com.mall.cloud.passport.api.service.AdminAuthorizeService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
+
 
 /**
  * <p>封装Qicloud项目ConsoleHomeController类.<br></p>

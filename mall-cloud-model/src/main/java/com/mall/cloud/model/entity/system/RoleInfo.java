@@ -41,4 +41,8 @@ public class RoleInfo extends BaseEntity {
      * 角色作用域[1-后台 2-APP 3-SMR 4-公司管理员]
      */
     private Integer scope;
+    /**
+     * 公司id
+     */
+    private String companyId;
 }

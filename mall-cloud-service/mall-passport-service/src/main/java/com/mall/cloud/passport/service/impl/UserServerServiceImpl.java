@@ -1,12 +1,19 @@
 package com.mall.cloud.passport.service.impl;
 
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.google.common.collect.Lists;
 import com.mall.cloud.common.annotation.dubbo.DubboConsumerClient;
 import com.mall.cloud.common.annotation.dubbo.DubboProviderServer;
+import com.mall.cloud.common.constant.Constants;
 import com.mall.cloud.common.constant.Resources;
+import com.mall.cloud.common.constant.UserType;
 import com.mall.cloud.common.exception.PassportServerException;
 import com.mall.cloud.common.persistence.service.BaseServerService;
 import com.mall.cloud.common.restful.DatagridResult;
@@ -14,6 +21,7 @@ import com.mall.cloud.common.restful.ResponseResult;
 import com.mall.cloud.common.utils.CheckEmptyUtil;
 import com.mall.cloud.model.entity.user.AdminUser;
 import com.mall.cloud.model.mapper.user.AdminUserMapper;
+import com.mall.cloud.model.result.user.ResponseUserResult;
 import com.mall.cloud.passport.api.param.RequestUserParam;
 import com.mall.cloud.passport.api.service.RedisOperationsService;
 import com.mall.cloud.passport.api.service.UserServerService;
@@ -21,6 +29,7 @@ import com.mall.cloud.passport.api.service.ValueOperationsService;
 
 import javax.annotation.Resource;
 import java.time.Duration;
+import java.util.List;
 
 /**
  * <p>封装Qicloud项目UserServerServiceImpl类.<br></p>
@@ -94,7 +103,29 @@ public class UserServerServiceImpl extends BaseServerService implements UserServ
      */
     @Override
     public DatagridResult list(Integer pageSize, Integer pageLimit, RequestUserParam param) throws PassportServerException {
-    return null;
+        DatagridResult result = new DatagridResult();
+        PageHelper.startPage(pageSize, pageLimit);
+        //查询列表
+        QueryWrapper<AdminUser> queryUser = new QueryWrapper<>();
+        if (CheckEmptyUtil.isNotEmpty(param.getAccount())) {
+            queryUser.lambda().eq(AdminUser::getAccount, param.getAccount());
+        }
+        if (CheckEmptyUtil.isNotEmpty(param.getName())) {
+            queryUser.lambda().eq(AdminUser::getName, param.getName());
+        }
+        if (CheckEmptyUtil.isNotEmpty(param.getMobile())) {
+            queryUser.lambda().eq(AdminUser::getMobile, param.getMobile());
+        }
+        if (CheckEmptyUtil.isNotEmpty(param.getStatus())) {
+            queryUser.lambda().eq(AdminUser::getStatus, param.getStatus());
+        }
+        queryUser.lambda().eq(AdminUser::getIsDelete, Constants.NO);
+        queryUser.lambda().orderByDesc(AdminUser::getCreateTime);
+        List<AdminUser> queryList = adminUserMapper.selectList(queryUser);
+        result.setDataList(queryList);
+        PageInfo<AdminUser> pageInfo = new PageInfo<>(queryList);
+        result.setPageCount(pageInfo.getTotal());
+        return result;
     }
 
     /**

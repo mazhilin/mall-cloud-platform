@@ -43,7 +43,7 @@ public class DatagridResult implements Result {
 	/**
 	 * 返回数据列表-dataList
 	 */
-	private List<?> dataList;
+	private List dataList;
 	/**
 	 * 返回数据集合-dataMap
 	 */

@@ -52,7 +52,7 @@ public class ParameterServerServiceImpl extends BaseServerService implements Par
         //PageHelper插件的
         PageInfo<ConfigParameter> pageInfo = new PageInfo<>(list);
         //返回总数
-        result.setTotalCount(pageInfo.getTotal());
+        result.setPageCount(pageInfo.getTotal());
         return result;
     }
 

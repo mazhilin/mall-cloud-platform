@@ -85,7 +85,7 @@ public class ResponseResult implements Result {
 	 * @param data 数据结果
 	 */
 	public void setResult(DatagridResult data) {
-		this.result.put("totalCount", data.getTotalCount());
+		this.result.put("totalCount", data.getPageCount());
 		this.result.put("dataList", data.getDataList());
 		if (Objects.nonNull(data.getPageSize())) {
 			this.result.put("pageSize", data.getPageSize());
