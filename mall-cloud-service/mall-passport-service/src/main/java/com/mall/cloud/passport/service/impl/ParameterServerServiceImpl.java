@@ -10,7 +10,10 @@ import com.mall.cloud.common.restful.DatagridResult;
 import com.mall.cloud.common.restful.ResponseResult;
 import com.mall.cloud.common.utils.CheckEmptyUtil;
 import com.mall.cloud.model.entity.system.ConfigParameter;
+import com.mall.cloud.model.entity.system.PublicParameter;
 import com.mall.cloud.model.mapper.system.ConfigParameterMapper;
+import com.mall.cloud.model.mapper.system.PublicParameterMapper;
+import com.mall.cloud.passport.api.param.RequestPublicParam;
 import com.mall.cloud.passport.api.service.ParameterServerService;
 
 import javax.annotation.Resource;
@@ -28,29 +31,29 @@ import java.util.List;
 public class ParameterServerServiceImpl extends BaseServerService implements ParameterServerService {
 
     @Resource
-    private ConfigParameterMapper configParameterMapper;
+    private PublicParameterMapper publicParameterMapper;
 
     /**
      * 条件查询列表数据
      *
      * @param pageSize  页码数
      * @param pageCount 条目数
-     * @param parameter 请求参数对象
+     * @param param 请求参数对象
      * @return 返回结果
      * @throws PassportServerException 异常消息
      */
     @Override
-    public DatagridResult list(Integer pageSize, Integer pageCount, ConfigParameter parameter) throws PassportServerException {
+    public DatagridResult list(Integer pageSize, Integer pageCount, RequestPublicParam param) throws PassportServerException {
         DatagridResult result = new DatagridResult();
         PageHelper.startPage(pageCount,pageSize);
         //查询
-        QueryWrapper<ConfigParameter> query = new QueryWrapper<>(parameter);
-        query.lambda().ne(ConfigParameter::getStatus, 2);
-        List<ConfigParameter> list = configParameterMapper.selectList(query);
+        QueryWrapper<PublicParameter> queryParam = new QueryWrapper<>();
+        queryParam.lambda().ne(PublicParameter::getStatus, 2);
+        List<PublicParameter> list = publicParameterMapper.selectList(queryParam);
         //返回列表
         result.setDataList(list);
         //PageHelper插件的
-        PageInfo<ConfigParameter> pageInfo = new PageInfo<>(list);
+        PageInfo<PublicParameter> pageInfo = new PageInfo<>(list);
         //返回总数
         result.setPageCount(pageInfo.getTotal());
         return result;
@@ -66,14 +69,14 @@ public class ParameterServerServiceImpl extends BaseServerService implements Par
      * @throws PassportServerException 异常消息
      */
     @Override
-    public ResponseResult save(ResponseResult response, ConfigParameter parameter) throws PassportServerException {
-        QueryWrapper<ConfigParameter> query = new QueryWrapper<>();
-        query.lambda().eq(ConfigParameter::getCode, parameter.getCode());
-        int exist = configParameterMapper.selectCount(query);
+    public ResponseResult save(ResponseResult response, PublicParameter parameter) throws PassportServerException {
+        QueryWrapper<PublicParameter> query = new QueryWrapper<>();
+        query.lambda().eq(PublicParameter::getCode, parameter.getCode());
+        int exist = publicParameterMapper.selectCount(query);
         if (exist > 0) {
             response.setError("配置唯一码已存在，请重新设置!");
         }
-        configParameterMapper.insert(parameter);
+        publicParameterMapper.insert(parameter);
         return response;
     }
 
@@ -86,18 +89,18 @@ public class ParameterServerServiceImpl extends BaseServerService implements Par
      * @throws PassportServerException 异常消息
      */
     @Override
-    public ResponseResult edit(ResponseResult response, ConfigParameter parameter) throws PassportServerException {
-        ConfigParameter parameters = configParameterMapper.selectById(parameter.getId());
+    public ResponseResult edit(ResponseResult response, PublicParameter parameter) throws PassportServerException {
+        PublicParameter parameters = publicParameterMapper.selectById(parameter.getId());
         if (CheckEmptyUtil.isNotEmpty(parameters)) {
-            QueryWrapper<ConfigParameter> query = new QueryWrapper<>();
-            query.lambda().eq(ConfigParameter::getCode, parameter.getCode());
-            query.lambda().ne(ConfigParameter::getId, parameter.getId());
-            int exist = configParameterMapper.selectCount(query);
+            QueryWrapper<PublicParameter> query = new QueryWrapper<>();
+            query.lambda().eq(PublicParameter::getCode, parameter.getCode());
+            query.lambda().ne(PublicParameter::getId, parameter.getId());
+            int exist = publicParameterMapper.selectCount(query);
             if (exist > 0) {
                 response.setError("配置唯一码已存在，请重新设置!");
                 return response;
             }
-            configParameterMapper.updateById(parameter);
+            publicParameterMapper.updateById(parameter);
             return response;
         } else {
             throw new PassportServerException("未找到该系统配置");
@@ -111,7 +114,7 @@ public class ParameterServerServiceImpl extends BaseServerService implements Par
      * @return 返回详情
      */
     @Override
-    public ConfigParameter getDetailById(Long id) {
-        return configParameterMapper.selectById(id);
+    public PublicParameter getDetailById(Long id) {
+        return publicParameterMapper.selectById(id);
     }
 }

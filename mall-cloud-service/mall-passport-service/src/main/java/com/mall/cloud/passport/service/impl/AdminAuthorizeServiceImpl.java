@@ -76,7 +76,7 @@ public class AdminAuthorizeServiceImpl extends GeneralApplicationAuthorize
      */
     @Override
     public Long getSessionTimeOut() {
-        Long sessionTimeout = 60L * 30L;
+        Long sessionTimeout = 30*24*3600L;
         ConfigParameter parameter = null;
         try {
             QueryWrapper<ConfigParameter> queryParameter = new QueryWrapper<>();
@@ -86,7 +86,8 @@ public class AdminAuthorizeServiceImpl extends GeneralApplicationAuthorize
             return sessionTimeout;
         }
         if (CheckEmptyUtil.isNotEmpty(parameter) && CheckEmptyUtil.isNotEmpty(parameter.getValue())) {
-            return Long.parseLong(parameter.getValue());
+            sessionTimeout = Long.valueOf(parameter.getValue());
+            return sessionTimeout;
         }
         return sessionTimeout;
     }

@@ -5,31 +5,28 @@ import com.mall.cloud.common.persistence.service.BaseService;
 import com.mall.cloud.common.restful.DatagridResult;
 import com.mall.cloud.common.restful.ResponseResult;
 import com.mall.cloud.model.entity.system.ConfigParameter;
-import com.mall.cloud.model.entity.system.PublicParameter;
-import com.mall.cloud.passport.api.param.RequestPublicParam;
-
-import java.util.Map;
+import com.mall.cloud.passport.api.param.RequestConfigParam;
 
 /**
- * <p>封装Qicloud项目ParameterServerService类.<br></p>
+ * <p>封装Qicloud项目ConfigServerService类.<br></p>
  * <p>//TODO...<br></p>
  *
- * @author Powered by marklin 2020-10-30 00:09
+ * @author Powered by marklin 2020-11-21 22:23
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
-public interface ParameterServerService extends BaseService {
+public interface ConfigServerService extends BaseService {
 
     /**
      * 条件查询列表数据
      *
      * @param pageSize  页码数
-     * @param pageCount 条目数
+     * @param pageLimit 条目数
      * @param param 请求参数对象
      * @return 返回结果
      * @throws PassportServerException 异常消息
      */
-    DatagridResult list(Integer pageSize, Integer pageCount, RequestPublicParam param) throws PassportServerException;
+    DatagridResult list(Integer pageSize, Integer pageLimit, RequestConfigParam param) throws PassportServerException;
     /**
      * 新增系统配置参数
      *
@@ -38,7 +35,7 @@ public interface ParameterServerService extends BaseService {
      * @return 结果
      * @throws PassportServerException 异常消息
      */
-    ResponseResult save(ResponseResult response, PublicParameter parameter) throws PassportServerException;
+    ResponseResult save(ResponseResult response, ConfigParameter parameter) throws PassportServerException;
 
     /**
      * 编辑系统配置参数
@@ -48,7 +45,7 @@ public interface ParameterServerService extends BaseService {
      * @return 结果
      * @throws PassportServerException 异常消息
      */
-    ResponseResult edit(ResponseResult response, PublicParameter parameter) throws PassportServerException;
+    ResponseResult edit(ResponseResult response, ConfigParameter parameter) throws PassportServerException;
 
     /**
      * 根据id获取系统配置的详情
@@ -56,5 +53,5 @@ public interface ParameterServerService extends BaseService {
      * @param id 系统配置参数id
      * @return 返回详情
      */
-    PublicParameter getDetailById(Long id);
+    ConfigParameter getDetailById(Long id);
 }

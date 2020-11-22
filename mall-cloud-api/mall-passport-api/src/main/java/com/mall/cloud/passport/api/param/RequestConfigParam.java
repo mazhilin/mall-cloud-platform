@@ -1,33 +1,26 @@
-package com.mall.cloud.model.entity.system;
+package com.mall.cloud.passport.api.param;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.mall.cloud.common.persistence.entity.BaseEntity;
-import lombok.*;
+import com.mall.cloud.common.persistence.param.BaseParam;
+import lombok.Data;
 
 import java.math.BigDecimal;
 
 /**
- * <p>封装Qicloud项目ConfigParameter类.<br></p>
+ * <p>封装Qicloud项目RequestConfigParam类.<br></p>
  * <p>//TODO...<br></p>
  *
- * @author Powered by marklin 2020-10-28 22:53
+ * @author Powered by marklin 2020-11-21 22:21
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-@TableName(value = "mall_config_parameter")
-public class ConfigParameter extends BaseEntity {
-    private static final long serialVersionUID = 8126189452965639339L;
+public class RequestConfigParam extends BaseParam {
+    private static final long serialVersionUID = -3824511626508749858L;
     /**
      * 配置id
      */
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
     /**
      * 配置编码
@@ -46,7 +39,7 @@ public class ConfigParameter extends BaseEntity {
      */
     private String value;
     /**
-     * 作用域[1-后台 2-APP 3-SMR 4-公司管理员]
+     * 配置作用域
      */
     private String scope;
 }

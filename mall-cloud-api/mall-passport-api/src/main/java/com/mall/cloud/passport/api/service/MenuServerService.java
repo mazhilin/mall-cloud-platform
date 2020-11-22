@@ -1,9 +1,11 @@
 package com.mall.cloud.passport.api.service;
 
+import com.mall.cloud.common.exception.ConsoleServerException;
 import com.mall.cloud.common.exception.PassportServerException;
 import com.mall.cloud.common.persistence.service.BaseService;
 import com.mall.cloud.common.restful.DatagridResult;
 import com.mall.cloud.model.entity.system.MenuInfo;
+import com.mall.cloud.passport.api.param.RequestMenuParam;
 
 import java.util.List;
 
@@ -20,13 +22,13 @@ public interface MenuServerService extends BaseService {
     /**
      * 分页查询菜单列表
      *
-     * @param pageCount 页码数
-     * @param pageSize  条目数
-     * @param menu      参数对象
+     * @param pageSize 页码数
+     * @param pageLimit  条目数
+     * @param param      参数对象
      * @return 返回结果
-     * @throws PassportServerException 异常消息
+     * @throws ConsoleServerException 异常消息
      */
-    DatagridResult list(Integer pageCount, Integer pageSize, MenuInfo menu) throws PassportServerException;
+    DatagridResult list(Integer pageSize, Integer pageLimit, RequestMenuParam param) throws ConsoleServerException;
 
     /**
      * 新增菜单
@@ -71,4 +73,14 @@ public interface MenuServerService extends BaseService {
      * @return 菜单树结构列表
      */
     List<MenuInfo> menuTreeList(Long id);
+
+
+    /**
+     * 系统后台-菜单管理-选项卡
+     *
+     * @param userId 菜单id
+     * @return 菜单树结构列表
+     * @throws ConsoleServerException 异常消息
+     */
+    List<MenuInfo> category(String userId) throws ConsoleServerException;
 }

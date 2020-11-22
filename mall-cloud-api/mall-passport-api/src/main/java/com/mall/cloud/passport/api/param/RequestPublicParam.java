@@ -1,27 +1,21 @@
-package com.mall.cloud.model.entity.system;
+package com.mall.cloud.passport.api.param;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.mall.cloud.common.persistence.entity.BaseEntity;
-import lombok.*;
+import com.mall.cloud.common.persistence.param.BaseParam;
+import lombok.Data;
 
 /**
- * <p>封装Qicloud项目PublicParameter类.<br></p>
+ * <p>封装Qicloud项目RequestPublicParam类.<br></p>
  * <p>//TODO...<br></p>
  *
- * @author Powered by marklin 2020-11-17 22:03
+ * @author Powered by marklin 2020-11-21 23:53
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-@TableName(value = "mall_public_parameter")
-public class PublicParameter extends BaseEntity {
-    private static final long serialVersionUID = 7727970101907906129L;
+public class RequestPublicParam extends BaseParam {
+    private static final long serialVersionUID = -3499676683023556309L;
     /**
      * 配置id
      */

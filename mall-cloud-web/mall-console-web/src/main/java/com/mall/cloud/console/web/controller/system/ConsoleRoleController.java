@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
 @RestController
-@RequestMapping("/api/console/role")
+@RequestMapping("/api/console/role/")
 public class ConsoleRoleController extends BaseController {
     /**
      * 后台管理平台-系统中心-菜单管理-列表
