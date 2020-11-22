@@ -1,13 +1,10 @@
 package com.mall.cloud.passport.service.impl;
 
-import com.mall.cloud.common.constant.Constants;
+import com.mall.cloud.common.annotation.dubbo.DubboProviderServer;
 import com.mall.cloud.passport.api.service.ValueOperationsService;
-import com.mall.cloud.passport.api.service.ZSetOperationsService;
-import org.apache.dubbo.config.annotation.Service;
 import org.springframework.data.redis.connection.BitFieldSubCommands;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.Collection;
@@ -23,8 +20,7 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
-@Component(value = "valueOperationsServiceImpl")
-@Service(version = Constants.DUBBO_SERVICE_VERSION, timeout = Constants.DUBBO_TIMEOUT)
+@DubboProviderServer
 public class ValueOperationsServiceImpl <K, V> implements ValueOperationsService<K, V> {
     @Resource(name = "stringRedisTemplate")
     private ValueOperations<K, V> valueOperations;

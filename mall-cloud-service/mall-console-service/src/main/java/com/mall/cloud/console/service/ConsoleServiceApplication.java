@@ -1,10 +1,14 @@
 package com.mall.cloud.console.service;
 
 
-import com.mall.cloud.common.container.annotation.ApplicationServerBootstrap;
+import com.alicp.jetcache.anno.config.EnableCreateCacheAnnotation;
+import com.alicp.jetcache.anno.config.EnableMethodCache;
+import com.mall.cloud.common.annotation.container.ApplicationServerBootstrap;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * <p>封装Qicloud项目ConsoleServiceApplication类.<br></p>
@@ -16,8 +20,13 @@ import org.springframework.boot.SpringApplication;
 @ApplicationServerBootstrap
 @EnableDubbo
 @MapperScan(basePackages = {"com.mall.cloud.model.mapper"})
+@EnableMethodCache(basePackages = "com.mall.cloud")
+@EnableCreateCacheAnnotation
+@EnableAspectJAutoProxy(exposeProxy = true, proxyTargetClass = true)
 public class ConsoleServiceApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(ConsoleServiceApplication.class, args);
+		ConfigurableApplicationContext applicationContext=SpringApplication.run(ConsoleServiceApplication.class, args);
+		applicationContext.registerShutdownHook();
+		applicationContext.start();
 	}
 }

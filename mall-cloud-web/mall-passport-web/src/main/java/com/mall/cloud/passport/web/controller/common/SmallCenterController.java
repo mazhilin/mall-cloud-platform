@@ -31,13 +31,12 @@ public class SmallCenterController extends BaseController {
      * @return 返回结果
      */
     @PostMapping(value = "/login")
-    @ApplicationAuthorize( scope = ScopeType.SMR)
+    @ApplicationAuthorize( authorizeScope = ScopeType.SMR)
     public ResponseResult login(
             @RequestParam(value = "account") String account,
             @RequestParam(value = "password") String password,
             @RequestParam(value = "clientType", required = false, defaultValue = "smr") String clientType,
             @RequestParam(value = "userType", required = false, defaultValue = "0") Integer userType) throws Exception {
-
         return new ResponseResult();
     }
 }

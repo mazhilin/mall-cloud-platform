@@ -1,12 +1,17 @@
 package com.mall.cloud.model.entity.user;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.mall.cloud.common.constant.Formats;
 import com.mall.cloud.common.persistence.entity.BaseEntity;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.*;
+import java.time.LocalDateTime;
 
 /**
  * <p>封装Qicloud项目AdminUser类.<br></p>
@@ -21,7 +26,7 @@ import javax.validation.constraints.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@TableName(value = "mall_admin_user",autoResultMap = true,resultMap = "BaseResultMap",keepGlobalPrefix = false)
+@TableName(value = "mall_admin_user")
 public class AdminUser extends BaseEntity {
     private static final long serialVersionUID = 3854519652448554552L;
     /**
@@ -83,9 +88,14 @@ public class AdminUser extends BaseEntity {
     private String profilePicture;
 
     /**
-     * 账户类型[0-系统管理员 1-公司管理员]
+     * 账户类型[0-超级管理员 1-系统管理员 2-公司管理员 3-公司员工]
      */
     private Integer type;
-
-
+    /**
+     * 登录时间
+     */
+    @ApiModelProperty(value = "登录时间")
+    @DateTimeFormat(pattern = Formats.DATE_TIME_TO_PM)
+    @JSONField(format = Formats.DATE_TIME_TO_PM)
+    private LocalDateTime loginTime;
 }

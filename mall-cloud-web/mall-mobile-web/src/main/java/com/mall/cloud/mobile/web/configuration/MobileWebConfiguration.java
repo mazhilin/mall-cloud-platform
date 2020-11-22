@@ -1,5 +1,6 @@
 package com.mall.cloud.mobile.web.configuration;
 
+import com.mall.cloud.common.component.interceptor.GolbalApplictaionInterceptor;
 import com.mall.cloud.mobile.web.interceptor.MobileWebInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebMvc
 @ComponentScan(basePackageClasses = MobileWebConfiguration.class, useDefaultFilters = true)
 public class MobileWebConfiguration implements WebMvcConfigurer {
+    private GolbalApplictaionInterceptor applictaionInterceptor = new GolbalApplictaionInterceptor();
     private MobileWebInterceptor mobileWebInterceptor = new MobileWebInterceptor();
 
     @Bean
@@ -28,9 +30,16 @@ public class MobileWebConfiguration implements WebMvcConfigurer {
         return mobileWebInterceptor;
     }
 
+    @Bean
+    GolbalApplictaionInterceptor applictaionInterceptor() {
+        return applictaionInterceptor;
+    }
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(webInterceptor()).addPathPatterns("/**");
+        // 需要拦截的路径
+        String[] addPathPatterns = {"/**"};
+        registry.addInterceptor(applictaionInterceptor).addPathPatterns(addPathPatterns);
+        registry.addInterceptor(mobileWebInterceptor).excludePathPatterns(addPathPatterns);
     }
 
     @Override

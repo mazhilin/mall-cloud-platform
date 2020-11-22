@@ -1,5 +1,6 @@
 package com.mall.cloud.console.web.configuration;
 
+import com.mall.cloud.common.component.interceptor.GolbalApplictaionInterceptor;
 import com.mall.cloud.console.web.ConsoleWebApplication;
 import com.mall.cloud.console.web.interceptor.ConsoleWebInterceptor;
 import org.springframework.context.annotation.Bean;
@@ -23,17 +24,37 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @ComponentScan(basePackageClasses = ConsoleWebApplication.class, useDefaultFilters = true)
 public class ConsoleWebConfiguration implements WebMvcConfigurer {
 
+    private GolbalApplictaionInterceptor applictaionInterceptor = new GolbalApplictaionInterceptor();
     private ConsoleWebInterceptor consoleWebInterceptor = new ConsoleWebInterceptor();
 
+
     @Bean
-    ConsoleWebInterceptor webInterceptor(){
+    ConsoleWebInterceptor webInterceptor() {
         return consoleWebInterceptor;
+    }
+
+    @Bean
+    GolbalApplictaionInterceptor applictaionInterceptor() {
+        return applictaionInterceptor;
     }
 
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(webInterceptor()).addPathPatterns("/**");
+        // 需要拦截的路径
+        String[] addPathPatterns = {"/**"};
+        //不需要拦截的路径
+        String[] excludePathPatterns = {
+                "/api/console/home/toLogin",
+                "/main/loginView",
+                "/shaker/file/upload",
+                "/job/api",
+                "/shakerLiveSocket",
+                "/documentManager/updateDocumentBlue",
+                "/documentManager/updateDocumentSea"
+        };
+        registry.addInterceptor(applictaionInterceptor).addPathPatterns(addPathPatterns);
+        registry.addInterceptor(consoleWebInterceptor).excludePathPatterns(excludePathPatterns);
     }
 
     @Override

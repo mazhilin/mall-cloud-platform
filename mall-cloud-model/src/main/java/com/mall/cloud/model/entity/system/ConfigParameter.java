@@ -46,11 +46,7 @@ public class ConfigParameter extends BaseEntity {
      */
     private String value;
     /**
-     * 配置作用域
+     * 作用域[1-后台 2-APP 3-SMR 4-公司管理员]
      */
     private String scope;
-    /**
-     * 配置排序
-     */
-    private BigDecimal sort;
 }

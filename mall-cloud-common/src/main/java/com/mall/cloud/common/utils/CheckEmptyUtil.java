@@ -1,7 +1,5 @@
 package com.mall.cloud.common.utils;
 
-import cn.hutool.core.util.StrUtil;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -14,7 +12,7 @@ import java.util.Set;
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
-public class CheckEmptyUtil {
+public final class CheckEmptyUtil {
     /**
      * 判断一个参数是否为空。判断的时候根据不同的类型，会有不同的判断标准。
      *
@@ -138,6 +136,22 @@ public class CheckEmptyUtil {
         return true;
     }
 
+    /**
+     * 只要其中一个对象是empty，返回true，否则返回false
+     *
+     * @param o
+     * @return
+     */
+    public static final boolean isAnyEmpty(Object... o) {
+        for (int i = 0; i < o.length; i++) {
+            Object obj = o[i];
+            if (CheckEmptyUtil.isEmpty(obj)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static boolean isAndNotEmpty(Object... objects) {
         if (objects == null || objects.length == 0) {
             return false;
@@ -149,4 +163,18 @@ public class CheckEmptyUtil {
         }
         return true;
     }
+
+    /**
+     * 将字符串的首字母变大写
+     *
+     * @param s
+     * @return
+     */
+    public static String upperCaseFirstChar(String s) {
+        if (CheckEmptyUtil.isEmpty(s)) {
+            return "";
+        }
+        return s.substring(0, 1).toString().toUpperCase() + s.substring(1).toString();
+    }
+
 }

@@ -1,4 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
     com.mall.cloud.common.configuration.EnableAutoContainerConfiguration,\
     com.mall.cloud.common.configuration.SwaggerConfiguration,\
-    com.mall.cloud.common.utils.SpringContextHolder
+        com.mall.cloud.common.configuration.MultipartStorageConfiguration,\
+    com.mall.cloud.common.core.holder.SpringContextHolder

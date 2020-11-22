@@ -9,14 +9,16 @@
         <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
         <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
         <result column="email" jdbcType="VARCHAR" property="email"/>
-        <result column="gender" jdbcType="INTEGER" property="gender"/>
+        <result column="gender" jdbcType="TINYINT" property="gender"/>
         <result column="profile_picture" jdbcType="VARCHAR" property="profilePicture"/>
-        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="type" jdbcType="TINYINT" property="type"/>
+        <result column="is_delete" jdbcType="TINYINT" property="isDelete"/>
+        <result column="login_time" jdbcType="TIMESTAMP" property="loginTime"/>
         <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_by" jdbcType="VARCHAR" property="createBy"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
-        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
     </resultMap>
 </mapper>

@@ -1,6 +1,7 @@
 package com.mall.cloud.common.utils;
 
 import com.mall.cloud.common.constant.Formats;
+import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import java.util.UUID;
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
+@Component
 public class SequenceServerUtil {
     /**
      * 第一种：Jeesite框架生成唯一ID算法实现

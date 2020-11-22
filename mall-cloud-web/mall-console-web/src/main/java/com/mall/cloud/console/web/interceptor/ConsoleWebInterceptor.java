@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
 public class ConsoleWebInterceptor extends BaseHandlerInterceptor {
+
     /**
      * 配置拦截器-nextHandlerInterceptor
      *
@@ -55,7 +56,7 @@ public class ConsoleWebInterceptor extends BaseHandlerInterceptor {
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
         response.setHeader("Access-Control-Allow-Headers",
-                "Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,token");
+                "Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers");
         return true;
     }
 

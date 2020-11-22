@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p> 
  */
 @RestController
-@RequestMapping("/api/access")
+@RequestMapping("/api/access/center")
 public class AccessCenterController extends BaseController {
 
 }

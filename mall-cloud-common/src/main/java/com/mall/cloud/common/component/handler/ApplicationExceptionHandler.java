@@ -2,8 +2,10 @@ package com.mall.cloud.common.component.handler;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mall.cloud.common.persistence.controller.BaseController;
 import com.mall.cloud.common.restful.ResponseResult;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,7 +16,9 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -32,11 +36,23 @@ import java.util.List;
  * @version 1.0.0
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
-@Slf4j
 @RestControllerAdvice
 public class ApplicationExceptionHandler {
+    protected static final transient Logger logger = LoggerFactory.getLogger(BaseController.class);
     @Autowired
     private ObjectMapper objectMapper;
+
+
+    /**
+     * 应用到所有@RequestMapping注解方法，在其执行之前初始化数据绑定器
+     *
+     * @param binder binder
+     */
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        logger.info("binder.getFieldDefaultPrefix {}", binder.getFieldDefaultPrefix());
+        logger.info("binder.getFieldMarkerPrefix {}", binder.getFieldMarkerPrefix());
+    }
 
     // ---------- 参数校验 ----------
 
@@ -171,7 +187,7 @@ public class ApplicationExceptionHandler {
      * @param request HttpServletRequest
      */
     private void printLog(Throwable e, HttpServletRequest request) {
-        log.error("【method】: {}【uri】: {}【errMsg】: {}【params】:{}",
+        logger.error("【method】: {}【uri】: {}【errMsg】: {}【params】:{}",
                 request.getMethod(), request.getRequestURI(), e.getMessage(), buildParamsStr(request), e);
     }
 

@@ -1,24 +1,23 @@
 package com.mall.cloud.passport.web.controller.common;
 
+import com.google.common.collect.Lists;
+import com.mall.cloud.common.annotation.ApplicationAuthorize;
+import com.mall.cloud.common.annotation.dubbo.DubboConsumerClient;
+import com.mall.cloud.common.component.authorize.ApplicationLoginAuthorize;
 import com.mall.cloud.common.constant.Constants;
-import com.mall.cloud.common.constant.UserType;
+import com.mall.cloud.common.constant.ResponseType;
+import com.mall.cloud.common.constant.ScopeType;
+import com.mall.cloud.common.constant.Tokens;
 import com.mall.cloud.common.exception.ApplicationServerException;
-import com.mall.cloud.common.persistence.controller.BaseController;
+import com.mall.cloud.common.persistence.controller.Controller;
 import com.mall.cloud.common.restful.ResponseResult;
-import com.mall.cloud.common.utils.ApplicationServerUtil;
 import com.mall.cloud.common.utils.CheckEmptyUtil;
-import com.mall.cloud.common.utils.JsonServerUtil;
-import com.mall.cloud.common.utils.MD5Util;
 import com.mall.cloud.model.entity.user.AdminUser;
-import com.mall.cloud.model.entity.user.EmployeeUser;
-import com.mall.cloud.passport.api.service.LoginServerService;
-import com.mall.cloud.passport.api.service.RedisOperationsService;
-import com.mall.cloud.passport.api.service.ValueOperationsService;
-import org.apache.dubbo.config.annotation.Reference;
+import com.mall.cloud.passport.api.service.*;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -30,106 +29,109 @@ import java.util.Objects;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
 @RestController
-@RequestMapping(value = "/api/console/center", produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
-public class ConsoleCenterController extends BaseController {
-
-    @Reference(version = Constants.DUBBO_SERVICE_VERSION, timeout = Constants.DUBBO_TIMEOUT, check = Constants.DUBBO_CHECK, retries = Constants.DUBBO_RETRIES)
+@RequestMapping(value = "/api/console/center/", produces = "application/json;charset=UTF-8", method = RequestMethod.POST)
+public class ConsoleCenterController extends ApplicationLoginAuthorize implements Controller {
+    @DubboConsumerClient
     private LoginServerService loginServerService;
-    @Reference(version = Constants.DUBBO_SERVICE_VERSION, timeout = Constants.DUBBO_TIMEOUT, check = Constants.DUBBO_CHECK, retries = Constants.DUBBO_RETRIES)
+    @DubboConsumerClient
+    private UserServerService userServerService;
+    @DubboConsumerClient
     private RedisOperationsService<String, Object> redisOperationsService;
-    @Reference(version = Constants.DUBBO_SERVICE_VERSION, timeout = Constants.DUBBO_TIMEOUT, check = Constants.DUBBO_CHECK, retries = Constants.DUBBO_RETRIES)
+    @DubboConsumerClient
     private ValueOperationsService<String, Object> valueOperationsService;
+    @DubboConsumerClient
+    private AdminAuthorizeService adminAuthorize;
+
 
     /**
      * 系统后台登录方法-login
      *
      * @param account    登录账户[系统用户,APP用户,员工用户]
      * @param password   登录密码
-     * @param clientType 客户端类型[app-手机端APP登录,web-PC客户端登录]
-     * @param userType   用户类型[0-系统用户,1-APP用户,2-员工]
      * @param auto       是否自动登录[0-否 1-是]
      * @return 返回结果
      * @throws ApplicationServerException 应用服务异常
      */
-    @PostMapping(value = "/login",produces = "application/json;charset=UTF-8")
+    @PostMapping(value = "login",produces = "application/json;charset=UTF-8")
+    @ResponseBody
     public String login(
             @RequestParam(value = "account") String account,
             @RequestParam(value = "password") String password,
-            @RequestParam(value = "auto", required = false, defaultValue = "0") Integer auto,
-            @RequestParam(value = "clientType", required = false, defaultValue = "web") String clientType,
-            @RequestParam(value = "userType", required = false, defaultValue = "0") Integer userType)
+            @RequestParam(value = "auto", required = false) Integer auto)
             throws ApplicationServerException {
         ResponseResult result = new ResponseResult();
-        synchronized (this) {
-            try {
-                HttpSession session = Objects.requireNonNull(ApplicationServerUtil.getRequest()).getSession();
-                UserType types = UserType.get(userType);
-                switch (Objects.requireNonNull(types)) {
-                    case ADMIN:
-                        AdminUser adminUser = (AdminUser) session.getAttribute("adminUser");
-                        if (CheckEmptyUtil.isNotEmpty(adminUser)) {
-                            return result.parseToJson(result);
-                        }
-                        if (CheckEmptyUtil.isEmpty(account) || CheckEmptyUtil.isEmpty(password)) {
-                            result.setError("请填写用户名和密码！");
-                            return result.parseToJson(result);
-                        }
-                        if (CheckEmptyUtil.isEmpty(account)) {
-                            result.setError("请填写用户名!");
-                            return result.parseToJson(result);
-                        }
-                        if (CheckEmptyUtil.isEmpty(password)) {
-                            result.setError("请填写密码！");
-                            return result.parseToJson(result);
-                        }
-                        adminUser = loginServerService.queryAdminUser(account, password);
-                        if (CheckEmptyUtil.isEmpty(adminUser)) {
-                            result.setError("账号或密码错误！");
-                            return result.parseToJson(result);
-                        }
-                        valueOperationsService.set("mall:cloud:adminUser" + adminUser.getId(), JsonServerUtil.getInstance().parseToJson(adminUser));
-                        session.setAttribute("adminUser", adminUser);
-                        session.setMaxInactiveInterval(1800);
-                        if (auto.equals("1")) {
-                            Cookie cookieAC = new Cookie("account", account);
-                            Cookie cookiePA = new Cookie("password", MD5Util.generate(password));
-
-                            System.out.println(
-                                    "是否是同一字符串:" + MD5Util.verify(adminUser.getPassword(), MD5Util.generate(password)));
-                            // 设置为7天
-                            cookieAC.setMaxAge(7 * 60 * 60 * 24);
-                            cookieAC.setPath("/");
-                            // 设置为7天
-                            cookiePA.setMaxAge(7 * 60 * 60 * 24);
-                            cookiePA.setPath("/");
-                        }
-                        break;
-                    case COMPANY:
-                        AdminUser companyUser = (AdminUser) session.getAttribute("companyUser");
-                        if (CheckEmptyUtil.isNotEmpty(companyUser)) {
-                            return result.parseToJson(result);
-                        }
-                        break;
-                    case EMPLOYEE:
-                        EmployeeUser employeeUser = (EmployeeUser) session.getAttribute("employeeUser");
-                        if (CheckEmptyUtil.isNotEmpty(employeeUser)) {
-                            return result.parseToJson(result);
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            } catch (ApplicationServerException exception) {
-                int error = 500;
-                if (error != result.getCode()) {
-                    result.setError("账号名或密码输入错误!");
-                    logger.error("后台控制台登陆失败：{}", result.getMessage());
-                } else {
-                    logger.error("后台控制台登陆失败：{}", exception.toString());
-                }
-            }
-            throw new ApplicationServerException("");
+        // [1].校验用户请求参数
+        if (CheckEmptyUtil.isEmpty(account)) {
+            result.setError(ResponseType.EMPTY.code(), "登录账号不能为空!");
+            return result.parseToJson(result);
         }
+        if (CheckEmptyUtil.isEmpty(password)) {
+            result.setError(ResponseType.EMPTY.code(), "登录密码不能为空!");
+            return result.parseToJson(result);
+        }
+        // [2].查询用户数据是否正确
+        AdminUser adminUser = loginServerService.queryAdminUser(account, password);
+        if (CheckEmptyUtil.isEmpty(adminUser)) {
+            result.setError("登录失败!用户名/密码错误!");
+            return result.parseToJson(result);
+        }
+        if (CheckEmptyUtil.isNotEmpty(adminUser.getStatus())
+                && Objects.equals(Constants.DISABLE, adminUser.getStatus())) {
+            result.setError("用户已被锁定，请联系管理员!");
+            return result.parseToJson(result);
+        }
+        // [3] 更新用户登录时间
+        adminUser.setLoginTime(LocalDateTime.now());
+        adminUser.setPassword(null);
+        // TODO...
+        try {
+            List<String> resourceList = Lists.newLinkedList();
+            String token = login(adminUser.getId(), resourceList, adminAuthorize);
+            result.putResult(Tokens.WEB_LOGIN_TOKEN, token);
+            result.putResult(Constants.ADMIN_USER, adminUser);
+        } catch (ApplicationServerException exception) {
+            logger.error("用户登陆失败，账号:{},密码：{},TRACE:e", account, password, exception);
+            result.setError("系统繁忙，请稍后再试!");
+        }
+        return result.parseToJson(result);
+    }
+
+    /**
+     * 推出登陆
+     *
+     * @return 结果
+     */
+    @ApplicationAuthorize(authorizeResources = false, authorizeLogin = false,authorizeScope = ScopeType.WEB)
+    @PostMapping(value = "logout", produces = "application/json;charset=UTF-8")
+    @ResponseBody
+    public String logout(
+            @RequestParam(value = "token") String token
+    ) throws ApplicationServerException {
+        ResponseResult result = new ResponseResult();
+        String loginToken = this.getCookie(adminAuthorize.getAuthorizeCookie());
+        if (CheckEmptyUtil.isNotEmpty(loginToken) && Objects.equals(loginToken, token)) {
+            logout(token, adminAuthorize);
+        }
+        return result.parseToJson(result);
+    }
+
+
+    /**
+     * 后台用户修改密码
+     *
+     * @param password        新密码
+     * @param confirmPassword 确认密码
+     * @return 返回结果
+     * @throws ApplicationServerException
+     */
+    @ApplicationAuthorize(authorizeResources = false, authorizeScope = ScopeType.WEB)
+    @PostMapping(value = "updatePassword", produces = "application/json;charset=UTF-8")
+    public String updatePassword(
+            @RequestParam(value = "password") String password,
+            @RequestParam(value = "confirmPassword") String confirmPassword)
+            throws ApplicationServerException {
+        ResponseResult result = new ResponseResult();
+        return result.parseToJson(result);
     }
 
 

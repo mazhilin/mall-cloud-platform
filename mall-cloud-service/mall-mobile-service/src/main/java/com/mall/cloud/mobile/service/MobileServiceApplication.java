@@ -1,9 +1,10 @@
 package com.mall.cloud.mobile.service;
 
-import com.mall.cloud.common.container.annotation.ApplicationServerBootstrap;
+import com.mall.cloud.common.annotation.container.ApplicationServerBootstrap;
 import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * <p>封装Qicloud项目MobileServiceApplication类.<br></p>
@@ -17,6 +18,8 @@ import org.springframework.boot.SpringApplication;
 @MapperScan(basePackages = {"com.mall.cloud.model.mapper"})
 public class MobileServiceApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(MobileServiceApplication.class, args);
+		ConfigurableApplicationContext applicationContext=SpringApplication.run(MobileServiceApplication.class, args);
+		applicationContext.registerShutdownHook();
+		applicationContext.start();
 	}
 }

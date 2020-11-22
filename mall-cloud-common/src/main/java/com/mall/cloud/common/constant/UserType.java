@@ -14,17 +14,21 @@ import java.util.Arrays;
  */
 public enum UserType implements BaseHandler {
     /**
-     * 系统管理员-0
+     * 超级管理员-0
      */
-    ADMIN(0, "系统管理员"),
+    DEFAULT(0, "超级管理员"),
     /**
-     * 公司管理员-1
+     * 系统管理员-1
      */
-    COMPANY(1, "公司管理员"),
+    ADMIN(1, "系统管理员"),
     /**
-     * 公司员工-2
+     * 公司管理员-2
      */
-    EMPLOYEE(2, "公司员工");
+    COMPANY(2, "公司管理员"),
+    /**
+     * 公司员工-3
+     */
+    EMPLOYEE(3, "公司员工");
     /**
      * 编码-code
      */

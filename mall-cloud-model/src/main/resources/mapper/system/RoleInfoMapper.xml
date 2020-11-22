@@ -3,13 +3,14 @@
 <mapper namespace="com.mall.cloud.model.mapper.system.RoleInfoMapper">
     <resultMap id="BaseResultMap" type="com.mall.cloud.model.entity.system.RoleInfo">
         <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="user_id" jdbcType="BIGINT" property="userId"/>
-        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
-        <result column="type" jdbcType="INTEGER" property="type"/>
-        <result column="alipay_id" jdbcType="VARCHAR" property="alipayId"/>
-        <result column="add_time" jdbcType="TIMESTAMP" property="addTime"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="scope" jdbcType="INTEGER" property="scope"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_by" jdbcType="VARCHAR" property="createBy"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
-        <result column="flag" jdbcType="VARCHAR" property="flag"/>
-
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
     </resultMap>
 </mapper>

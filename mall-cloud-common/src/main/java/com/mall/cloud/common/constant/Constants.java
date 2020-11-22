@@ -24,19 +24,23 @@ public final class Constants {
     /**
      * 系统状态-禁用状态[0,禁用-disable]
      */
-    public static final Integer DEFAULT = 0;
-    /**
-     * 系统状态-禁用状态[0,禁用-disable]
-     */
     public static final Integer DISABLE = 0;
     /**
      * 系统状态-启用状态[1, 启用-enable]
      */
     public static final Integer ENABLE = 1;
     /**
-     * 系统状态-删除状态[2, 删除-delete]
+     * 系统状态-移除状态[2, 移除-remove]
      */
-    public static final Integer DELETE = 2;
+    public static final Integer REMOVE = 2;
+    /**
+     * 系统状态-是否状态[0,否-NO]
+     */
+    public static final Integer NO = 0;
+    /**
+     * 系统状态-是否状态[1, 是-YES]
+     */
+    public static final Integer YES = 1;
     /**
      * 系统账户参数-account
      */
@@ -50,9 +54,21 @@ public final class Constants {
      */
     public static final String CONFIRM_PASSWORD = "confirmPassword";
     /**
-     * 后台系统默认Session名称-userInfo
+     * 后台系统默认Session名称-adminUser
      */
-    public static final String SESSION = "userInfo";
+    public static final String ADMIN_USER = "adminUser";
+    /**
+     * 后台系统默认Session名称-adminUser
+     */
+    public static final String APP_USER = "adminUser";
+    /**
+     * MD5加密公共盐
+     */
+    public static final String PUBLIC_SALT = "pivotalcloud";
+
+
+
+
     /**
      * 系统Cookie最大时效-maxAge
      */
@@ -65,22 +81,6 @@ public final class Constants {
      * 系统Cookie路径-path
      */
     public static final String COOKIE_PATH = "/";
-    /**
-     * 跳转Monitor错误url
-     */
-    public static final String REDIRECT_MONITOR_ERROR_URL = "/monitor/views/error.html";
-    /**
-     * 跳转Monitor登录url
-     */
-    public static final String REDIRECT_MONITOR_LOGIN_URL = "/monitor/views/login.html";
-    /**
-     * 跳转Monitor首页url
-     */
-    public static final String REDIRECT_MONITOR_INDEX_URL = "/monitor/views/index.html";
-    /**
-     * 跳转Monitor访问禁止页面url
-     */
-    public static final String REDIRECT_MONITOR_FORBID_URL = "/monitor/views/forbid.html";
 
     public static final String REQUEST_WITH = "X-Requested-With";
     public static final String REQUEST_HTTP = "XMLHttpRequest";
@@ -107,26 +107,33 @@ public final class Constants {
      */
     public static final String REQUEST_ID = "RequestId";
     /**
-     * 后台管理登录token
+     * 后台登录超时，单位秒
      */
-    public static final String WEB_LOGIN_TOKEN = "web_login_token";
-    /**
-     * 移动APP登录token
-     */
-    public static final String APP_LOGIN_TOKEN = "app_login_token";
-    /**
-     * 微信登录token
-     */
-    public static final String SMR_LOGIN_TOKEN = "smr_login_token";
+    public static final String WEB_SESSION_TIMEOUT = "web_session_timeout";
 
+    /**
+     * 微信端登录超时，单位秒
+     */
+    public static final String SMR_SESSION_TIMEOUT = "smr_session_timeout";
+
+    /**
+     * app端登录超时，单位秒
+     */
+    public static final String APP_SESSION_TIMEOUT = "app_session_timeout";
     /**
      * dubbo 服务通用版本号
      */
     public static final String DUBBO_SERVICE_VERSION = "1.0.0";
-
-    public static final int DUBBO_TIMEOUT = 360000;
-
-    public static final boolean DUBBO_CHECK = false;
-
-    public static final int DUBBO_RETRIES = 1;
+    /**
+     * dubbo 服务通用超时时间
+     */
+    public static final int DUBBO_SERVICE_TIMEOUT = 360000;
+    /**
+     * dubbo 服务通用检查状态
+     */
+    public static final boolean DUBBO_SERVICE_CHECK = false;
+    /**
+     * dubbo 服务通用重试次数
+     */
+    public static final int DUBBO_SERVICE_RETRIES = 1;
 }
