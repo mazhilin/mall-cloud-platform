@@ -9,9 +9,7 @@ import com.mall.cloud.common.exception.PassportServerException;
 import com.mall.cloud.common.persistence.service.BaseServerService;
 import com.mall.cloud.common.restful.DatagridResult;
 import com.mall.cloud.common.utils.CheckEmptyUtil;
-import com.mall.cloud.model.entity.system.MenuInfo;
 import com.mall.cloud.model.entity.system.RoleInfo;
-import com.mall.cloud.model.entity.user.AdminUser;
 import com.mall.cloud.model.mapper.system.RoleInfoMapper;
 import com.mall.cloud.passport.api.param.RequestRoleParam;
 import com.mall.cloud.passport.api.service.RoleServerService;
@@ -68,25 +66,25 @@ public class RoleServerServiceImpl extends BaseServerService implements RoleServ
     /**
      * 新增菜单
      *
-     * @param menu 菜单信息
+     * @param role 菜单信息
      * @return 结果
      * @throws PassportServerException 异常消息
      */
     @Override
-    public int save(MenuInfo menu) throws PassportServerException {
-        return 0;
+    public int save(RoleInfo role) throws PassportServerException {
+        return roleInfoMapper.insert(role);
     }
 
     /**
      * 新增菜单
      *
-     * @param menu 菜单信息
+     * @param role 菜单信息
      * @return 结果
      * @throws PassportServerException 异常消息
      */
     @Override
-    public int edit(MenuInfo menu) throws PassportServerException {
-        return 0;
+    public int edit(RoleInfo role) throws PassportServerException {
+        return roleInfoMapper.updateById(role);
     }
 
     /**
@@ -96,7 +94,7 @@ public class RoleServerServiceImpl extends BaseServerService implements RoleServ
      * @return 菜单详情
      */
     @Override
-    public MenuInfo detail(Long id) {
-        return null;
+    public RoleInfo detail(String id) {
+        return roleInfoMapper.selectById(id);
     }
 }

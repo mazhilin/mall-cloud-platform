@@ -1,31 +1,29 @@
 package com.mall.cloud.passport.service.impl;
 
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.google.common.collect.Lists;
 import com.mall.cloud.common.annotation.dubbo.DubboConsumerClient;
 import com.mall.cloud.common.annotation.dubbo.DubboProviderServer;
 import com.mall.cloud.common.constant.Constants;
 import com.mall.cloud.common.constant.Resources;
-import com.mall.cloud.common.constant.UserType;
 import com.mall.cloud.common.exception.PassportServerException;
 import com.mall.cloud.common.persistence.service.BaseServerService;
 import com.mall.cloud.common.restful.DatagridResult;
 import com.mall.cloud.common.restful.ResponseResult;
 import com.mall.cloud.common.utils.CheckEmptyUtil;
+import com.mall.cloud.common.utils.SequenceServerUtil;
 import com.mall.cloud.model.entity.user.AdminUser;
 import com.mall.cloud.model.mapper.user.AdminUserMapper;
-import com.mall.cloud.model.result.user.ResponseUserResult;
 import com.mall.cloud.passport.api.param.RequestUserParam;
 import com.mall.cloud.passport.api.service.RedisOperationsService;
 import com.mall.cloud.passport.api.service.UserServerService;
 import com.mall.cloud.passport.api.service.ValueOperationsService;
+import org.springframework.beans.BeanUtils;
 
 import javax.annotation.Resource;
 import java.time.Duration;
@@ -147,7 +145,7 @@ public class UserServerServiceImpl extends BaseServerService implements UserServ
      */
     @Override
     public AdminUser detail(String id) {
-        return null;
+        return adminUserMapper.selectById(id);
     }
 
     /**
@@ -159,7 +157,10 @@ public class UserServerServiceImpl extends BaseServerService implements UserServ
      */
     @Override
     public Integer save(RequestUserParam param) throws PassportServerException {
-        return null;
+        AdminUser admin = new AdminUser();
+        BeanUtils.copyProperties(param, admin);
+        admin.setId(String.valueOf(SequenceServerUtil.getInstance().produceId()));
+        return adminUserMapper.insert(admin);
     }
 
     /**
@@ -189,4 +190,5 @@ public class UserServerServiceImpl extends BaseServerService implements UserServ
     public ResponseResult update(ResponseResult result, String id, Integer status, String operatorId) throws PassportServerException {
         return null;
     }
+
 }

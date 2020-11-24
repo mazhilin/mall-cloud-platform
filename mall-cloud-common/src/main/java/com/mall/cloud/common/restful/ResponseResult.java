@@ -126,6 +126,16 @@ public class ResponseResult implements Result {
 	}
 
 	/**
+	 * 格式化Json字符串
+	 *
+	 * @param  结果
+	 * @return
+	 */
+	public synchronized String parseToJson() {
+		return JsonServerUtil.getInstance().parseToJson(this);
+	}
+
+	/**
 	 * 设置错误信息[默认设置]
 	 *
 	 * @param message 错误信息

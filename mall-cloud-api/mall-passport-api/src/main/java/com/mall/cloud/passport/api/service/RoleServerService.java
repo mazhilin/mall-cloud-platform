@@ -1,11 +1,10 @@
 package com.mall.cloud.passport.api.service;
 
-import com.mall.cloud.common.exception.ConsoleServerException;
 import com.mall.cloud.common.exception.PassportServerException;
 import com.mall.cloud.common.persistence.service.BaseService;
 import com.mall.cloud.common.restful.DatagridResult;
 import com.mall.cloud.model.entity.system.MenuInfo;
-import com.mall.cloud.passport.api.param.RequestMenuParam;
+import com.mall.cloud.model.entity.system.RoleInfo;
 import com.mall.cloud.passport.api.param.RequestRoleParam;
 
 /**
@@ -31,20 +30,20 @@ public interface RoleServerService extends BaseService {
     /**
      * 新增菜单
      *
-     * @param menu 菜单信息
+     * @param role 菜单信息
      * @return 结果
      * @throws PassportServerException 异常消息
      */
-    int save(MenuInfo menu) throws PassportServerException;
+    int save(RoleInfo role) throws PassportServerException;
 
     /**
      * 新增菜单
      *
-     * @param menu 菜单信息
+     * @param role 菜单信息
      * @return 结果
      * @throws PassportServerException 异常消息
      */
-    int edit(MenuInfo menu) throws PassportServerException;
+    int edit(RoleInfo role) throws PassportServerException;
 
     /**
      * 根据ID查询菜单详情
@@ -52,5 +51,5 @@ public interface RoleServerService extends BaseService {
      * @param id 菜单ID
      * @return 菜单详情
      */
-    MenuInfo detail(Long id);
+    RoleInfo detail(String id);
 }
