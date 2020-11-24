@@ -11,7 +11,6 @@ import com.mall.cloud.model.entity.file.FileUpload;
 import com.mall.cloud.passport.api.service.StorageServerService;
 import lombok.AllArgsConstructor;
 
-import javax.annotation.Resource;
 
 /**
  * <p>封装Qicloud项目StorageServerServiceImpl类.<br></p>
@@ -24,8 +23,7 @@ import javax.annotation.Resource;
 @DubboProviderServer
 @AllArgsConstructor
 public class StorageServerServiceImpl extends BaseServerService implements StorageServerService {
-    @Resource
-    private StorageServerUtil storageServerUtil;
+
 
     @Override
     public ResponseResult createBucket(ResponseResult result, String bucketName) throws PassportServerException {
