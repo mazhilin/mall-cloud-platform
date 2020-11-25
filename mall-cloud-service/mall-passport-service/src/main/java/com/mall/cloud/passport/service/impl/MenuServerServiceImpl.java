@@ -19,6 +19,7 @@ import com.mall.cloud.model.mapper.system.MenuInfoMapper;
 import com.mall.cloud.model.mapper.user.AdminUserMapper;
 import com.mall.cloud.passport.api.param.RequestMenuParam;
 import com.mall.cloud.passport.api.service.MenuServerService;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -33,6 +34,7 @@ import java.util.Objects;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
 @DubboProviderServer
+@Transactional(rollbackFor = {RuntimeException.class, Exception.class})
 public class MenuServerServiceImpl extends BaseServerService implements MenuServerService {
 
     @Resource

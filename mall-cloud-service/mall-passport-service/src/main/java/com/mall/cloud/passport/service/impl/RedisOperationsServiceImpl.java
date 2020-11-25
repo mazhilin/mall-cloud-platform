@@ -12,6 +12,7 @@ import org.springframework.data.redis.core.types.RedisClientInfo;
 import org.springframework.data.redis.hash.HashMapper;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.io.Closeable;
@@ -32,6 +33,7 @@ import java.util.concurrent.TimeUnit;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
 @DubboProviderServer
+@Transactional(rollbackFor = {RuntimeException.class, Exception.class})
 public class RedisOperationsServiceImpl<K, V> implements RedisOperationsService<K, V> {
     @Resource(name = "stringRedisTemplate")
     private ValueOperations<K, V> valueOperations;

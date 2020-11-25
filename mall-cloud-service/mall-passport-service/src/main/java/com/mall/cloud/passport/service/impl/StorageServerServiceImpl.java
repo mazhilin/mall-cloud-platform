@@ -10,6 +10,7 @@ import com.mall.cloud.common.utils.StorageServerUtil;
 import com.mall.cloud.model.entity.file.FileUpload;
 import com.mall.cloud.passport.api.service.StorageServerService;
 import lombok.AllArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -21,7 +22,7 @@ import lombok.AllArgsConstructor;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
 @DubboProviderServer
-@AllArgsConstructor
+@Transactional(rollbackFor = {RuntimeException.class, Exception.class})
 public class StorageServerServiceImpl extends BaseServerService implements StorageServerService {
 
 

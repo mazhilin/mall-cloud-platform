@@ -14,6 +14,7 @@ import com.mall.cloud.model.entity.user.CustomerUser;
 import com.mall.cloud.model.mapper.user.AdminUserMapper;
 import com.mall.cloud.model.mapper.user.CustomerUserMapper;
 import com.mall.cloud.passport.api.service.LoginServerService;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Map;
@@ -27,6 +28,7 @@ import java.util.Map;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
 @DubboProviderServer
+@Transactional(rollbackFor = {RuntimeException.class, Exception.class})
 public class LoginServerServiceImpl extends BaseServerService implements LoginServerService {
     @Resource
     private AdminUserMapper adminUserMapper;

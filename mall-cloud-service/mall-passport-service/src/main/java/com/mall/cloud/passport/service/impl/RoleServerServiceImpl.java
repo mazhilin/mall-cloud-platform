@@ -13,6 +13,7 @@ import com.mall.cloud.model.entity.system.RoleInfo;
 import com.mall.cloud.model.mapper.system.RoleInfoMapper;
 import com.mall.cloud.passport.api.param.RequestRoleParam;
 import com.mall.cloud.passport.api.service.RoleServerService;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -26,6 +27,7 @@ import java.util.List;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
 @DubboProviderServer
+@Transactional(rollbackFor = {RuntimeException.class, Exception.class})
 public class RoleServerServiceImpl extends BaseServerService implements RoleServerService {
     @Resource
     private RoleInfoMapper roleInfoMapper;

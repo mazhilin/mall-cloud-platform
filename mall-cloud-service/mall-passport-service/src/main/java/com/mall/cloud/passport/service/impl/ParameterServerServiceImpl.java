@@ -15,6 +15,7 @@ import com.mall.cloud.model.mapper.system.ConfigParameterMapper;
 import com.mall.cloud.model.mapper.system.PublicParameterMapper;
 import com.mall.cloud.passport.api.param.RequestPublicParam;
 import com.mall.cloud.passport.api.service.ParameterServerService;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -28,6 +29,7 @@ import java.util.List;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
 @DubboProviderServer
+@Transactional(rollbackFor = {RuntimeException.class, Exception.class})
 public class ParameterServerServiceImpl extends BaseServerService implements ParameterServerService {
 
     @Resource

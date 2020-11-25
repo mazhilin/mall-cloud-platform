@@ -10,18 +10,14 @@ import com.mall.cloud.common.persistence.controller.BaseController;
 import com.mall.cloud.common.restful.DatagridResult;
 import com.mall.cloud.common.restful.ResponseResult;
 import com.mall.cloud.common.utils.CheckEmptyUtil;
-import com.mall.cloud.model.entity.system.MenuInfo;
 import com.mall.cloud.model.entity.system.RoleInfo;
 import com.mall.cloud.model.entity.user.AdminUser;
-import com.mall.cloud.passport.api.param.RequestMenuParam;
 import com.mall.cloud.passport.api.param.RequestRoleParam;
 import com.mall.cloud.passport.api.service.RoleServerService;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -91,19 +87,34 @@ public class ConsoleRoleController extends BaseController {
     /**
      * 后台管理平台-系统中心-菜单管理-列表
      *
-     * @param pageSize  页码数
-     * @param pageCount 条目数
-     * @param name      菜单名称
      * @return 返回结果
      * @throws PassportServerException
      */
     @ApplicationAuthorize(authorizeResources = false, authorizeScope = ScopeType.WEB)
     @PostMapping(value = "save", produces = "application/json;charset=UTF-8")
-    public String save(
-            @RequestParam(value = "pageSize", required = false, defaultValue = "1") Integer pageSize,
-            @RequestParam(value = "pageCount", required = false, defaultValue = "10") Integer pageCount,
-            @RequestParam(value = "name", required = false, defaultValue = "") String name) throws PassportServerException {
-        return StringUtils.EMPTY;
+    public String save(@ModelAttribute RequestRoleParam param) throws PassportServerException {
+        ResponseResult result = new ResponseResult();
+        // [1].用户登录鉴权
+        AdminUser user = (AdminUser) request.getAttribute(Constants.ADMIN_USER);
+        if (CheckEmptyUtil.isEmpty(user)) {
+            throw new ConsoleServerException("系统繁忙，请稍后再试!");
+        }
+        RoleInfo role = new RoleInfo();
+        role.setMessage(param.getMessage());
+        role.setCode(param.getCode());
+        role.setName(param.getName());
+        role.setScope(param.getScope());
+        role.setStatus(Constants.YES);
+        role.setIsDelete(Constants.NO);
+        role.setCreateBy(user.getId());
+        role.setCreateTime(LocalDateTime.now());
+        role.setUpdateBy(user.getId());
+        role.setUpdateTime(LocalDateTime.now());
+        int count = roleServerService.save(role);
+        if (count < 0) {
+            result.setError("500");
+        }
+        return result.parseToJson(result);
     }
 
 
@@ -183,19 +194,20 @@ public class ConsoleRoleController extends BaseController {
     /**
      * 后台管理平台-系统中心-菜单管理-列表
      *
-     * @param pageSize  页码数
-     * @param pageCount 条目数
-     * @param name      菜单名称
      * @return 返回结果
      * @throws PassportServerException
      */
     @ApplicationAuthorize(authorizeResources = false, authorizeScope = ScopeType.WEB)
     @PostMapping(value = "detail", produces = "application/json;charset=UTF-8")
-    public String detail(
-            @RequestParam(value = "pageSize", required = false, defaultValue = "1") Integer pageSize,
-            @RequestParam(value = "pageCount", required = false, defaultValue = "10") Integer pageCount,
-            @RequestParam(value = "name", required = false, defaultValue = "") String name) throws PassportServerException {
-        return StringUtils.EMPTY;
+    public String detail(@RequestParam(value = "id") String id) throws PassportServerException {
+        ResponseResult result = new ResponseResult();
+        try {
+            RoleInfo role = roleServerService.detail(id);
+            result.putResult("role", role);
+        } catch (PassportServerException exception) {
+            result.setError(exception.getMessage());
+        }
+        return result.parseToJson(result);
     }
 
     /**

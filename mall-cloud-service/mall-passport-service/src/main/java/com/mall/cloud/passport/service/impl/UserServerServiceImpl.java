@@ -24,6 +24,7 @@ import com.mall.cloud.passport.api.service.RedisOperationsService;
 import com.mall.cloud.passport.api.service.UserServerService;
 import com.mall.cloud.passport.api.service.ValueOperationsService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.time.Duration;
@@ -38,6 +39,7 @@ import java.util.List;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
 @DubboProviderServer
+@Transactional(rollbackFor = {RuntimeException.class, Exception.class})
 public class UserServerServiceImpl extends BaseServerService implements UserServerService {
     @DubboConsumerClient
     private RedisOperationsService<String, Object> redisOperationsService;

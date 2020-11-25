@@ -4,6 +4,7 @@ import com.mall.cloud.common.annotation.dubbo.DubboProviderServer;
 import com.mall.cloud.passport.api.service.ListOperationsService;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Collection;
@@ -19,6 +20,7 @@ import java.util.concurrent.TimeUnit;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
 @DubboProviderServer
+@Transactional(rollbackFor = {RuntimeException.class, Exception.class})
 public class ListOperationsServiceImpl <K, V> implements ListOperationsService<K, V> {
     @Resource(name = "stringRedisTemplate")
     private ValueOperations<K, V> valueOperations;
