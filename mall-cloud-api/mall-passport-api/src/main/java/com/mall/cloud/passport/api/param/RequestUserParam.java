@@ -4,10 +4,9 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.mall.cloud.common.constant.Formats;
 import com.mall.cloud.common.persistence.param.BaseParam;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.*;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 
 /**
@@ -29,7 +28,6 @@ public class RequestUserParam extends BaseParam {
      * 用户密码
      */
     private String password;
-
     /**
      * 用户姓名
      */

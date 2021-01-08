@@ -440,6 +440,11 @@
                 <artifactId>mall-console-api</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.mall.cloud</groupId>
+                <artifactId>mall-program-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!--spring-boot project setting  end-->
             <dependency>
                 <groupId>cn.afterturn</groupId>

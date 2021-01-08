@@ -110,6 +110,7 @@
         <module>mall-mobile-service</module>
         <module>mall-console-service</module>
         <module>mall-passport-service</module>
+        <module>mall-program-service</module>
     </modules>
 
 </project>
