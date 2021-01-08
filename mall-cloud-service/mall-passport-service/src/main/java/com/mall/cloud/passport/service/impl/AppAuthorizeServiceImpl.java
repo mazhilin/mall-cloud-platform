@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ import java.util.concurrent.TimeUnit;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
 @DubboProviderServer
+@Transactional(rollbackFor = {RuntimeException.class, Exception.class})
 public class AppAuthorizeServiceImpl extends GeneralApplicationAuthorize implements AppAuthorizeService {
     @Autowired
     private JdbcTemplate jdbcTemplate;

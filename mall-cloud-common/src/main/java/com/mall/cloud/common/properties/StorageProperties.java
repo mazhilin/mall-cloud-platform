@@ -1,9 +1,13 @@
 package com.mall.cloud.common.properties;
 
+import com.aliyun.oss.OSSClient;
+import io.minio.MinioClient;
+import io.minio.errors.InvalidEndpointException;
+import io.minio.errors.InvalidPortException;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 
 /**
  * <p>封装Qicloud项目StorageProperties类.<br></p>
@@ -27,6 +31,18 @@ public class StorageProperties {
 
     private Alioss alioss;
 
+    @Bean
+    public MinioClient minioClient() throws InvalidEndpointException, InvalidPortException {
+        MinioClient minioClient = new MinioClient(getMinio().getEndpoint(), getMinio().getAccessKeyId(), getMinio().getAccessKeySecret());
+        return minioClient;
+    }
+
+    @Bean
+    public OSSClient ossClient() throws InvalidEndpointException, InvalidPortException {
+        OSSClient ossClient = new OSSClient(getAlioss().getEndpoint(), getAlioss().getAccessKeyId(), getAlioss().getAccessKeySecret());
+        return ossClient;
+    }
+
     @Data
     @NoArgsConstructor
     public static class Minio {
@@ -45,12 +61,12 @@ public class StorageProperties {
         /**
          * 对象存储服务的URL
          */
-        private String endpoint=StringUtils.EMPTY;;
+        private String endpoint = "default";
 
         /**
          * 默认的存储桶名称
          */
-        private String bucketName = StringUtils.EMPTY;
+        private String bucketName = "default";
     }
 
     @Data
@@ -64,19 +80,15 @@ public class StorageProperties {
          * Secret key是你账户的密码
          */
         private String accessKeySecret;
-
-        /**
-         * 最大线程数，默认： 100
-         */
-        private Integer maxConnections = 100;
         /**
          * 对象存储服务的URL
          */
-        private String endpoint=StringUtils.EMPTY;;
+        private String endpoint = "default";
 
         /**
          * 默认的存储桶名称
          */
-        private String bucketName = StringUtils.EMPTY;
+        private String bucketName = "default";
     }
+
 }

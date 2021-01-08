@@ -6,6 +6,7 @@ import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.ScanOptions;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Collection;
@@ -22,6 +23,7 @@ import java.util.Set;
  * <p>Copyright © 2018-2020 Pivotal Cloud Technology Systems Incorporated. All rights reserved.<br></p>
  */
 @DubboProviderServer
+@Transactional(rollbackFor = {RuntimeException.class, Exception.class})
 public class HashOperationsServiceImpl<H, HK, HV> implements HashOperationsService<H, HK, HV> {
     @Resource(name = "stringRedisTemplate")
     private HashOperations<H, HK, HV> hashOperations;

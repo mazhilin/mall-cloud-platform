@@ -66,9 +66,45 @@ public final class Constants {
      */
     public static final String PUBLIC_SALT = "pivotalcloud";
 
+    /**
+     * 文件图片支持格式
+     */
+    public static final String[] PICTURE_FORMATS = {".png", ".jpg", ".jpeg", ".gif", ".bmp"};
+    /**
+     * 视频文件支持格式
+     */
+    public static final String[] VIDEO_FORMATS = {".avi", ".wmv", ".mp4", ".mov", ".flv"};
 
+    /**
+     * 音频文件支持格式
+     */
+    public static final String[] AUDIO_FORMATS = {".wav", ".wma", ".mp3", ".acc", ".flac"};
+    /**
+     * 文档文件支持格式
+     */
+    public static final String[] DOCUMENT_FORMATS = {".docx", ".doc", ".txt", ".md", ".xls"};
 
+    /**
+     * 图片bucket名称
+     */
+    public static final String PICTURE = "picture";
+    /**
+     * 音频bucket名称
+     */
+    public static final String AUDIO = "audio";
+    /**
+     * 视频bucket名称
+     */
+    public static final String VIDEO = "video";
+    /**
+     * 文档bucket名称
+     */
+    public static final String DOCUMENT = "document";
 
+    /**
+     * 其他/模板bucket名称
+     */
+    public static final String TEMPLATE = "template";
     /**
      * 系统Cookie最大时效-maxAge
      */

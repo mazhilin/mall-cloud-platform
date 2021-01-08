@@ -1,9 +1,5 @@
 package com.mall.cloud.common.configuration;
 
-import com.mall.cloud.common.properties.StorageProperties;
-import com.mall.cloud.common.properties.SwaggerProperties;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +18,6 @@ import javax.servlet.MultipartConfigElement;
  */
 @Component
 @Configuration
-@ConditionalOnProperty(name = "pivotal.cloud.storage.enabled", matchIfMissing = true)
 public class MultipartStorageConfiguration {
     @Bean
     public MultipartConfigElement multipartConfigElement() {
@@ -32,11 +27,5 @@ public class MultipartStorageConfiguration {
         /// 总上传数据大小
         factory.setMaxRequestSize(DataSize.ofMegabytes(1024));
         return factory.createMultipartConfig();
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public StorageProperties swaggerProperties() {
-        return new StorageProperties();
     }
 }

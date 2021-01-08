@@ -58,7 +58,7 @@ public class ConfigCenterController extends BaseController {
             param.setStatus(status);
             DatagridResult datagrid = configServerService.list(pageSize, pageLimit, param);
             List<AdminUser> userList = datagrid.getDataList();
-            result.putResult("resultList", userList);
+            result.putResult("list", userList);
             result.putResult("pageCount", datagrid.getPageCount());
             result.putResult("pageSize", pageSize);
             result.putResult("pageLimit", pageLimit);

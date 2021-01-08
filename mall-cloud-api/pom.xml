@@ -108,6 +108,9 @@
     <modules>
         <module>mall-mobile-api</module>
         <module>mall-console-api</module>
+        <module>mall-manager-api</module>
         <module>mall-passport-api</module>
+        <module>mall-program-api</module>
+        <module>mall-monitor-api</module>
     </modules>
 </project>

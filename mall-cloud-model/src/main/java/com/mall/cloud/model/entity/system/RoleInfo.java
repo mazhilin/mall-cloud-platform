@@ -30,15 +30,19 @@ public class RoleInfo extends BaseEntity {
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
     /**
-     * 菜单编码
+     * 角色编码
      */
     private String code;
     /**
-     * 菜单名称
+     * 角色编码
      */
     private String name;
     /**
-     * 角色作用域[1-后台 2-APP 3-SMR 4-公司管理员]
+     * 角色描述
+     */
+    private String message;
+    /**
+     * 作用域[1-后台 2-APP 3-SMR 4-公司管理员]
      */
     private Integer scope;
     /**

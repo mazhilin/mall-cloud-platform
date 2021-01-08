@@ -61,7 +61,7 @@ public class UserCenterController extends BaseController {
             param.setStatus(status);
             DatagridResult datagrid = userServerService.list(pageSize, pageLimit, param);
             List<AdminUser> userList = datagrid.getDataList();
-            result.putResult("resultList", userList);
+            result.putResult("list", userList);
             result.putResult("pageCount", datagrid.getPageCount());
             result.putResult("pageSize", pageSize);
             result.putResult("pageLimit", pageLimit);

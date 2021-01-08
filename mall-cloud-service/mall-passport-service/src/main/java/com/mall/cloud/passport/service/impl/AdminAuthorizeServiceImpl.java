@@ -16,6 +16,7 @@ import com.mall.cloud.model.mapper.user.AdminUserMapper;
 import com.mall.cloud.passport.api.service.*;
 import com.mall.cloud.passport.service.authorize.GeneralApplicationAuthorize;
 import org.springframework.dao.DataAccessException;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Map;
@@ -31,6 +32,7 @@ import java.util.Map;
  * <br>
  */
 @DubboProviderServer
+@Transactional(rollbackFor = {RuntimeException.class, Exception.class})
 public class AdminAuthorizeServiceImpl extends GeneralApplicationAuthorize
         implements AdminAuthorizeService {
     @DubboConsumerClient
