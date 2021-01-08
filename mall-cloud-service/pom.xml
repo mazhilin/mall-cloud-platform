@@ -107,8 +107,10 @@
 
 
     <modules>
-        <module>mall-mobile-service</module>
         <module>mall-console-service</module>
+        <module>mall-manager-service</module>
+        <module>mall-mobile-service</module>
+        <module>mall-monitor-service</module>
         <module>mall-passport-service</module>
         <module>mall-program-service</module>
     </modules>

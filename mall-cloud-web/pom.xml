@@ -115,7 +115,9 @@
     <modules>
         <module>mall-console-web</module>
         <module>mall-mobile-web</module>
+        <module>mall-monitor-web</module>
         <module>mall-passport-web</module>
+        <module>mall-portal-web</module>
         <module>mall-program-web</module>
         <module>mall-schedule-web</module>
     </modules>
